@@ -1,0 +1,3 @@
+[submodule "thesis-cover"]
+	path = src/thesis/latex-thesis-cover
+	url = git@github.com:pedromig/latex-thesis-cover.git
