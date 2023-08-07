@@ -1,25 +1,51 @@
-\documentclass[12pt,oneside]{thesis}
+\documentclass[oneside]{thesis}
 
 \usepackage{./latex-thesis-cover/uccover}
+
+\usepackage{lipsum}
+
+% PDF Document Metadata
+\hypersetup{
+ pdftitle = {Principled Modelling Of The Google Hash Code Problems For Meta-Heuristics},
+ pdfauthor = {Pedro Rodrigues, Alexandre Jesus, Carlos Fonseca},
+ pdfsubject = {Master Thesis},
+ pdfkeywords = {Modelling, Meta-Heuristics, Combinatorial Optimization, Constructive Search, Local Search, Intelligent Systems, Software Engineering},
+ pdfproducer = {LuaLaTeX},
+ pdfcreator = {Pedro Rodrigues},
+}
+
+% Bibliography
+\addbibresource{../references.bib}
+
+% Acronyms
+\newacronym{dei}{DEI}{Department of Informatics Engineering}
+\newacronym{combinatorial-optimization}{CO}{Combinatorial Optimization}
+\newacronym{knapsack-problem}{KP}{Knapsack Problem}
+\newacronym{travelling-salesman-problem}{TSP}{Travelling Salesman Problem}
+\newacronym{global-optimization}{GO}{Global Optimization}
+\newacronym{local-optimization}{LO}{Local Optimization}
+\newacronym{black-box-optimization}{BBO}{Black Box Optimization}
+\newacronym{glass-box-optimization}{GBO}{Glass Box Optimization}
+
+\makeglossaries
 
 \begin{document}
 
 \frontmatter
 
-\include{frontmatter/uc.tex}
-\include{frontmatter/cover.tex}
-\include{frontmatter/abstract.tex}
-\include{frontmatter/funding.tex}
-\include{frontmatter/acknowledgements.tex}
-\include{frontmatter/contents.tex}
+\input{frontmatter/uc.tex}
+\input{frontmatter/cover.tex}
+\input{frontmatter/funding.tex}
+\input{frontmatter/abstract.tex}
+\input{frontmatter/acknowledgements.tex}
+\input{frontmatter/misc.tex}
 
 \mainmatter
 
-\include{mainmatter/1-Introduction/main.tex}
+\input{mainmatter/1-Introduction/main.tex}
 
 \backmatter
 
-% \input{backmatter/acronyms.tex}
-% \input{backmatter/bibliography.tex}
+\input{backmatter/misc.tex}
 
 \end{document}
