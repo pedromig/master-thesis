@@ -37,7 +37,7 @@
 \usepackage[libertine]{newtxmath}
 \usepackage[scaled=0.97]{zi4}
 \usepackage{roboto}
-\usepackage[activate={true,nocompatibility},final,tracking=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage[activate={true,nocompatibility}]{microtype}
 
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
@@ -49,7 +49,13 @@
 \usepackage{fancyhdr}
 \usepackage{sectsty}
 \usepackage{csquotes}
+
+% URL Formatting
 \usepackage{url}
+
+% Epigraph
+\usepackage{epigraph}
+\usepackage{etoolbox}
 
 % Bibliography
 \usepackage[backend=biber,natbib=true,sorting=ynt]{biblatex}
@@ -58,6 +64,14 @@
 
 % Detect Overflows
 \overfullrule=2cm
+
+% Epigraph (Chapter)
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+
+\makeatletter
+\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
 
 % Empty Page Customization 
 \usepackage{emptypage}
@@ -85,7 +99,9 @@
 \ifthenelse{\boolean{@twoside}}{
   % Two-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm}
+  \usepackage{varioref}
   \usepackage[hidelinks]{hyperref}
+  \usepackage{cleveref}
 
   \let\tmp\oddsidemargin
   \let\oddsidemargin\evensidemargin
@@ -105,7 +121,9 @@
 }{
   % One-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm,hcentering}
+  \usepackage{varioref}
   \usepackage[colorlinks=true,citecolor=RoyalBlue,linkcolor=RoyalBlue,urlcolor=ForestGreen]{hyperref}
+  \usepackage{cleveref}
 
 
   % Headers And Footers
@@ -120,6 +138,18 @@
   \fancyfoot{}
   \fancyfoot[L]{\hfill\thepage\hfill}
 }
+
+% Avoid Useless Cross-Referencing Loops
+\makeatletter
+\def\@testdef #1#2#3{%
+  \def\reserved@a{#3}\expandafter \ifx \csname #1@#2\endcsname
+    \reserved@a \else
+    \typeout{^^Jlabel #2 changed:^^J%
+      \meaning\reserved@a^^J%
+      \expandafter\meaning\csname #1@#2\endcsname^^J}%
+    \@tempswatrue \fi}
+\makeatother
+
 
 % Acronyms and Glossaries
 \usepackage[acronym,toc]{glossaries}
@@ -156,17 +186,24 @@
 \newenvironment{abstract}[1][Abstract]{
   \clearpage
   \chapter*{#1}
-  \markboth{#1}{}
+  \ifthenelse{\boolean{@twoside}}{
+    \markboth{}{#1}
+  }{
+    \markboth{#1}{}
+  }
 }{
   \cleardoublepage
 }
 
 % Acknowledgements Environment
-\newenvironment{acknowledgments}[1][Acknowledgements]{
+\newenvironment{acknowledgments}[1][Acknowledgments]{
   \clearpage
   \chapter*{#1}
-  \markboth{#1}{}
-}{
+  \ifthenelse{\boolean{@twoside}}{
+    \markboth{}{#1}
+  }{
+    \markboth{#1}{}
+  }
 }{
   \cleardoublepage
 }
