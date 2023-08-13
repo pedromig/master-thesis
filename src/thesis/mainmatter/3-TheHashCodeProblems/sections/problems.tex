@@ -1,0 +1,462 @@
+\subsection{Hash Code 2014}
+\label{subsec:hashcode-2014}
+
+\subsubsection*{Street View Routing}
+\label{subsubsec:hashcode-2014-final}
+
+In the context of constructing street view maps there is a need to collect
+imagery that is taken by specialized vehicles equipped for that purpose. This
+constitutes a challenging problem since given a fleet of cars which may only be
+available for a limited amount of time a route for each must be defined as to
+maximize the number of streets photographed. City streets are modelled as a
+graph where nodes are junctions and the edges are streets connecting said
+junctions. Moreover, streets are defined by three distinct properties:
+direction, length and cost that will take for the car to traverse the street.
+
+The challenge consists of scheduling the routes for street view cars in the
+city, adhering to a pre-determined time budget. The goal is to optimize the
+solution by maximizing the sum of the lengths of the traversed streets, while
+minimizing the overall time expended in the process. The quality of the solution
+for this problem is evaluated by using the sum of the lengths of the streets as
+the primary criterion and the time spent as a tie-breaker.
+
+The problem at hand bears a strong resemblance to a combination of the Vehicle
+Routing Problem and the Maximum Covering Problem. This is because the scheduling
+of routes for the fleet of cars must be done in a way that ensures that the
+combination of all sets of streets visited by each car encompasses the entire
+city, in the most time-efficient manner possible.
+
+\subsection{Hash Code 2015}
+\label{subsec:hashcode-2015}
+
+\subsubsection*{Optimize a Data Center}
+\label{subsubsec:hashcode-2015-qualification}
+
+The optimization of server placement problem is a concern that pertains to the
+design of data centers, as various factors must be taken into account to ensure
+optimal efficiency. In this context, the `optimizing servers'' problem portrays
+a scenario in which contestants are in the position of designing a data center
+and seeking to determine the optimal distribution of servers. The data center
+is physically organized in rows of slots where servers can be placed. Hence,
+the challenge is to efficiently fill the available slots in a Google data center
+with servers of varying sizes and computing capacities, while also ensuring that
+each server is assigned to a specific resource pool.
+
+Objectively, the goal is to assign multiple servers to available slots and
+resource pools in such a way as to maximize the guaranteed capacity for all
+resource pools. This metric serves as the criterion for evaluating solutions to
+this problem. The guaranteed capacity, in this context, refers to the lowest
+amount of computing power that will remain for a specific resource pool in the
+event of a failure of an arbitrary row of the data center. It is important to
+note that this objective function is considered a bottleneck, as small changes
+in a solution may not result in significant changes in the score, making the
+optimization process more difficult.
+
+Notably, the problem of optimizing the placement of servers in a data center can
+be thought of as a combination of a Multiple-Knapsack Problem and an assignment
+problem. This is because the servers must be placed within the constraints of
+the available space in the data center rows, and subsequently, they must be
+assigned to resource pools.
+
+\subsubsection*{Loon}
+\label{subsubsec:hashcode-2015-final}
+
+Project \textit{Loon}, which was a research endeavor undertaken by Google, aimed at
+expanding internet coverage globally by utilizing high altitude balloons. The
+problem presented in this competition drew inspiration from this concept,
+requiring contestants to devise plans for position adjustments for a set of
+balloons, taking into consideration various environmental factors, particularly
+wind patterns, with the objective of ensuring optimal internet coverage in a
+designated region over a specific time frame.
+
+The objective of this problem was to develop a sequence of actions, including
+ascent, descent, and maintaining altitude, for a set of balloons with the goal
+of maximizing a score. In this case, the score is calculated based on the
+aggregate coverage time of each location, represented as cells on a map of
+specified dimensions, at the conclusion of the available time budget.
+
+In summary, this problem can be classified as both a simulation and a coverage
+and routing problem, based on the properties previously described. It is
+important to note that the simulation aspect of this problem has a direct impact
+on the calculation of the score, and is not solely limited to constraints on the
+available time budget for operations. Furthermore, this problem can be
+represented in a forest, where the vertices represent spatiotemporal coordinates
+$(x, y, z, t)$, and the edges symbolize changes in altitude and lateral movement
+(wind) for a given balloon.
+
+\subsection{Hash Code 2016}
+\label{subsec:hashcode-2016}
+
+\subsubsection*{Delivery}
+\label{subsubsec:hashcode-2016-qualification}
+
+In today's world, with the widespread availability of internet, online shopping
+has become a prevalent activity. As a consequence, there is an ever-growing need
+for efficient delivery systems. This competition challenges participants to
+manage a fleet of drones, which are to be used as vehicles for the distribution
+of purchased goods. Given a map with delivery locations, a set of drones, each
+with a set of operations that can be performed (load, deliver, unload, wait), a
+number of warehouses, and a number of orders, the objective is to satisfy the
+orders in the shortest possible time, taking into consideration that the
+products to be delivered in an order may have product items stored in multiple
+different warehouses and therefore require separate pickups by drones.
+
+In this problem, the simulation time $\mathcal{T}$ is given and the goal is to
+complete each order within that time frame. The score for each order is
+calculated as $\frac{(\mathcal{T} - t)}{\mathcal{T}} \times 100$, where $t$ is
+the time at which the order is completed. The score ranges from 1 to 100, with
+higher scores indicating that the order was completed sooner. The overall score
+for the problem is the sum of the individual scores for all orders, and it is to
+be maximized.
+
+In summary, this problem can be classified as a variant of the Vehicle Routing
+Problem, specifically as a Capacitated, Pickup and Delivery Time Windowed
+Multi-Depot Vehicle Routing Problem. This classification takes into account the
+pickup and delivery of items, the time window for delivery, the multiple routes
+and warehouses that each vehicle may need to visit in order to fulfill the
+orders.
+
+\subsubsection*{Satellites}
+\label{subsubsec:hashcode-2016-final}
+
+\textit{Terra Bella} was a Google division responsible for managing and
+operating a constellation of satellites that collected and processed imagery for
+commercial purposes. Specifically, these satellites were tasked with capturing
+images in response to client requests.
+
+The challenge presented to participants involves crafting schedules for
+individual satellites within the fleet. The goal is to secure image collections
+that match customer preferences. These collections are characterized by
+geographical coordinates on Earth and specific time windows for image capture.
+Each satellite, originating from unique latitude and longitude coordinates and
+possessing a certain velocity, possesses the ability to make minor positional
+adjustments along both axes to access potential photography sites. The problem's
+score is determined by aggregating the points earned through the successful
+completion of customer collections. In this context, completion signifies
+capturing all images for a given collection within the designated time frame.
+
+In essence, this problem falls into the categories of both an assignment and a
+maximum covering problem. It involves not only covering the maximum number of
+images with the available satellites to complete collections, but also making
+decisions about which satellites will capture each photo. Additionally, the
+simulation aspect is crucial as it directly affects scoring; images not taken
+within the specified time frame won't contribute to the collection, potentially
+influencing its completion and the overall score.
+
+\subsection{Hash Code 2017}
+\label{subsec:hashcode-2017}
+
+\subsubsection*{Streaming Videos}
+\label{subsubsec:hashcode-2017-qualification}
+
+In the era of online streaming services like YouTube, effectively distributing
+content to users is crucial. This challenge focuses on optimizing video
+distribution across cache servers to minimize transmission delays and waiting
+times for users. Contestants must strategise video placement within servers
+while considering space limitations.
+
+With a roster of videos, each assigned a specific size, an collection of cache
+servers with designated space, and an index of endpoints initiating multiple
+requests for various videos, this challenge entails determining an optimal
+video assignment within servers. The time saved for each request is measured as the
+difference between data center streaming time and cache server streaming time
+with minimal latency. The overall score is computed by summing the time saved
+for each request, multiplied by 1000, and then divided by the total request
+count. It's important to note that the problem description offers transmission
+latencies between different nodes.
+
+In general, we categorize this problem as a combination of assignment and
+knapsack problems. Contestants are tasked not only with determining the
+allocation of videos to servers but also with accounting for capacity
+limitations on the number of videos per server. It's worth noting that the
+calculation of time saved for each request may encounter a bottleneck effect,
+which can pose challenges when optimizing the overall score.
+
+\subsubsection*{Router Placement}
+\label{subsubsec:hashcode-2017-final}
+
+Strategically optimizing the placement of Wi-Fi routers to achieve optimal
+signal coverage is a challenge encountered by many institutions and individual
+users. This issue becomes particularly prominent in larger and complex
+buildings. Furthermore, in such scenarios, the task may involve setting up a wired
+connection to establish internet connectivity from the source point,
+facilitating the strategic positioning of routers for maximum coverage.
+
+The challenge tasked participants with optimizing the arrangement of routers and
+fiber wiring within a building's cell-based layout, along with a designated
+backbone connection point. The aim was to strategically position routers and
+devise an effective wiring configuration. The primary goal encompassed achieving
+optimal coverage while adhering to a predefined budget. The problem's score
+comprised two components: the count of cells covered by routers, multiplied by
+1000, and the remaining budget. Notably, the scoring approach emphasized both
+extensive coverage and economical budget allocation.
+
+In essence, this problem falls under the category of a maximum covering problem,
+as the central aim is to ensure the coverage of as many cells as possible.
+Furthermore, considering the budget limitations and wiring arrangement, we
+observe that this challenge shares similarities with the Steiner Tree Problem.
+This likeness arises from the possibility of determining the optimal cost of
+wiring placement based on the router locations, which may hold significance for the
+problem's resolution.
+
+\subsection{Hash Code 2018}
+\label{subsec:hashcode-2018}
+
+\subsubsection*{Self-Driving Rides}
+\label{subsubsec:hashcode-2018-qualification}
+
+Daily car commuting is a ubiquitous practice globally, involving trips to homes,
+schools, workplaces, and more. As a means of travel, cars remain a common
+choice, with ongoing efforts to enhance safety through the advancement of
+self-driving technology. In this challenge, contestants assume the role of
+managing a fleet of self-driving cars within a simulated setting. The goal is to
+ensure commuters reach their destinations securely and punctually.
+
+With a fleet of cars at disposal and a roster of rides defined by their starting
+and ending intersections on a square grid representing the city, along with the
+earliest start time and the latest end time to ensure punctuality, the task is
+to allocate rides to vehicles. The aim is to maximize the number of completed
+rides before a predefined simulation time limit is reached. The scoring is
+determined by the summation of the individual ride scores. A ride's score is
+computed as the sum of a value proportional to the distance covered during the
+ride, augmented by a bonus if the ride commences precisely at its earliest
+allowed start time.
+
+Generally, this problem can be categorized as an assignment and vehicle routing
+problem with time windows. This classification arises from the necessity to
+assign rides to cars within specific time constraints. Notably, the car's route
+is determined by the sequence of rides assigned to it. Moreover, this challenge
+falls under the simulation category, as it directly impacts the scoring
+mechanism and cannot be simplified or abstracted.
+
+\subsubsection*{City Plan}
+\label{subsubsec:hashcode-2018-final}
+
+With the world's population increasingly concentrating in urban areas, the
+demand for expanded city infrastructure is on the rise. This entails not only
+residential buildings but also the incorporation of essential public facilities
+and services to cater to the growing populace. This challenge mirrors a scenario
+where participants are tasked with planning a city's building layout,
+involving both the selection of building types and their strategic placement.
+
+For this challenge, participants receive building projects with specific width and
+height dimensions, covering both residential and utility structures. The city is
+a square grid of cells. Overall, the goal is to create buildings from these
+plans, arranging them within the city to optimize space and create a balanced
+mix of structures. This minimizes residents' walking distance to reach essential
+services. The overall score is the sum individual residential building scores,
+calculated by multiplying the number of residents and the number of utility
+building types within walking distance of that building. Notably, the walking
+distance parameter is specific to each problem instance.
+
+Essentially, this problem belongs to the category of packing problems. The core
+objective revolves around determining how to fit buildings within the city
+layout. Importantly, there is no predetermined limit on the number of buildings
+that can be constructed for each plan, granting contestants the flexibility to
+make choices accordingly.
+
+\subsection{Hash Code 2019}
+\label{subsec:hashcode-2019}
+
+\subsubsection*{Photo Slideshow}
+\label{subsubsec:hashcode-2019-qualification}
+
+Given the surge in digital photography and the vast number of images traversing
+the internet daily, this challenge delves into the interesting concept of crafting
+picture slideshows using the available photo pool.
+
+In this scenario, participants were tasked with creating a slideshow composed of
+pictures, which could be oriented either vertically or horizontally in the
+slides. Notably, a slide could contain two photos if they were arranged
+vertically. Additionally, these photos could be tagged with multiple descriptors
+corresponding to their subjects. The scoring of this problem revolves around the
+slideshow's appeal, determined by a calculated value that depends on consecutive
+slide pairs. This value is computed as the minimum between the tags count of the
+first picture, the second picture in the sequence and the count of the common
+tags shared between the two images.
+
+Overall, this challenge can be categorized as a scheduling problem, to be
+precise, a single-machine job scheduling problem. If we liken the jobs to
+photos, the goal is to sequence them to optimize a specific objective function
+in this context, the~\textquote{appeal} factor. Additionally, the interactions
+between slides introduce elements resembling a grouping problem.
+
+\subsubsection*{Compiling Google}
+\label{subsubsec:hashcode-2019-final}
+
+Given Google's extensive codebase spanning billions of lines of code across
+numerous source code files, compiling these files on a single machine would be
+time-consuming. To address this, Google distributes the compilation process
+across multiple servers.
+
+This challenge tasks participants with optimizing compilation time by
+strategically distributing source code files across available servers. Notably,
+the compilation of a single code file can depend on other files being compiled
+prior to it, involving dependencies. Given a certain number of available servers
+and specific deadlines for compilation targets, the problem's score is
+calculated by summing the scores for the completion of each compilation target.
+These scores are determined by a fixed value for meeting the deadline, with an
+additional bonus if the compilation is completed ahead of the expected time.
+
+This problem can be categorized as a scheduling problem, as the primary
+objective involves distributing compilation tasks (jobs) among different
+machines while adhering to dependencies between files. In essence, this problem
+resembles a variation of the classical job-shop scheduling problem.
+
+\subsection{Hash Code 2020}
+\label{subsec:hashcode-2020}
+
+\subsubsection*{Book Scanning}
+\label{subsubsec:hashcode-2020-qualification}
+
+\textit{Google Books} is project that aims to create a digital collection of many books
+by scanning them from libraries and publishers around the world. In this
+challenge, contestants are put in the position of managing the operation of
+setting up a scanning pipeline for millions of books.
+
+Given a dataset describing libraries and available books, the objective of this
+challenge is to select books for scanning from each library within a specified
+global deadline. Each library has a distinct sign-up process duration before it can
+commence scanning, and only one library can be signed up at a time. Moreover,
+each library has a fixed scanning rate for books per day, and each scanned book
+contributes to the final score. The problem's goal is to maximize the overall
+score, which is calculated as the sum of the scores for unique books scanned
+within the given deadline.
+
+This problem exhibits a combination of characteristics from classical
+scheduling, assignment, covering, and knapsack problems. It resembles a
+scheduling problem as the order in which libraries are signed up needs to be
+determined. It involves assignment, since libraries can share books,
+necessitating a decision on which libraries will scan each book. The covering
+aspect is apparent in the scoring mechanism, where the aim is to maximize the
+number of unique books scanned.  Lastly, the problem also incorporates a
+knapsack-like element. While the time-related simulation factor exists, it can
+be abstracted into a knapsack scenario where the goal is to optimize the overall
+score by considering the number of books a library can scan until the deadline
+as its capacity.
+
+\subsubsection*{Assembling Smartphones}
+\label{subsubsec:hashcode-2020-final}
+
+Constructing smartphones is a intricate process that entails assembling a
+multitude of hardware components. This challenge delves into the concept of
+creating an automated assembly line for smartphones, employing robotic arms to
+streamline the manufacturing process.
+
+Contestants are tasked with placing robotic arms within a workspace depicted as
+a rectangular cell grid. The objective is to optimize the arrangement of these
+arms to allow the execution of assigned tasks. Each task involves specific
+movements that a robotic arm must perform, essentially traversing a designated
+number of cells to accomplish the task. Notably, robotic arms cannot cross each
+other, necessitating precise task assignment and arm positioning to ensure
+unobstructed task execution for all arms. The problem's score is derived from
+the summation of scores obtained by successfully completing tasks within the
+constraints.
+
+In summary, this challenge falls under the category of both assignment and
+scheduling problems since it encompasses the assignment of robotic arms to
+suitable positions and the scheduling of tasks across these arms to optimize the
+completion of tasks.
+
+\subsection{Hash Code 2021}
+\label{subsec:hashcode-2021}
+
+\subsubsection*{Traffic Signaling}
+\label{subsubsec:hashcode-2021-qualification}
+
+This challenge delves into the optimization of traffic light timers to enhance
+the travel experience in a city. While traffic lights inherently contribute to
+road safety, their built-in timers are important in regulating traffic flow. The
+focus here is to fine-tune these timers with the aim of optimizing overall
+travel time for all commuters within the city.
+
+Contestants are presented with a city layout, complete with intersections
+housing traffic lights. The task is to strategically allocate time intervals to
+these traffic light timers, optimizing traffic flow to ensure the maximum number
+of car trips are successfully completed within a predefined simulation time
+limit. The problem's score is the cumulative sum of scores assigned to each
+completed trip. These scores comprise a fixed value for trip completion and a
+bonus proportional to how early the trip concludes relative to the simulation's
+time limit. While the challenge may seem complex due to its detailed rules and
+operational aspects, its core objective revolves around this fundamental
+optimization process.
+
+In summary, this challenge can be categorized as a simulation problem. It's
+worth highlighting that this problem aligns closely with the Signal Timing
+problem in the literature of Control Optimization.
+
+\subsubsection*{Software Engineering at Scale}
+\label{subsubsec:hashcode-2021-final}
+
+This challenge addresses the complexity of managing Google's vast monolithic
+codebase, which has grown significantly alongside the expanding number of
+engineers. To overcome the hurdles of effective feature deployment, participants
+are tasked with creating a solution that optimally schedules feature
+implementation work among engineers.
+
+In this challenge, there are three primary components to be considered: features,
+services, and binaries. Each feature may require certain services, which can be
+present in specific binaries. The main objective is to efficiently assign
+features to engineers, considering that their implementation might entail
+additional tasks such as service implementation, binary relocation, new binary
+creation, or waiting for a designated time. The challenge revolves around
+optimizing this workflow to minimize delays caused by multiple engineers working
+in the same service. The scoring is based on the sum of scores awarded for
+feature completion. Each completed feature's score is determined by the product
+of the number of users benefiting from it, as specified in the problem
+statement, and the number of days between the maximum day (also defined) and the
+day the feature was launched.
+
+In essence, this challenge falls within the realm of classic scheduling
+problems. It involves assigning tasks (jobs) to engineers with the aim of
+optimizing a quantity influenced by the order in which each engineer performs
+their tasks and the interactions of tasks among multiple engineers.
+
+\subsection{Hash Code 2022}
+\label{subsec:hashcode-2022}
+
+\subsubsection*{Mentorship and Teamwork}
+\label{subsubsec:hashcode-2022-qualification}
+
+\subsubsection*{Santa Tracker}
+\label{subsubsec:hashcode-2022-final}
+
+\subsection{Outline}
+\label{subsec:hashcode-outline}
+
+In summary, this section provided an overview and description of the key aspects
+of the Hash Code problems. Furthermore, a categorization that links these
+problems to topics commonly found in combinatorial optimization literature was
+presented. The~\Cref{tab:hashcode-summary} shows a summary of the
+analysis conducted.
+
+\begin{table}[ht]
+  \centering
+  \resizebox{\textwidth}{!}{% 
+    \begin{tabular}{@{\extracolsep{4pt}}cccccccc}
+      \toprule
+      \multirow{2}{*}{\textbf{Problem}} & \multicolumn{7}{c}{\textbf{Categories}}                                                                                    \\
+      \cmidrule{2-8}
+      {}                                & Assignment                              & Knapsack   & Coverage   & Vehicle Routing & Simulation & Scheduling & Packing    \\ \midrule
+      Street View Routing               &                                         &            & \checkmark & \checkmark      &            &            &            \\
+      Optimize a Data Center            & \checkmark                              & \checkmark &            &                 &            &            &            \\
+      Loon                              &                                         &            & \checkmark & \checkmark      & \checkmark &            &            \\
+      Delivery                          &                                         &            &            & \checkmark      &            &            &            \\
+      Satellites                        & \checkmark                              &            & \checkmark &                 & \checkmark &            &            \\
+      Streaming Videos                  & \checkmark                              & \checkmark &            &                 &            &            &            \\
+      Router Placement                  &                                         &            & \checkmark &                 &            &            &            \\
+      Self-Driving Rides                & \checkmark                              &            &            & \checkmark      & \checkmark &            &            \\
+      City Plan                         &                                         &            &            &                 &            &            & \checkmark \\
+      Photo Slideshow                   &                                         &            &            &                 &            & \checkmark &            \\
+      Compiling Google                  &                                         &            &            &                 &            & \checkmark &            \\
+      Book Scanning                     & \checkmark                              & \checkmark & \checkmark &                 &            & \checkmark &            \\
+      Assembling Smartphones            & \checkmark                              &            &            &                 &            & \checkmark &            \\
+      Traffic Signaling                 &                                         &            &            &                 & \checkmark &            &            \\
+      Software Engineering at Scale     &                                         &            &            &                 &            & \checkmark &            \\
+      Mentorship and Teamwork           &                                         &            &            &                 &            & \checkmark &            \\
+      Santa Tracker                     &                                         &            &            & \checkmark      &            &            &            \\ \bottomrule
+    \end{tabular}
+  }
+  \caption{Categorization of Google Hash Code Problems}
+  \label{tab:hashcode-summary}
+\end{table}

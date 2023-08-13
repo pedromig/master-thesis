@@ -1,4 +1,4 @@
-% ucthesis.cls
+% thesis.cls
 % Created by: Pedro Rodrigues <pedror@student.dei.uc.pt>
 
 \NeedsTeXFormat{LaTeX2e}
@@ -27,6 +27,7 @@
 % Encoding
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{fontspec}
 
 % Geometry and Colors
 \usepackage[usenames,dvipsnames]{xcolor}
@@ -38,9 +39,16 @@
 \usepackage[scaled=0.97]{zi4}
 \usepackage{roboto}
 \usepackage[activate={true,nocompatibility}]{microtype}
+\setmonofont{Inconsolatazi4-Regular}
 
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
+
+% Tables, Figures, etc...
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
 
 % Headers, Titles, Paragraphs, etc...
 \usepackage{parskip}
@@ -48,7 +56,10 @@
 \usepackage[titles]{tocloft}
 \usepackage{fancyhdr}
 \usepackage{sectsty}
+
+\usepackage{setspace}
 \usepackage{csquotes}
+\usepackage{enumitem}
 
 % URL Formatting
 \usepackage{url}
@@ -65,8 +76,11 @@
 % Detect Overflows
 \overfullrule=2cm
 
+% Line Spacing
+\setstretch{1.2}
+
 % Epigraph (Chapter)
-\setlength\epigraphwidth{8cm}
+\setlength\epigraphwidth{.45\textwidth}
 \setlength\epigraphrule{0pt}
 
 \makeatletter
@@ -76,9 +90,12 @@
 % Empty Page Customization 
 \usepackage{emptypage}
 
+% Description Environment Indentation
+\setlist[description]{leftmargin=1.05cm,labelindent=0.2cm}
+
 % Depth of TOC
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{2}
 
 % Headers and Footers
 \renewcommand{\headrulewidth}{0.3pt}
@@ -139,6 +156,9 @@
   \fancyfoot[L]{\hfill\thepage\hfill}
 }
 
+% URL Font
+\urlstyle{tt}
+
 % Avoid Useless Cross-Referencing Loops
 \makeatletter
 \def\@testdef #1#2#3{%
@@ -150,14 +170,22 @@
     \@tempswatrue \fi}
 \makeatother
 
+% Make sure that blank pages are actually blank
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+      \hbox{}
+      \vspace*{\fill}
+      \thispagestyle{empty}
+      \newpage
+      \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
 
 % Acronyms and Glossaries
 \usepackage[acronym,toc]{glossaries}
 
-
 % Blank Page
 \newcommand{\blankpage}{
-  \clearpage
   \thispagestyle{empty}
   \addtocounter{page}{-1}
   \null
@@ -166,7 +194,6 @@
 
 % Cover Page Environment
 \newenvironment{cover}{
-  \clearpage
   \thispagestyle{empty}
   \begin{center}
     }{
@@ -177,7 +204,8 @@
 \newenvironment{funding}{
   \clearpage
   \thispagestyle{empty}
-  \mbox{} \vfill
+  \mbox{}
+  \vfill
 }{
   \cleardoublepage
 }
@@ -206,6 +234,12 @@
   }
 }{
   \cleardoublepage
+}
+
+% Chapter Epigraph
+\newcommand{\chquote}[3]{
+  \epigraph{\textquote{#1}}{\textup{#2},~\emph{#3}}
+  \vspace{0.5cm}
 }
 
 % Keywords Environment

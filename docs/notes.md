@@ -50,6 +50,14 @@ C. Gather results that allow us to see if some algorithms are better than
 % Explain the model a lil bit more.
 %
 
+# Experiments
+
+## Problem A
+
+## Problem B
+
+
+-----
 The Hash Code programming competition was a yearly event held by Google where
 teams were challenged to solve a complex problem using any tools, resources, and
 programming languages of their choice in just four hours. The problems were
@@ -181,6 +189,16 @@ modelling and the evaluation of meta-heuristics.
   \item \textbf{Chapter~\ref{chapter:conclusion}:} Presents a reflection on this work.
 \end{itemize}
 
+* Olhar para um problema e decompor nas suas partes consituintes é uma ferramenta interessante para a construção 
+  de bounds. visto que construir bounds é quase uma arte. O conhecimento de certos problemas considerados "texbook"
+  e bastante estudados mesmo até ao nivel de construção de bounds, estratégias que resultam melhor, etc... pode
+  sugerir um bound mais interessante para um problema que combine varios destes problemas "textbook". Mesmo sendo 
+  de uma forma imprevisivel ou, pelo menos, um bocado exotica. 
+* Destes problemas todos a gente selecionou dois que achamos ser um ponto de começo interessante para 
+  a tentativa de modelação.
+
+* Hashcode problem Interesting from a theorectical standpoint but also approachable from a practical perspective
+
 The remainder of this document is structured as follows:
 
 The main goal of this work is to develop and implement effective heuristic and
@@ -215,3 +233,37 @@ analysis will consider various performance dimensions, including the effort
 required for problem modelling and solver development, the computational
 efficiency of the implemented software, and the quality of the solutions
 obtained.
+
+% \epigraph{``Begin at rhe beginning," the King said gravely, ``and go on till you come to the end, then stop."}{--- \textup{Lewis Carroll}, Alice in Wonderland}
+
+
+chapter 3
+“understanding a question is half an answer”
+― Socrates, Essential Thinkers - Socrates
+
+
+
+2016 Final - Covering, Assignment, Simulation -> 2016 Final - OK
+2017 Qualification - Assignment, Knapsack ->  2017 Qualification - OK
+2017 Final - Covering, Cable Trench Problem (?) ->  2017 Final - Deixava só Covering (o custo ótimo do backbone dada a localização dos routers, é o Steiner Tree Problem que possivelmente vale a pena mencionar?)
+2018 Qualification - Assignment, Simulation, Vehicle Routing (with Time Windows) -> 2018 Qualification - OK
+2018 Final - Packing (2D Packing?), Covering  -> 2018 Final - OK (deixava só Packing)
+2019 Qualification - Scheduling (Ordering), Satisfiability? -> 2019 Qualification - Deixava só Scheduling (Single-resource scheduling se quiseres ser mais preciso). Assumo que por SAT queiras dizer a constraint de 2 verticais, mas isso é simplesmente uma constraint na construção da solução não é SAT. Eventualmente poderia fazer sentido mencionar algo como Grouping no sentido que os grupos é que interessam, se bem que grouping problems costumam implicar sets disjuntos o que não é verdade aqui (mas diria que encaixa na mesma).
+2019 Final - Scheduling, Assignment ->  2019 Final - Tipicamente problemas de Scheduling já pressupõem assignment (é sempre preciso dizer em que máquina vão ser feitos a menos que seja single-resource). Para além disso nota que a compilação de um ficheiro pode ser feita em mais do que 1 servidor (até aparece no exemplo) e tipicamente em assignment isto não é verdade (em scheduling também não é comum mas pronto). Por isto talvez deixasse apenas Scheduling aqui.
+2020 Qualification - Scheduling, Knapsack, Assignment, Covering ->  2020 Qualification - OK
+2020 Final - Assignment Scheduling -> 2020 Final - OK
+
+2021 Qualification - Simulation -> 2021 Qualification - OK. Eventualmente fará sentido ter também algo relacionado com o tempo de cada semáforo, que será algo na perspetiva de Control Optimization, uma pesquisa rápida no scholar até chama a este tipo de problemas Signal Timing ou Traffic Signal Timing.
+
+
+2021 Final - Scheduling, Assignment
+2022 Qualification - Assignemnt, Scheduling
+2022 Final - TSP Like (Vehicle Routing ?)
+
+
+2021 Final - Scheduling ok, assignment não sei se vale a pena estar aqui.
+2022 Qualification - Se calhar metia Scheduling e Simulation. Simulation no sentido que é preciso ir atualizando os skills das pessoas. Mas eventualmente pode só ficar Scheduling. Assignment não me parece relevante.
+2022 Final - VRP parece-me bem. Diria que há aqui mais qualquer coisa relacionada com as mudanças de aceleração, talvez na ótica de Control Optimization. 
+
+Coverage on 2020 book scanning?
+Simulation in 2022?
