@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  13 AUG 2023 19:26
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  15 AUG 2023 17:35
  system commands enabled.
 **thesis.tex
 (./thesis.tex
@@ -2916,26 +2916,26 @@ LaTeX Font Info:    Font shape `TU/Roboto(0)/b/n' will be
  [7
 
 ] [8] [9] [10]
-[11] [12] [13] [14] [15] [16])
+[11] [12] [13] [14] [15] [16] [17])
 (./mainmatter/3-TheHashCodeProblems/sections/instance.tex)
 (./mainmatter/3-TheHashCodeProblems/sections/remarks.tex))
-(./mainmatter/4-ThePrincipledModellingFramework/main.tex [17]
+(./mainmatter/4-ThePrincipledModellingFramework/main.tex [18]
 Chapter 4.
-) (./mainmatter/5-OptimizeDataCenter/main.tex [18
+) (./mainmatter/5-OptimizeDataCenter/main.tex [19
 
 ]
 Chapter 5.
-) (./mainmatter/6-BookScanning/main.tex [19
+) (./mainmatter/6-BookScanning/main.tex [20
 
 ]
 Chapter 6.
-) (./mainmatter/7-Conclusion/main.tex [20
+) (./mainmatter/7-Conclusion/main.tex [21
 
 ]
 Chapter 7.
-) [21
+) [22
 
-] (./backmatter/misc.tex (./build/thesis.acr) [22
+] (./backmatter/misc.tex (./build/thesis.acr) [23
 
 
 
@@ -2946,7 +2946,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `Inconsolatazi4-Regular' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-) [23
+) [24
 
 ]
 (./build/thesis.aux)
@@ -2961,12 +2961,12 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 59606 strings out of 477805
+ 59607 strings out of 477805
  125086,2373549 words of node,token memory allocated
  1032 words of node memory still in use:
    8 hlist, 2 vlist, 2 rule, 1 local_par, 7 glue, 4 kern, 1 penalty, 3 glyph, 22
  attribute, 133 glue_spec, 13 attribute_list, 2 write, 3 pdf_action nodes
-   avail lists: 1:1,2:1524,3:296,4:147,5:498,6:90,7:6257,8:58,9:658,10:17,11:586
+   avail lists: 1:2,2:1416,3:296,4:139,5:498,6:90,7:6343,8:58,9:638,10:17,11:586
 ,12:1
  77867 multiletter control sequences out of 65536+600000
  242 fonts using 32117687 bytes
@@ -2981,10 +2981,10 @@ ibertine_R.otf></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/Libertine
 MathMI.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (31 pages, 263321 bytes).
+Output written on thesis.pdf (32 pages, 267040 bytes).
 
-PDF statistics: 451 PDF objects out of 1000 (max. 8388607)
- 386 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 131072)
+PDF statistics: 455 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 131072)
  240 words of extra memory for PDF output out of 10000 (max. 100000000)
 

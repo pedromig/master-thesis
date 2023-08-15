@@ -1,4 +1,4 @@
-Incremental bound -> property testing
+Incremental Bound -> property testing
 
 A `superset` of these algorithms.
 It is evident `its not so evident`. 
@@ -189,16 +189,6 @@ modelling and the evaluation of meta-heuristics.
   \item \textbf{Chapter~\ref{chapter:conclusion}:} Presents a reflection on this work.
 \end{itemize}
 
-* Olhar para um problema e decompor nas suas partes consituintes é uma ferramenta interessante para a construção 
-  de bounds. visto que construir bounds é quase uma arte. O conhecimento de certos problemas considerados "texbook"
-  e bastante estudados mesmo até ao nivel de construção de bounds, estratégias que resultam melhor, etc... pode
-  sugerir um bound mais interessante para um problema que combine varios destes problemas "textbook". Mesmo sendo 
-  de uma forma imprevisivel ou, pelo menos, um bocado exotica. 
-* Destes problemas todos a gente selecionou dois que achamos ser um ponto de começo interessante para 
-  a tentativa de modelação.
-
-* Hashcode problem Interesting from a theorectical standpoint but also approachable from a practical perspective
-
 The remainder of this document is structured as follows:
 
 The main goal of this work is to develop and implement effective heuristic and
@@ -234,14 +224,7 @@ required for problem modelling and solver development, the computational
 efficiency of the implemented software, and the quality of the solutions
 obtained.
 
-% \epigraph{``Begin at rhe beginning," the King said gravely, ``and go on till you come to the end, then stop."}{--- \textup{Lewis Carroll}, Alice in Wonderland}
-
-
-chapter 3
-“understanding a question is half an answer”
-― Socrates, Essential Thinkers - Socrates
-
-
+# Chapter 3
 
 2016 Final - Covering, Assignment, Simulation -> 2016 Final - OK
 2017 Qualification - Assignment, Knapsack ->  2017 Qualification - OK
@@ -255,7 +238,6 @@ chapter 3
 
 2021 Qualification - Simulation -> 2021 Qualification - OK. Eventualmente fará sentido ter também algo relacionado com o tempo de cada semáforo, que será algo na perspetiva de Control Optimization, uma pesquisa rápida no scholar até chama a este tipo de problemas Signal Timing ou Traffic Signal Timing.
 
-
 2021 Final - Scheduling, Assignment
 2022 Qualification - Assignemnt, Scheduling
 2022 Final - TSP Like (Vehicle Routing ?)
@@ -267,3 +249,39 @@ chapter 3
 
 Coverage on 2020 book scanning?
 Simulation in 2022?
+
+# Random Thoughts
+
+* Olhar para um problema e decompor nas suas partes consituintes é uma
+ferramenta interessante para a construção  de bounds. visto que construir
+bounds é quase uma arte. O conhecimento de certos problemas considerados
+"textbook" e bastante estudados mesmo até ao nivel de construção de bounds,
+estratégias que resultam melhor, etc... pode sugerir um bound mais
+interessante para um problema que combine varios destes problemas "textbook".
+Mesmo sendo de uma forma imprevisivel ou, pelo menos, um bocado exotica. 
+
+* Destes problemas todos a gente selecionou dois que achamos ser um ponto de
+começo interessante para a tentativa de modelação.
+
+* Hashcode problem Interesting from a theorectical standpoint but also
+approachable from a practical perspective
+
+* If we have so few instances why not generate more. We can do that because
+problems are described thoroughly in the problem statement but it was not our
+main objective to do that.  Our main objective was to try and model google
+Google Hash Code problems and then try to implement some meta-heuristics to solve those
+problems. That is a thing that we left as an open possibility and as future work.
+
+* There are still VRP, Simulation and Packing problems which we did not modeled. Thats future work.
+
+# Quotes
+
++ Chapter (Introduction) 1: 'Begin at rhe beginning', the King said gravely, 'and go on till you come to the end, then stop'. --- Lewis Carroll, Alice in Wonderland.
+
++ Chapter  (Background) 2: 'If I have seen further than others, it is by standing upon the shoulders of giants'. --- Isaac Newton.
+
++ Chapter (Google Hash Code Competition) 3: "understanding a question is half an answer". --- Socrates, Essential Thinkers.
+
+"Theory will take you only so far". J. Robert Oppenheimer 
+
++ Chapter (Conclusion) 7': We can only see a short distance ahead, but we can see plenty there that needs to be done.' -- Alan Turing.
