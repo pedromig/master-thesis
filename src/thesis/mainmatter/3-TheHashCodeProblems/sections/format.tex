@@ -1,32 +1,78 @@
-% The Hash Code competition problems are modeled on complex engineering challenges
-% faced by Google. Given the scale of the enterprise, it is evident that they
-% represent complex engineering challenges that mirror real-world scenarios
-% prevalent in the industry. As such, these problems not only function as valuable
-% benchmark problems, but also provide an opportunity to establish a robust
-% baseline for the development and testing of modeling based meta-heuristic
-% approaches. This is because numerous individuals with diverse backgrounds have
-% attempted to solve these problems, resulting in readily accessible scores and
-% solutions.
+The Google Hash Code competition, organized by Google from 2014 to 2022,
+consisted of two main phases: a qualifying round and a final round. During this
+competition, teams of 2-4 skilled individuals were tasked with solving complex
+problems that mirrored real-world engineering challenges faced by Google's own
+engineers. The primary aim of the competition was to attract talented
+individuals to the company. In the qualifying round, participants worldwide
+engaged in a 4-hour problem-solving session. Subsequently, around 40-50 select
+teams advanced to the final round, which took place at a Google headquarters.
+Additionally, participants gathered at designated hubs globally during the
+qualifying round, fostering a competitive environment.
 
-% When examining the available information about the solutions for the problems,
-% it is essential to take into consideration a few key points. Firstly, since only
-% a select number of teams from the qualification round advance to the finals, the
-% number of solutions available tend to be limited. However, it is reasonable to
-% expect that the solutions found by the top teams will be excellent
-% representatives of the best problem-solving processes, as they have undergone
-% the selection process. Secondly, in the early years of the competition, it was
-% only open to teams from Paris. In the subsequent three years, it was open to
-% teams from Europe, Africa, and the Middle East before becoming a worldwide
-% competition. Therefore, it is expected that there will be an increase in the
-% number of results available in the later years and more challenging problems due
-% to the increase in competition.
+\pgfplotstableread{
+  Label Qualification Final
+  2014 100 54
+  2015 230 65
+  2016 1050 51
+  2017 2815 50
+  2018 3012 40
+  2019 6672 41
+  2020 10725 45
+  2021 9003 38
+  2022 10177 39
+}\testdata
 
-% In order to fulfill the objectives of this work, it is crucial to gain a
-% thorough understanding of the problem at hand before proceeding with the
-% formulation of the model. This includes identifying the objective, classifying
-% the problem type, understanding the constraints, and most importantly,
-% determining its relationship to problems previously studied in literature.
-% Through this analysis, valuable insights into the appropriate approach can be
-% gained. Therefore, a comprehensive analysis of the Hash Code problems was
-% conducted and a summary of the key aspects of each problem evaluated in this
-% first semester is presented in the following sections
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel = {Year},
+        ylabel = {Participants},
+        ybar,
+        ymin=0,
+        opacity=0.8,
+        xtick=data,
+        ymode=log,
+        width=0.8\textwidth,
+        height=\axisdefaultheight,
+        legend style={cells={anchor=west}, legend pos=north west, font=\footnotesize},
+        x tick label style={font=\footnotesize},
+        y tick label style={font=\footnotesize},
+        reverse legend=false,
+        xticklabels from table={\testdata}{Label},
+        xticklabel style={text width=2cm,align=center},
+      ]
+      \addplot [fill=cb_blue] table [y=Qualification, meta=Label, x expr=\coordindex] {\testdata};
+      \addlegendentry{Qualification Round}
+      \addplot [fill=cb_orange] table [y=Final, meta=Label, x expr=\coordindex] {\testdata};
+      \addlegendentry{Final Round}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Google Hash Code Competition Attendance 2014-2022}
+  \label{fig:hashcode-attendance}
+\end{figure}
+
+
+In the early years of the competition, it was only open to teams from Paris. In
+the subsequent three years, it was open to teams from Europe, Africa, and the
+Middle East before becoming a worldwide competition. Therefore, it is expected
+that there will be an increase in the number of results available in the later
+years and more challenging problems due to the increase in competition. Futhermore,
+the number of participants kept growing throughout the years which highlights
+the importance of this event as illustrated in~\Cref{fig:hashcode-attendance}
+
+Unfortunately this year, the Hash Code competition, along with other coding
+competitions, ceased due to significant layoffs. Nevertheless, the competition
+generated a diverse collection of attempts at solving the problems, resulting in
+a valuable wealth empirical data accessible to the community.
+
+Lastly, due to the competition format, it is worth mentioning that competitors
+frequently make use of greedy and other heuristic strategies tailored to the
+challenge. Moreover, meta-heuristics in this situation are not as popular due to
+the time constraints imposed by the competition format. At first glance, the
+majority of optimization problems are structurally different from one other,
+which makes it demanding to write general-purpose heuristic solvers that can be
+easily reused.  On the other hand, it might not be worth the effort spent in the
+implementation of such solvers, particularly as the benefit of using a simple
+heuristic strategy may outweigh the development and the running cost of
+meta-heuristic solvers such as evolutionary algorithms.
