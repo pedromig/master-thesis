@@ -29,6 +29,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{fontspec}
 
+% Math Symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
 % Geometry and Colors
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[a4paper,headheight=15pt]{geometry}
@@ -40,6 +46,9 @@
 \usepackage{roboto}
 \usepackage[activate={true,nocompatibility}]{microtype}
 \setmonofont{Inconsolatazi4-Regular}
+
+% Algorithm Pseudo Code
+\usepackage[algochapter,ruled,lined]{algorithm2e}
 
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
@@ -69,9 +78,21 @@
 \usepackage{etoolbox}
 
 % Bibliography
-\usepackage[backend=biber,natbib=true,sorting=ynt]{biblatex}
+\usepackage[backend=biber,natbib=true,url=false,doi=true,sorting=ynt]{biblatex}
 
 %% Customization
+
+% Color Definitions (Colourblind friendly)
+\definecolor{cb_blue}{RGB}{0, 92, 169}
+\definecolor{cb_orange}{RGB}{213, 94, 0}
+\definecolor{cb_green}{RGB}{0, 158, 115}
+\definecolor{cb_purple}{RGB}{102, 51, 153}
+\definecolor{cb_pink}{RGB}{204, 121, 167}
+\definecolor{cb_gray}{RGB}{153, 153, 153}
+\definecolor{cb_dark_yellow}{RGB}{230, 159, 0}
+\definecolor{cb_light_blue}{RGB}{86, 180, 233}
+\definecolor{cb_light_yellow}{RGB}{240, 228, 66}
+\definecolor{cb_dark_blue}{RGB}{0, 114, 178}
 
 % Detect Overflows
 \overfullrule=2cm
@@ -80,8 +101,10 @@
 \setstretch{1.2}
 
 % Epigraph (Chapter)
-\setlength\epigraphwidth{.45\textwidth}
+\setlength\epigraphwidth{.55\textwidth}
 \setlength\epigraphrule{0pt}
+\setlength\beforeepigraphskip{1\baselineskip}
+\setlength\afterepigraphskip{1\baselineskip}
 
 \makeatletter
 \patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
@@ -100,14 +123,33 @@
 % Headers and Footers
 \renewcommand{\headrulewidth}{0.3pt}
 
-% Micro Typographical Improvements
-\microtypesetup{activate={true,nocompatibility}}
-
 % Headings Font Customization 
 \chapterfont{\sffamily}
 \sectionfont{\sffamily}
 \subsectionfont{\sffamily}
 \subsubsectionfont{\sffamily}
+
+% Theorems, Definitions, and Other 
+\newtheoremstyle{definition}
+{10pt}   % measure of space to leave above the theorem.
+{10pt}   % measure of space to leave below the theorem.
+{\itshape}  % name of the font to use in the body of the theorem 
+{}          % measure of space to indent 
+{\bfseries} % name of head font 
+{.}          % punctuation between head and body 
+{ }         % space after theorem head; " " = normal interword space 
+{\thmname{#1}\thmnumber{ #2}~(\thmnote{#3})} % Manually specify head
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+% Algorithm Style
+\SetKwComment{Comment}{$\vartriangleright$\ }{}
+
+% Custom Operators
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
 
 % Chapter Font in Toc
 \renewcommand{\cftchapfont}{\bfseries\sffamily}
@@ -158,6 +200,8 @@
 
 % URL Font
 \urlstyle{tt}
+
+% Some helpfull colors (colourblind safe )
 
 % Avoid Useless Cross-Referencing Loops
 \makeatletter
@@ -238,7 +282,7 @@
 
 % Chapter Epigraph
 \newcommand{\chquote}[3]{
-  \epigraph{\textquote{#1}}{\textup{#2},~\emph{#3}}
+  \epigraph{#1}{---~\textup{#2}\ifthenelse{\equal{#3}{}}{}{,~\emph{#3}}}
   \vspace{0.5cm}
 }
 

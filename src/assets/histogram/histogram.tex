@@ -1,0 +1,50 @@
+\begin{tikzpicture}
+
+  % Data
+  \pgfplotstableread{
+    Label Qualification Final
+    2014 100 54
+    2015 230 65
+    2016 1050 51
+    2017 2815 50
+    2018 3012 40
+    2019 6672 41
+    2020 10725 45
+    2021 9003 38
+    2022 10177 39
+  }\data
+
+  % Legend Style
+  \pgfplotsset{
+    /pgfplots/area legend/.style={
+        /pgfplots/legend image code/.code={
+            \fill[##1] (0cm,0.6em) rectangle (2*\pgfplotbarwidth,-0.3em);
+          },
+      },
+  }
+
+  \begin{axis}[
+      xlabel = {Year},
+      ylabel = {Teams},
+      ybar,
+      ymin=0,
+      opacity=0.8,
+      xtick=data,area legend,
+      ymode=log,
+      width=0.8\textwidth,
+      height=\axisdefaultheight,
+      legend style={cells={anchor=west}, legend pos=north west, font=\scriptsize},
+      x tick label style={font=\scriptsize},
+      y tick label style={font=\scriptsize},
+      xticklabels from table={\data}{Label},
+      xticklabel style={text width=2cm,align=center},
+    ]
+    % Qualification Round
+    \addplot [fill=cb_dark_blue] table [y=Qualification, meta=Label, x expr=\coordindex] {\data};
+    \addlegendentry{Qualification Round}
+
+    % Final Round
+    \addplot [fill=cb_orange] table [y=Final, meta=Label, x expr=\coordindex] {\data};
+    \addlegendentry{Final Round}
+  \end{axis}
+\end{tikzpicture}

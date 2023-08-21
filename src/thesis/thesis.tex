@@ -1,20 +1,21 @@
 \documentclass[oneside]{thesis}
 
-\usepackage{./latex-thesis-cover/uccover}
+% Tikz
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
 
-\usepackage{tikz,pgfplots,pgfplotstable}
+% PGF
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{external}
 
+% Can't be bothered
 \usepackage{lipsum}
 
-% Color Definitions
-\definecolor{cb_blue}{RGB}{0, 92, 169}     % Blue
-\definecolor{cb_orange}{RGB}{255, 140, 0}  % Orange
-\definecolor{cb_green}{RGB}{0, 158, 115}   % Green
-\definecolor{cb_purple}{RGB}{102, 51, 153} % Purple
-\definecolor{cb_pink}{RGB}{255, 187, 120}  % Pink
-\definecolor{cb_gray}{RGB}{128, 128, 128}  % Gray
-
-
+% UC Thesis Cover Page
+\usepackage{./latex-thesis-cover/uccover}
 
 % PDF Document Metadata
 \hypersetup{
@@ -32,8 +33,10 @@
 % Acronyms
 \newacronym{cisuc}{CISUC}{Centre for Informatics and Systems of the University of Coimbra}
 \newacronym{ac}{AC}{Adaptive Computation}
-\newacronym{algo}{ALGO}{Algorithms and Optimization Laboratory}
+\newacronym{algo}{ALGO}{Algorithms and OptimizationLaboratory}
 \newacronym{fct}{FCT}{Foundation for Science and Technology}
+
+\newacronym{meta-heuristic}{MH}{Meta-Heuristic}
 
 \newacronym{combinatorial-optimization}{CO}{Combinatorial Optimization}
 \newacronym{global-optimization}{GO}{Global Optimization}
@@ -63,7 +66,7 @@
 \input{mainmatter/2-Background/main.tex}
 \input{mainmatter/3-TheHashCodeProblems/main.tex}
 \input{mainmatter/4-ThePrincipledModellingFramework/main.tex}
-\input{mainmatter/5-OptimizeDataCenter/main.tex}
+\input{mainmatter/5-OptimiseDataCenter/main.tex}
 \input{mainmatter/6-BookScanning/main.tex}
 \input{mainmatter/7-Conclusion/main.tex}
 

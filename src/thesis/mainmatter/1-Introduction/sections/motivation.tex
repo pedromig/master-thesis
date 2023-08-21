@@ -1,90 +1,93 @@
-% -> Maybe talk about constructive and local search approaches employed by meta-heuristics
-% -> Talk about mathematical optimization example in the background
-% -> Recommendation given by the jury (give an example)
+Optimization problems are ubiquitous in real-world scenarios. When considering,
+for example, the task of planning a road trip, we are quickly faced with several
+optimization challenges arising from a seemingly simple task. For example,
+finding the best route, considering factors as fuel efficiency, travel time, and
+budget limitations or to efficiently packing luggage. Solving such optimization
+problems entails finding~\textquote{good} solutions in the most time-efficient manner.
 
-Optimization problems are ubiquitous in real-world scenarios. Consider, for
-example, the task of planning a road trip, which involves various optimization
-challenges. These range from selecting the best route considering factors like
-fuel efficiency, travel time, and budget limitations, to efficiently packing
-luggage. Solving these problems entails finding good solutions, ideally
-in the most time-efficient manner possible.
+Tackling an optimization problem can typically be seen as a two-phase process.
+First, we start by understanding the problem and modeling its details. Then, we
+can apply, or develop, a solver to find one or more solutions taking into
+account the given model. This approach serves, for example, as the foundation of
+most linear optimization software packages which are widely used to solve
+real-world problems. In particular, such packages expect a mathematical
+formulation (model) describing the problem as a linear objective function and a
+set of linear constraints, and then use one or more algorithms designed to solve
+such linear optimization problems. This clear separation of concerns leads to
+some advantages. Notably, practitioners that want to solve a particular problem
+can focus on developing the model for that problem and easily use existing
+solvers to find solutions without needing to implement state-of-the-art
+algorithms themselves. Meanwhile, solver developers can take advantage of
+existing problems to test and enhance their solvers's performance.
 
-Tackling an optimization problem typically begins by understanding the problem
-and its details. Then, a strategy is employed to solve the problem. This
-highlights the two main steps: first, describing the problem's details (model),
-and second, employ a strategy (solver) that uses those details to discover
-solutions.
+In this work, we are interested in tackling~\acrfull{combinatorial-optimization}
+problems using a similar separation of concerns. Generally
+speaking,~\acrshort{combinatorial-optimization} consists of finding an optimal
+solution, according to some objective function, from a discrete set of
+solutions. Several generic approaches have been developed to solve CO problems
+exactly,~\ie{}, to find an optimal solution. However,
+many~\acrshort{combinatorial-optimization} problems are NP-Hard, meaning that,
+the time required to solve them via (problem-specific) exact approaches grows
+exponentially with the problem size, and consequently generic exact methods will
+also grow exponentially. In practice, this means that exact methods are often
+ineffective to
+solve~\textquote{real-world}~\acrshort{combinatorial-optimization} problems
+which have large problem sizes.
 
-In fact, this approach serves as the foundation for one widely employed method
-to address to address optimization problems, wherein a standard mathematical
-formulation (model) describing the problem is developed.  Subsequently, one of
-the numerous available generic solvers,~\eg{} the simplex method, is utilized to
-find solutions. Notably, the simplex method, is an exact solver, which ensures
-the optimality of the obtained solutions.
+As a result, there has been a growing interest in the development of methods
+that can find \textquote{good} solutions for such problems. In this work, we
+focus on heuristic and meta-heuristic methods. Heuristic methods are search
+procedures, often problem-specific, that attempt to quickly solve a problem and
+provide a~\textquote{rule of thumb} for attaining decent solutions, albeit
+without optimality guarantees.~\acrfull{meta-heuristic} methods employ several
+high-level strategies to construct and improve solutions. It is worth noting
+that such high-level strategies often depend on problem-specific details,~\eg{},
+the neighborhood structure and search tree definition. However, meta-heuristics
+do not require knowledge about these problem-specific details and instead use
+the high-level strategies in a black-box fashion. As
+such,~\acrshort{meta-heuristic} approaches are problem-independent and can be
+applied to a broad range of problems.
 
-Although this method for solving optimization problems is clearly established in
-the community there is recently growing interest in how to employ heuristic and
-meta-heuristic strategies to solve these problems, specifically, in the
-~\acrfull{combinatorial-optimization} field.
+Given the nature of~\acrshort{meta-heuristic} methods and the inherent diversity
+of problems, crafting universal~\acrshort{meta-heuristic} solvers is a
+challenging task made harder due to the difficulty in separating the
+problem-specific details required by the high-level strategies from
+the~\acrshort{meta-heuristic} problem-independent solving process. In fact, the
+abundance of~\acrshort{meta-heuristic} optimization software that provides
+specific frameworks for implementing evolutionary, local or constructive search
+meta-heuristics for~\acrshort{combinatorial-optimization}
+problems~\cite{cahon2004paradiseoa,digaspero2003easylocal,durillo2011jmetal} and
+the lack of a unifying framework supporting all approaches can be regarded as a
+symptom of the difficulty of this endeavor. Still, it is worth remarking the
+works by Vieira~\cite{vieira2009uma} and Outeiro~\cite{outeiro2021application},
+which partially looked at the formalization of this objective.
 
-Heuristic are procedures, often problem-specific, that attempt to quickly solve
-a problem and provide a helpful ``rule of thumb'' for achieving reasonably good
-results, usually in a greedy fashion. Meta-heuristic methods combine several
-subordinate heuristics thus being more generic and can be applied to broad a
-range of problems. Natural processes and phenomena, such as collective behavior,
-natural selection, and some physical properties of materials, inspire several
-meta-heuristic search processes making them flexible and adaptable, although
-more computationally intensive than more conventional heuristics. Remarkably,
-both strategies are generally more time-efficient than exact approaches, though
-without an associated guarantee of optimality.
+The development of a unifying framework would standardize problem-solving
+approaches, facilitate the reuse of~\acrshort{meta-heuristic} methods, and
+distinctly separate the tasks of problem modelling and solver development.
+Moreover, it would provide researchers and practitioners with a valuable tool to
+experimentally assess the performance of~\acrshort{meta-heuristic} methods
+across a range of diverse problems.
 
-Given the nature of meta-heuristic methods, and the inherent diversity of
-problems, crafting universal meta-heuristic solvers is challenging.  Unlike
-mathematical optimization, there's no established modelling framework for
-meta-heuristics that follows the same principled approach, possibly due to
-skepticism about its feasibility and effectiveness.
-
-The establishment of this framework would standardize problem-solving
-approaches, facilitate the reuse of meta-heuristic methods, and distinctly
-separate the tasks of problem modeling and solver development. Moreover, it
-would provide researchers and practitioners with a useful tool to experimentally
-assess the performance of meta-heuristic methods across a range of diverse
-problems.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth,keepaspectratio]{../assets/modelling/modelling.pdf}
-  \caption{Modelling and Problem Solving}
-  \label{fig:problem-solving}
-\end{figure}
-
-In summary, the concept of a modeling framework for problem tackling can be
-visually depicted as shown in \Cref{fig:problem-solving}. For a given
-problem, a computational model that describes the problem is generated and
-provided to a machine, which then employs a meta-heuristic solver to obtain
-solutions. This approach is built upon prior
-work~\cite{vieira2009uma,outeiro2021application} that has initiated the
-formalization of this objective.
-
-Simultaneously, alongside the development and application of meta-heuristic
-strategies to address combinatorial optimization problems, there exists a
-community interest in constructing a collection of benchmark optimization
-problems that hold both theoretical and practical significance. The Google Hash
-Code Competition problems, arguably, present themselves as suitable candidates.
+Simultaneously, alongside the development and application
+of~\acrshort{meta-heuristic} strategies to
+address~\acrshort{combinatorial-optimization} problems, there exists a community
+interest in constructing a collection of benchmark optimization problems that
+hold both theoretical and practical
+significance~\cite{bartz-beielstein2020benchmarking}. The Google Hash Code
+competition problems, arguably, present themselves as suitable candidates.
 
 The Hash Code programming competition, formerly hosted annually by Google,
 challenged teams of up to four members to solve
 intricate~\acrshort{combinatorial-optimization} problems within a four-hour time
-frame. Participants were allowed to use any tools, resources, and programming
-languages of their choice. These problems often drew inspiration from real-world
-issues and engineering challenges, such as vehicle routing, task scheduling, and
-Wi-Fi router placement. Essentially, can be classified as ``open'' research
-problems.
+frame using any tools, (online) resources, and programming languages of their
+choice. These problems often drew inspiration from real-world issues and
+engineering challenges, such as vehicle routing, task scheduling, and Wi-Fi
+router placement and can be classified as~\textquote{open} research problems.
 
-Given the pertinence of these problems, they serve as apt benchmarks for the
-evaluation of meta-heuristics. Moreover, they offer a suitable approach to
-assess the feasibility of the aforementioned principled modeling approach. Not
-only do these problems present challenges from theoretical and practical
-standpoints, but they also have well written and detailed statements. The
-competition context in which they were presented also provides a wealth of
-empirical data regarding the best solutions attained thus far.
+Given the pertinence of these problems, and the wide range of challenges they
+present from both a theoretical and practical standpoint, they serve as apt
+benchmarks for the evaluation of meta-heuristics. Furthermore, they offer a
+suitable approach to assess the feasibility of the aforementioned unifying
+framework on more realistic and challenging problems beyond the ones commonly
+found in the literature.

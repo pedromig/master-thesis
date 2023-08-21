@@ -1,0 +1,269 @@
+In the literature, the definition of meta-heuristic methods varies across
+different sources, resulting in a lack of consensus on a formal
+description~\cite{osman1996metaheuristics,blummetaheuristics,festa2014brief,luke2013essentialsa}.
+Nonetheless, one commonly accepted definition, provided by Osman and
+Laporte~\cite{osman1996metaheuristics}, captures the essence of these methods,
+which can be defined as iterative generation processes that \textit{``guide and
+  intelligently combine subordinate heuristics for exploring and exploiting
+  solutions in the search space''}.
+
+Given the nature of meta-heuristics as being based on heuristics, they inherit
+their underlying properties, making them a flexible tool for addressing complex
+problems that are intractable for exact algorithms in a reasonable amount of
+time. Furthermore, the fine-tuning required for meta-heuristics is often
+specific to the problem at hand and is typically determined through experimental
+means.
+
+In general, the majority of meta-heuristics can be characterized by the following
+properties~\cite{blummetaheuristics}:
+\begin{itemize}
+  \item \textbf{Search Strategy}: Meta-Heuristics can make use of different
+        strategies for improving candidate solutions. As such, local and
+        constructive approaches are common, with some methods using a combination of
+        both.
+
+  \item \textbf{Memory}: The utilization of memory mechanisms is an important
+        aspect in meta-heuristics, as it allows for the storage of relevant
+        information that can be utilized during the search process, such as
+        previously visited solutions.
+
+  \item \textbf{Population Based and Single-State}: Some meta-heuristics
+        incorporate a learning aspect, thus keeping an archive of solutions
+        (population) that is evolved during the optimisation process. On the other
+        hand, single state approaches work by improving a single candidate solution
+        throughout the process.
+\end{itemize}
+
+In the context of this work, a concise examination of several representative
+meta-heuristic methods is conducted and presented in the subsequent sections.
+Specifically, we will delve into Hill-Climbing (HC), Iterated Local Search
+(ILS), Tabu Search (TS), Greedy Randomized Adaptive Search Procedures (GRASP),
+and Ant Colony Optimization (ACO).
+
+\subsection{Hill-Climbing}
+
+Hill Climbing (HC) methods~\cite{luke2013essentialsa} are single-state,
+stochastic, local search meta-heuristics that work by iteratively applying small
+perturbations to an initial candidate solution with the goal of finding a better
+one. The process updates the best solution $s^{*}$ found so far at each iteration
+until a stopping criterion is met. Despite its simplicity, this approach is
+susceptible to getting trapped in local optima of the objective function.  For
+illustration purposes the pseudo-code of a simple version of an HC algorithm is
+shown in Algorithm~\ref{algorithm:hill-climber}.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Hill-Climbing}
+  \label{algorithm:hill-climber}
+  \KwIn{Problem Instance ($\mathcal{P}$), Objective Function ($f$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+  $s^{*} \gets$ CandidateSolution($\mathcal{P}$);{}  \Comment*[r]{Initial Solution}
+  \While{$\lnot$ stopping criteria met}{
+    $s^{\prime} \gets$ \normalfont{Perturb($s^{*}$}) \Comment*[r]{Improvement Attempt}
+    \If{$f(s^{\prime}) > f(s^{*}$)}{
+      $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+    }
+  }
+  \Return{$s^{*}$}
+  }
+\end{algorithm}
+
+\subsection{Iterated Local Search}
+
+The Iterated Local Search (ILS)~\cite{lourenco2010iterateda,luke2013essentialsa,
+  blummetaheuristics} is a single-state, stochastic, local search meta-heuristic
+that builds upon the ideas of Hill Climbing (HC) by incorporating repeated local
+searches starting from different solutions, allowing for exploration of the
+search space. In its simplest form, ILS can be implemented according to the
+pseudo-code shown in Algorithm~\ref{algorithm:iterated-local-search}. Variants
+of the ILS algorithm also exist, such as the memory-based, which store previously
+visited starting solutions to avoid re-exploration of the same regions of the
+search space.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Iterated Local Search}
+  \label{algorithm:iterated-local-search}
+  \KwIn{Problem Instance ($\mathcal{P}$), Objective Function ($f$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+    $s^{*} \gets$ CandidateSolution($\mathcal{P}$); \Comment*[r]{Initial Solution}
+    \While{$\lnot$ stopping criteria met}{
+      $s \gets$ \normalfont{Perturb($s^{*}$}); \Comment*[r]{Starting Point}
+      $s^{\prime} \gets$ \normalfont{LocalSearch($s$}); \Comment*[r]{Improve With Local Search}
+      \If{$f(s^{\prime}$) > $f(s^{*}$)}{
+        $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+      }
+    }
+    \Return{$s^{*}$}
+  }
+\end{algorithm}
+
+\subsection{Simulated Annealing}
+
+Simulated Annealing
+(SA)~\cite{kirkpatrick1983optimization,nikolaev2010simulateda,
+  luke2013essentialsa,blummetaheuristics} is a single-state, stochastic, local
+search meta-heuristic that is inspired by the process of annealing in
+metallurgy.  The algorithm works by iteratively applying small perturbations to
+a candidate solution with the aim of improving it, and accepting new solutions
+based on their quality and a probability function that simulates the cooling
+process of a metal. The probability function is controlled by a temperature
+parameter, which gradually decreases over time, thus reducing the acceptance
+probability of worse solutions. This allows the algorithm to initially explore a
+wider range of solutions and escape local optima, ultimately improving the
+exploration of the search space. The details of the process can be found in the
+pseudo-code provided in Algorithm~\ref{algorithm:simmulated-annealing}.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Simulated Annealing}
+  \label{algorithm:simmulated-annealing}
+  \KwIn{Problem Instance ($\mathcal{P}$), Objective Function ($f$), Initial
+    Temperature ($T_{0}$), Cooling Rate ($\alpha$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+    $t \gets T_{0}$; \Comment*[r]{Starting Temperature}
+    $s^{*} \gets$ CandidateSolution($\mathcal{P}$); \Comment*[r]{Initial Solution}
+    \While{$\lnot$ stopping criteria met}{
+      $s^{\prime} \gets$ \normalfont{Perturb($s^{*}$}); \Comment*[r]{Small Perturbation}
+      $\delta \gets$ $f(s^{*})$ - $f(s^{\prime})$; \Comment*[r]{Check Improvement}
+      \If{$\delta < 0$ $\lor$ \normalfont{Random($0, 1$) < \normalfont{$e^{-\frac{\delta}{t}}$}}}{
+        $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+      }
+      $t \gets t * \alpha$; \Comment*[r]{Update Temperature}
+    }
+    \Return{$s^{*}$}
+  }
+\end{algorithm}
+
+\subsection{Tabu Search}
+
+Tabu Search (TS)~\cite{glover1999tabu,gendreau2010tabua,luke2013essentialsa,
+  blummetaheuristics} is a single-state, stochastic, local search meta-heuristic
+that incorporates the use of memory to guide the search process. The algorithm
+iteratively explores the solution space by performing neighborhood searches for
+the best solutions, while maintaining a tabu list $\mathcal{T}$ of recently
+visited solutions that are temporarily forbidden from being revisited. The main
+idea behind this approach is that by avoiding previously visited solutions, the
+algorithm can escape local optima and explore new regions of the search space.
+The size and duration of the tabu list, as well as the rules for adding and
+removing solutions from the list, are user-specified parameters that need to be
+fine-tuned for each problem. The pseudo-code in
+Algorithm~\ref{algorithm:tabu-search} illustrates a simple version of this
+meta-heuristic.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Tabu Search}
+  \label{algorithm:tabu-search}
+  \KwIn{Problem Instance ($\mathcal{P}$), Objective Function ($f$),
+    Tabu List ($\mathcal{T}$), Tabu List Size (${\left\lvert \mathcal{T}
+          \right\rvert}_{max}$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+    $s^{*} \gets$ \normalfont{CandidateSolution($\mathcal{P}$)}; \Comment*[r]{Initial Solution}
+    $\mathcal{T} \gets \{ \emptyset \}$; \Comment*[r]{Tabu List}
+    \While{$\lnot$ stopping criteria met}{
+      $s^{\prime} \gets \argmax_{s \in (\mathcal{N}(s) \backslash \mathcal{T})} f(s)$;  \Comment*[r]{Select Best Neighbor $\notin \mathcal{T}$}
+      \If{$f(s^{\prime})$ > $f(s^{*})$}{
+        $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+        $\mathcal{T} \gets \mathcal{T} \cup \{s^{\prime}\}$; \Comment*[r]{Add Solution To $\mathcal{T}$}
+      }
+      \If{$\left\lvert \mathcal{T} \right\rvert > {\left\lvert \mathcal{T} \right\rvert}_{max} $} {
+        \normalfont{RemoveOldest($\mathcal{T}$)} \Comment*[r]{Keep $\mathcal{T}$ Updated}
+      }
+    }
+    \Return{$s^{*}$}
+  }
+\end{algorithm}
+
+\subsection{Greedy Randomized Adaptive Search Procedures}
+
+Greedy Randomized Adaptive Search Procedures
+(GRASP)~\cite{resende2010greedya,outeiro2021application,blummetaheuristics} are
+simple, single-state, stochastic meta-heuristics that iteratively build solutions by
+combining a greedy construction phase with a local search phase. The
+construction phase involves the selection of components from the ground set
+$\mathcal{G}$ based on their contribution to the objective function, using a
+greedy criterion, and subsequently incorporating them into a partial solution
+$s^{p}$. However, the constructed solution may not be feasible, requiring a
+repair process to improve its quality. The local search phase is then applied to
+the partial solution $s^{p}$ obtained during the construction phase, with the
+goal of further completing and improving the solution. The pseudo-code provided
+in Algorithm~\ref{algorithm:grasp} illustrates the functioning of a basic
+implementation of the GRASP algorithm.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Greedy Randomized Adaptive Search Procedure}
+  \label{algorithm:grasp}
+  \KwIn{Problem Instance ($\mathcal{P}$), Objective Function ($f$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+    \While{$\lnot$ stopping criteria met}{
+      $s^{p} \gets$ \normalfont{GreedyRandomizedSolution($\mathcal{P}$)}; \Comment*[r]{Construction}
+      \If{$\lnot$ \normalfont{isFeasible($s^{p}$)}}{
+        $s^{p} \gets$ \normalfont{Repair($s^{p}$)}; \Comment*[r]{Repair Solution}
+      }
+      $s^{\prime} \gets $ \normalfont{LocalSearch($s^{p}$)}; \Comment*[r]{Improve/Complete Solution}
+      \If{$f(s^{\prime})$ > $f(s^{*})$}{
+        $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+      }
+    }
+    \Return{$s^{*}$}
+  }
+\end{algorithm}
+
+
+\subsection{Ant Colony Optimisation}
+
+Ant Colony Optimization (ACO)~\cite{dorigo2010anta,outeiro2021application,
+  luke2013essentialsa,blummetaheuristics} is a population-based, stochastic,
+constructive meta-heuristic that is inspired by the foraging behavior of ants.
+
+The algorithm simulates the movement of ``ants'' through the search space, where
+each ant constructs a solution by making a sequence of probabilistic choices
+based on the ``pheromone'' trail left by previous ants. Notably, the pheromones,
+associated with the components $c_{i}$ of the ground set $\mathcal{G}$, weigh
+the relevance of the integration of a specific component in a solution during
+the construction process.
+
+One of the key features of ACO is the incorporation of a learning component
+through the use of a pheromone update rule that adapts the pheromone trail based
+on the quality of the solutions constructed by the ants, with the aim of guiding
+the ants towards better solutions over subsequent iterations. As such, the
+algorithm requires the tuning of several parameters such as the pheromone
+evaporation rate, the choice of the pheromone update rule, and the
+initialization of the pheromone trail.
+
+In summary, the ACO meta-heuristic can be described as a process that comprises
+of a solution construction phase, in which solutions (referred to as ``ants'')
+are constructed, followed by an optional phase of exploiting these solutions
+through local search, and culminating in a pheromone update phase. This process
+is then repeated for multiple iterations, as can be observed in the pseudo-code
+provided in Algorithm ~\ref{algorithm:aco}.
+
+\begin{algorithm}[htb!]
+  \DontPrintSemicolon
+  \caption{Ant Colony Optimisation}
+  \label{algorithm:aco}
+  \KwIn{Problem Instance ($\mathcal{P}$), Population ($\mathcal{A}$),
+    Objective Function ($f$), Pheromone Update Rule ($\mathcal{R}$), Pheromone
+    Values($\vec{\tau}$), Evaporation Rate ($\alpha$), Stopping Criteria.}
+  \KwOut{Best solution found ($s^{*}$).}
+  \Begin{
+    $\mathcal{A} \gets \{ \emptyset \}$; \Comment*[r]{Ant Population}
+    \While{$\lnot$ stopping criteria met}{
+      $\mathcal{A} \gets$ \normalfont{AntBasedSolutionConstruction($\mathcal{P}$, $\vec{\tau}$)}\;
+      $\mathcal{A} \gets$ \normalfont{LocalSearch($\mathcal{A}$)}; \Comment*[r]{Optional (``Daemon Actions'')}
+      $s^{\prime} \gets$ $\argmax_{s \in \mathcal{A}} f(s)$\;
+      \If{$f(s^{\prime})$ > $f(s^{*})$}{
+        $s^{*} \gets s^{\prime}$; \Comment*[r]{Update Best}
+      }
+      $\mathcal{A} \gets$ \normalfont{UpdatePheromones($\mathcal{A}$, $\mathcal{R}$, $\vec{\tau}$, $\alpha$)}\;
+    }
+    \Return{$s^{*}$}
+  }
+\end{algorithm}

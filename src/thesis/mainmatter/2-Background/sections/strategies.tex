@@ -1,0 +1,135 @@
+In the field of optimization, a vast array of algorithms have been extensively
+documented in the literature for resolving various types of problems. These
+algorithms can be broadly classified based on their time complexity, the
+strategy employed to discover solutions, and the quality of solutions obtained.
+Specifically, algorithms can be classified into three categories, based on
+optimality of the solution found as exact, approximate, or heuristic. Moreover,
+there are also general techniques for finding solutions, such as constructive
+and local search methods. Additionally, the concept of bounds, which serve to
+guide the search for solutions, is also a crucial factor that can be considered
+as a strategy to enhance the optimization process.
+
+\subsection{Exact, Approximation and Heuristic Approaches}
+\label{section:approaches}
+
+Exact approaches are techniques that aim to find the optimal solution for a
+given problem. These approaches typically involve an exhaustive enumeration and
+evaluation of solutions belonging to the set $\mathcal{S}$ of feasible solutions.
+However, in complex real-world problem instances, this may prove to be
+computationally infeasible. In the context of combinatorial optimization
+problems, two general exhaustive search strategies are well-known and widely
+studied: Branch and Bound and Dynamic Programming. These strategies work by
+successively dividing the problem into smaller dependent or independent
+sub-problems, and then combining the solutions to these sub-problems to obtain the
+final solution.
+
+Approximation approaches, in contrast, aim to find solutions that have a
+guarantee on the quality of the feasible solution being close to the quality of
+optimal solutions, within an approximation factor $\varepsilon$. Despite these
+approaches often solving problems in polynomial time and yielding solutions of
+relatively high quality, it is important to note that they require a
+mathematical proof of approximation that is specific to the problem at hand.
+There exists a significant amount of research in this field, particularly for
+combinatorial optimization problems~\cite{johnson1974approximation}.
+
+Lastly, heuristic approaches work by finding solutions according to a general
+rule of thumb, the quality of which can be verified through experimentation.
+These methods do not provide any guarantees of optimality, as they are derived
+from intuition and their effectiveness is closely tied to the characteristics of
+the problem at hand. Nevertheless, they are reliable means of finding solutions
+in difficult combinatorial optimization (CO) problems. A well-known class of
+algorithms that utilize this approach are meta-heuristics, as will be further
+discussed in this work, with examples such as Greedy Randomized Adaptive Search
+Procedures (GRASP), Simulated Annealing (SA) and Iterated Local Search (ILS).
+
+\subsection{Constructive Search}
+\label{section:contructive-search}
+
+Constructive search (CS) is a procedure for optimization where from an empty or
+partially complete solution for a given problem instance a feasible complete
+solution is constructed by iteratively adding components extracted from the
+ground set. The construction process is guided by a pre-established set of
+rules, which may be heuristic in nature or informed by other relevant
+information. These rules determine, at each iteration, the set of components
+that are eligible for inclusion in the final solution.
+
+CS approaches, as such, require certain information about the representation of
+solutions and specifically, how the addition or removal of a given component or
+set of components affects the overall quality of the solution, as measured by
+the objective function value or other metrics such as bounds or dominance
+relationships between solutions. It is crucial to note that the availability of
+information about the problem at hand directly impacts the capability of these
+strategies to optimize.
+
+As an illustrative example, consider the aforementioned \acrshort{knapsack-problem} and
+\acrshort{travelling-salesman-problem} from section
+~\ref{section:combinatorial-optimization}. In this scenario, an example of a
+constructive approach for the KP could involve selecting, in each step, the item
+with the highest ratio of profit to weight that does not exceed the weight
+capacity of the knapsack. Similarly, for the TSP, a constructive approach would
+involve selecting an edge to add to the tour that contributes the most, while
+ensuring that the primary constraint of constructing a Hamiltonian cycle is not
+violated.
+
+\subsection{Local Search}
+\label{section:local-search}
+
+In contrast to constructive search, local search (LS) procedures begin with a
+feasible solution to a given problem instance, and then make small modifications
+to its components by applying transformations, such as adding or removing
+elements. These transformations aim to improve the solution within the
+neighborhood, as defined by the problem's neighborhood
+structure~\ref{definition:neighborhood-structure}. The process terminates when
+further modifications cannot improve the quality of the solution, resulting in a
+local optimum~\ref{definition:local-optimum}.
+
+Although the primary objective of the local search algorithm is to improve a
+solution in the direction of finding a local optimum, as defined in
+~\ref{definition:local-optimum}, it is common for such an approach to
+intentionally worsen a solution in order to allow for further exploration of
+previously unseen regions of the search space. Furthermore, this approach is
+frequently applied as a sequence following a constructive search phase, where
+the constructive search aims to construct a new solution by exploring the search
+space, while the local search subsequently exploits the properties of the found
+solution.
+
+
+% Weak and Strong Bounds (see literature)
+\subsection{Bounds}
+\label{section:bounds}
+
+The use of bounds is a crucial tool in optimization. Formally, bounds of a
+(partial) solution $s^{p}$ can be defined as shown in~\ref{definition:bounds}.
+
+\begin{definition}[(Lower and Upper) Bounds~\cite{outeiro2021application,papadimitriou1998combinatorial}]
+  \label{definition:bounds}
+  A lower bound of a partial solution $s^p \in 2^G$ for an optimization problem
+  $(\mathcal{S}, f)$ is a numeric value given by a function $\Phi_\text{lb}
+    : 2^{\mathcal{G}} \rightarrow \mathbb{R}$ such that:
+  \begin{equation}
+    \forall s \in \mathcal{S} \land s \supseteq s^p : \Phi_\text{lb}(s^p) \le f(s)
+  \end{equation}
+  On the other hand, an upper bound is a numeric value given by a function $\Phi_\text{ub} :
+    : 2^{\mathcal{G}} \rightarrow \mathbb{R} $ such that:
+  \begin{equation}
+    \forall s \in \mathcal{S} \land s \supseteq s^p : f(s) \le \Phi_\text{ub}(s^p)
+  \end{equation}
+\end{definition}
+
+
+Particularly, in exact approaches such as Branch \& Bound, bounds
+enable the pruning of the search space, thereby avoiding the exploration of
+solutions that are guaranteed to not improve the current best solution found by
+the algorithm at a given time. Furthermore, they provide a guarantee that a
+solution of inferior quality is not accepted during the search process.
+
+In addition, bounds can also be employed in heuristic approaches to furnish
+additional information about the potential of a given partial solution $s^{p}$.
+For instance, in a constructive search setup, bounds can enable more effective
+guidance by providing insight into the best choices for components that can be
+added to improve a given partial solution.
+
+Despite the objective function's role in guiding the search, the evaluation of a
+partial solution's quality may not be well-defined for a specific problem, or
+the objective function may be a bottleneck that does not allow the optimizer to
+gauge the significance of changes made to the solution's quality.
