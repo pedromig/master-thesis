@@ -1,24 +1,25 @@
-Optimization problems are ubiquitous in real-world scenarios. When considering,
-for example, the task of planning a road trip, we are quickly faced with several
-optimization challenges arising from a seemingly simple task. For example,
-finding the best route, considering factors as fuel efficiency, travel time, and
-budget limitations or to efficiently packing luggage. Solving such optimization
-problems entails finding~\textquote{good} solutions in the most time-efficient manner.
+Optimization problems are ubiquitous in real-world scenarios. For example, when
+considering the task of planning a road trip, we are quickly faced with several
+optimization challenges arising from a seemingly simple task, such as, finding
+the shortest or cheapest route, and efficiently packing luggage. When solving
+these problems the goal is typically to find \textquote{good} solutions in a
+time-efficient manner.
 
 Tackling an optimization problem can typically be seen as a two-phase process.
 First, we start by understanding the problem and modeling its details. Then, we
 can apply, or develop, a solver to find one or more solutions taking into
 account the given model. This approach serves, for example, as the foundation of
 most linear optimization software packages which are widely used to solve
-real-world problems. In particular, such packages expect a mathematical
-formulation (model) describing the problem as a linear objective function and a
-set of linear constraints, and then use one or more algorithms designed to solve
-such linear optimization problems. This clear separation of concerns leads to
-some advantages. Notably, practitioners that want to solve a particular problem
-can focus on developing the model for that problem and easily use existing
-solvers to find solutions without needing to implement state-of-the-art
-algorithms themselves. Meanwhile, solver developers can take advantage of
-existing problems to test and enhance their solvers's performance.
+real-world problems,~\eg{},~\textit{Gurobi},~\textit{CPLEX}, or~\textit{GLPK}.
+In particular, such packages expect a mathematical formulation (model)
+describing the problem as a linear objective function and a set of linear
+constraints, and then use one or more algorithms designed to solve such linear
+optimization problems. This clear separation of concerns leads to some
+advantages. Notably, practitioners that want to solve a particular problem can
+focus on developing the model for that problem and easily use existing solvers
+to find solutions without needing to implement state-of-the-art algorithms
+themselves. Meanwhile, solver developers can take advantage of existing problems
+to test and enhance their solvers's performance.
 
 In this work, we are interested in tackling~\acrfull{combinatorial-optimization}
 problems using a similar separation of concerns. Generally
@@ -59,7 +60,7 @@ meta-heuristics for~\acrshort{combinatorial-optimization}
 problems~\cite{cahon2004paradiseoa,digaspero2003easylocal,durillo2011jmetal} and
 the lack of a unifying framework supporting all approaches can be regarded as a
 symptom of the difficulty of this endeavor. Still, it is worth remarking the
-works by Vieira~\cite{vieira2009uma} and Outeiro~\cite{outeiro2021application},
+works by~\citet{vieira2009uma} and~\citet{outeiro2021application},
 which partially looked at the formalization of this objective.
 
 The development of a unifying framework would standardize problem-solving
@@ -81,9 +82,15 @@ The Hash Code programming competition, formerly hosted annually by Google,
 challenged teams of up to four members to solve
 intricate~\acrshort{combinatorial-optimization} problems within a four-hour time
 frame using any tools, (online) resources, and programming languages of their
-choice. These problems often drew inspiration from real-world issues and
-engineering challenges, such as vehicle routing, task scheduling, and Wi-Fi
-router placement and can be classified as~\textquote{open} research problems.
+choice. These problems often drew inspiration from real-world challenges, such
+as vehicle routing, task scheduling, and router placement. There is often some
+relation to classical problems found in~\acrshort{combinatorial-optimization}
+literature, which may provide theoretical and practical insights on how to solve
+them but these seem to be harder to solve then their classical counterparts.
+Moreover, exact algorithms to solve these problems efficiently are not known,
+and up to our knowledge there is also no known heuristic or approximation method
+that prevails over other approaches. As a result, these appear to be interesting
+benchmark problems that offer ample research potential.
 
 Given the pertinence of these problems, and the wide range of challenges they
 present from both a theoretical and practical standpoint, they serve as apt

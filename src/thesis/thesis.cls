@@ -71,7 +71,9 @@
 \usepackage{enumitem}
 
 % URL Formatting
-\usepackage{url}
+\usepackage[hyphens]{url}
+\usepackage{breakurl}
+\usepackage{breakcites}
 
 % Epigraph
 \usepackage{epigraph}
@@ -159,7 +161,7 @@
   % Two-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm}
   \usepackage{varioref}
-  \usepackage[hidelinks]{hyperref}
+  \usepackage[hidelinks,breaklinks]{hyperref}
   \usepackage{cleveref}
 
   \let\tmp\oddsidemargin
@@ -168,40 +170,41 @@
   \reversemarginpar
 
   % Headers And Footers
-  \pagestyle{fancy}
+  \fancypagestyle{thesis}{
+    \fancyhead{}
+    \fancyhead[LE]{\thepage}
+    \fancyhead[RE]{\nouppercase\rightmark}
+    \fancyhead[LO]{\nouppercase\rightmark}
+    \fancyhead[RO]{\thepage}
 
-  \fancyhead{}
-  \fancyhead[LE]{\thepage}
-  \fancyhead[RE]{\nouppercase\rightmark}
-  \fancyhead[LO]{\nouppercase\rightmark}
-  \fancyhead[RO]{\thepage}
-
-  \fancyfoot{}
+    \fancyfoot{}
+  }
 }{
   % One-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm,hcentering}
   \usepackage{varioref}
-  \usepackage[colorlinks=true,citecolor=RoyalBlue,linkcolor=RoyalBlue,urlcolor=ForestGreen]{hyperref}
+  \usepackage[breaklinks,colorlinks=true,citecolor=RoyalBlue,linkcolor=RoyalBlue,urlcolor=ForestGreen]{hyperref}
   \usepackage{cleveref}
 
-
-  % Headers And Footers
-  \pagestyle{fancy}
   \renewcommand{\sectionmark}[1]{\markright{#1}}
   \renewcommand{\subsectionmark}[1]{}
 
-  \fancyhead{}
-  \fancyhead[R]{{\nouppercase\rightmark}}
-  \fancyhead[L]{{\nouppercase\leftmark}}
+  % Headers And Footers
+  \fancypagestyle{thesis}{
+    \fancyhead{}
+    \fancyhead[R]{\nouppercase\rightmark}
+    \fancyhead[L]{\nouppercase\leftmark}
 
-  \fancyfoot{}
-  \fancyfoot[L]{\hfill\thepage\hfill}
+    \fancyfoot{}
+    \fancyfoot[L]{\hfill\thepage\hfill}
+  }
 }
+
+% Define Default Page Style
+\pagestyle{thesis}
 
 % URL Font
 \urlstyle{tt}
-
-% Some helpfull colors (colourblind safe )
 
 % Avoid Useless Cross-Referencing Loops
 \makeatletter
@@ -224,6 +227,18 @@
       \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
+% Header style for front and back matter
+\fancypagestyle{fbmatter}{
+  \ifthenelse{\boolean{@twoside}}{
+  }{
+    \fancyhead{}
+    \fancyhead[R]{}
+    \fancyhead[L]{{\nouppercase\leftmark}}
+
+    \fancyfoot{}
+    \fancyfoot[L]{\hfill\thepage\hfill}
+  }
+}
 
 % Acronyms and Glossaries
 \usepackage[acronym,toc]{glossaries}
@@ -285,5 +300,3 @@
   \epigraph{#1}{---~\textup{#2}\ifthenelse{\equal{#3}{}}{}{,~\emph{#3}}}
   \vspace{0.5cm}
 }
-
-% Keywords Environment

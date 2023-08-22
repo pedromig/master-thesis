@@ -1,4 +1,5 @@
 \documentclass[oneside]{thesis}
+% TODO: Fix onesided version (front and backmatter pages heading)
 
 % Tikz
 \usepackage{tikz}
@@ -37,12 +38,16 @@
 \newacronym{fct}{FCT}{Foundation for Science and Technology}
 
 \newacronym{meta-heuristic}{MH}{Meta-Heuristic}
+\newacronym{ilp}{ILP}{Integer Linear Programing}
 
 \newacronym{combinatorial-optimization}{CO}{Combinatorial Optimization}
 \newacronym{global-optimization}{GO}{Global Optimization}
 \newacronym{local-optimization}{LO}{Local Optimization}
-\newacronym{black-box-optimization}{BBO}{Black Box Optimization}
-\newacronym{glass-box-optimization}{GBO}{Glass Box Optimization}
+\newacronym{black-box-optimization}{BBO}{Black-Box Optimization}
+\newacronym{glass-box-optimization}{GBO}{Glass-Box Optimization}
+
+\newacronym{local-search}{LO}{Local Search}
+\newacronym{constructive-search}{LO}{Local Search}
 
 \newacronym{knapsack-problem}{KP}{Knapsack Problem}
 \newacronym{travelling-salesman-problem}{TSP}{Travelling Salesman Problem}
@@ -64,11 +69,13 @@
 
 \input{mainmatter/1-Introduction/main.tex}
 \input{mainmatter/2-Background/main.tex}
-\input{mainmatter/3-TheHashCodeProblems/main.tex}
-\input{mainmatter/4-ThePrincipledModellingFramework/main.tex}
-\input{mainmatter/5-OptimiseDataCenter/main.tex}
+\input{mainmatter/3-GoogleHashCodeCompetition/main.tex}
+\input{mainmatter/4-PrincipledModellingFramework/main.tex}
+\input{mainmatter/5-OptimizeADataCenter/main.tex}
 \input{mainmatter/6-BookScanning/main.tex}
 \input{mainmatter/7-Conclusion/main.tex}
+
+\appendix
 
 \backmatter
 

@@ -18,14 +18,13 @@ solutions. Formally, an optimization problem can be defined as follows:
 
   That is, each solution $s \in \mathcal{S}$, is assigned a real value
   representing its quality, with the highest quality solution $s^{*} \in
-    \mathcal{S}$ being referred to as the (globally) optimal solution.
+    \mathcal{S}$ being referred to as the global optimal solution or just global optimum.
 \end{definition}
 
-\begin{definition}[Globally Optimal Solution~\cite{hiriart-urruty1995conditions,papadimitriou1998combinatorial}]
+\begin{definition}[Global Optimum~\cite{hiriart-urruty1995conditions,papadimitriou1998combinatorial}]
   \label{def:global-optimum}
-  Assuming, without loss of generality an optimization problem with a maximizing
-  objective function a globally optimal solution $s^* \in \mathcal{S}$ is
-  expressed by:
+  Assuming, without loss of generality, an optimization problem with a maximizing
+  objective function a global optimum $s^* \in \mathcal{S}$ is expressed by:
 
   \begin{equation}
     \forall s \in \mathcal{S} \colon f(s^{*}) \geq f(s)
@@ -33,7 +32,7 @@ solutions. Formally, an optimization problem can be defined as follows:
 
 \end{definition}
 
-Since Google Hash Code problems~\cite{llc2023codingcompetitionsarchive}
+Since Google Hash Code problems~\cite{googlellc2023codingcompetitionsarchive}
 have a single-objective maximizing objective function, we will only consider
 maximization in this work. However, it is possible to reformulate problems with
 a minimizing objective function for maximization~\cite{nocedal2006numerical}
@@ -127,123 +126,129 @@ alternatives to be considered.
 
 \subsection{Global and Local Optimization}
 
-% With regard to the search of solutions for optimization problems, there are two
-% primary strategies: \acrfull{global-optimization} and
-% \acrfull{local-optimization}.
-% 
-% \acrshort{global-optimization} refers to the process of identifying a global
-% optimal solution (\ref{definition:global-optimum}) to a given problem,
-% regardless of its location within the solution space. In contrast,
-% \acrshort{local-optimization} focuses on finding the best solution among those
-% that are proximate in some sense. The concept of proximity is related to the
-% definition of a neighborhood, which for a given solution is specified by a
-% particular neighborhood structure defined as follows:
-% 
-% \begin{definition}[Neighborhood Structure~\cite{papadimitriou1998combinatorial, blummetaheuristics}]
-%   \label{definition:neighborhood-structure}
-%   A neighborhood structure for an optimization problem with instances $(\mathcal{S}, f)$ is a mapping:
-%   \begin{equation}
-%     \label{equation:neighborhood-structure}
-%     \mathcal{N} \colon \mathcal{S} \longrightarrow 2^{\mathcal{S}}
-%   \end{equation}
-%   Such that, a set of neighboring solutions $\mathcal{N}(\hat{s}) \subseteq
-%     \mathcal{S}$ is assigned for each solution $\hat{s} \in \mathcal{S}$.
-%   This referred to as the neighborhood of $\hat{s}$.
-% \end{definition}
-% 
-% In general, the neighborhood structure refers to the set of rules that
-% must be applied to a solution in order to generate all of its neighbors.
-% Additionally, we consider the following definition of local optimal solution.
-% 
-% \begin{definition}[(Strictly) Local Optimal Solution~\cite{blummetaheuristics,nocedal2006numerical}]
-%   \label{definition:local-optimum}
-%   Assuming maximization without loss of generality, a solution $\hat{s}$ is
-%   local optimal with respect to a given neighborhood structure $N(\hat{s})$
-%   iff:
-%   \begin{equation}
-%     \label{equation:local-maximum}
-%     \forall s \in \mathcal{N}(\hat{s}) \colon f(\hat{s}) \geq f(s)
-%   \end{equation}
-%   Furthermore, $\hat{s}$ is considered strictly global optimal iff
-%   \begin{equation}
-%     \label{equation:strict-local-maximum}
-%     \forall s \in \mathcal{N}(\hat{s}) \setminus \{\hat{s}\} \colon f(\hat{s}) > f(s)
-%   \end{equation}
-% \end{definition}
-% 
-% As an illustrative example, consider the objective function $f(s)$ shown in
-% figure~\ref{fig:maxima}. With respect to the definitions~\ref{definition:global-optimum}
-% and~\ref{definition:local-optimum} $s^2$, $s^3$ are (strictly) local optimal.
-% 
-% \begin{figure}[h]
-%   \centering
-%   \input{../assets/plot/plot.tex}
-%   \caption{Global and Local Optimal Solutions}
-%   \label{fig:maxima}
-% \end{figure}
-% 
-% In practice, the decision to use either a global or local optimization strategy
-% is often influenced by factors such as the available time budget and the
-% preferences of the decision maker. While global optimization aims to find the
-% optimal solution to a problem, the search process may be time-consuming or, in
-% some cases, computationally infeasible due to the size of the search space.
-% On the other hand, local optimization, while lacking the optimality guarantees
-% of global optimization, is able to quickly generate good solutions that may
-% be acceptable to the decision maker. Nonetheless, the quality of the solutions
-% may be poor due to the ruggedness of the objective function fitness landscape
-% (many local optima). Ultimately, the performance of both methods is closely
-% tied to the knowledge of problem-specific features.
-% 
-% In a setting such as the Hash Code competition, the problems presented are
-% designed to resemble real-world situations. Additionally, due to the time
-% constraints, it is not in the interest of the contestants to use global optimization
-% methods, as they are unlikely to finish on more complex problem instances.
-% Instead, a balance between global and local optimization is typically employed,
-% with contestants utilizing the advantages of both methods. This approach
-% involves establishing a baseline with global optimization methods that explore
-% unseen regions of the search space for potentially good solutions, and then
-% utilizing local optimization methods for exploiting solutions that have
-% already been found.
-% 
-% \subsection{Black-Box and Glass-Box Optimization}
-% 
-% In the field of optimization, two settings are commonly recognized:
-% \acrfull{black-box-optimization} and \acrfull{glass-box-optimization}.
-% 
-% In \acrshort{black-box-optimization} optimization settings there is no
-% information about the landscape of the function being optimized, constraints
-% defining the set of feasible solutions~\cite{alarie2021two} or the objective function
-% is too complex to be approached from an analytical perspective. As such,
-% algorithms for achieving solutions for these problems do so only by interacting
-% with the problem through the evaluation of potential candidate
-% solutions~\cite{doerr2020complexity}. Meta-Heuristics, as will be later detailed
-% are examples of methods that follow this approach for finding/improving
-% solutions. By contrast, in \acrfull{glass-box-optimization} optimization, also
-% known as ``white box'' optimization, there is a good understanding of the
-% problem instance being optimized and the objective function
-% properties~\cite{doerr2020complexity}. Hence, the algorithms used may take
-% advantage of more analytical properties of the problem since they are
-% transparent to the optimizer.
-% 
-% For the purpose of clarification, with regard to the previously mentioned
-% \acrshort{travelling-salesman-problem}, a black-box strategy would entail the
-% utilization of a search heuristic such as simulated
-% annealing~\cite{luke2013essentialsa} to obtain solutions. This is because the
-% algorithm only necessitates knowledge of how to evaluate the quality of
-% solutions through the objective function and not any specific information about
-% the function being optimized. Alternatively, if the problem were to be
-% formulated as an Integer Linear Programming
-% problem~\cite{nocedal2006numerical,papadimitriou1998combinatorial}, it would
-% become amenable to a white-box approach, as the objective function would be
-% accessible, and additional information about the problem could be inferred from
-% it and provided to the algorithm.
-% 
-% In the context of the Hash Code competition, contestants typically engage with a
-% problem from a black-box perspective, as the underlying objective function of
-% the problem is not disclosed, and/or is too complex to formalize. Additionally,
-% the process of formalization would be time-consuming and, as a result, the usage
-% of white-box methods post-formalization would not be justified, given that they
-% may be computationally slower. Despite this, it is important to note that
-% white-box methods should not be overlooked as they construct a model of the
-% problem in order to solve it, which could be applied to a certain extent in the
-% context of black-box approaches.
+With regard to the search of solutions for optimization problems, there are two
+primary strategies: \acrfull{global-optimization} and \acrfull{local-optimization}.
+
+\acrshort{global-optimization} involves the process of discovering the ultimate
+global optimum~(\ref{def:global-optimum}) for a given problem, regardless of
+where it might lie within the solution space. This search for the best solution
+is often called~\textit{exploration}. In contrast,
+\acrshort{local-optimization} concentrates on finding the most optimal solution
+among proximate that are close in some way, which is commonly referred to as
+\textit{exploitation}. The concept of proximity is related to the definition
+of a neighborhood, which for a given solution is specified by a particular
+neighborhood structure defined as follows:
+
+\begin{definition}[Neighborhood Structure~\cite{papadimitriou1998combinatorial, blummetaheuristics}]
+  \label{def:neighborhood-structure}
+
+  A neighborhood structure for an optimization problem is a mapping:
+
+  \begin{equation}
+    \label{eq:neighborhood-structure}
+    \mathcal{N} \colon \mathcal{S} \longrightarrow 2^{\mathcal{S}}
+  \end{equation}
+
+  Such that, a set of neighboring solutions $\mathcal{N}(\hat{s}) \subseteq
+    \mathcal{S}$ is assigned for each solution $\hat{s} \in \mathcal{S}$. This
+  referred to as the neighborhood of $\hat{s}$.
+\end{definition}
+
+In general, the neighborhood structure refers to the set of rules that must be
+applied to a solution in order to generate all of its neighbors.  Additionally,
+we can define a local optimal solution or just local optimum as follows:
+
+\begin{definition}[Local Optimum~\cite{hiriart-urruty1995conditions,blummetaheuristics,nocedal2006numerical}]
+  \label{def:local-optimum}
+
+  Assuming maximization without loss of generality, a solution $\hat{s}$ is
+  a local optimum with respect to a given neighborhood structure $\mathcal{N}(\hat{s})$ iff:
+
+  \begin{equation}
+    \label{eq:local-optimum}
+    \forall s \in \mathcal{N}(\hat{s}) \colon f(\hat{s}) \geq f(s)
+  \end{equation}
+
+  Furthermore, $\hat{s}$ is a considered a strict a local optimum iff:
+
+  \begin{equation}
+    \label{eq:strict-local-optimum}
+    \forall s \in \mathcal{N}(\hat{s}) \setminus \{\hat{s}\} \colon f(\hat{s}) > f(s)
+  \end{equation}
+\end{definition}
+
+As an illustrative example, consider the objective function $f(s)$ shown in~\ref{fig:optima}.
+With respect to the~\Cref{def:global-optimum,def:local-optimum}, the solution
+$s^1$ is a global optimum and $s^2$, $s^3$ are (strict) local optima.
+
+\begin{figure}[h]
+  \centering
+  \input{../assets/plot/plot.tex}
+  \caption{Global and Local Optima}
+  \label{fig:optima}
+\end{figure}
+
+In practice, the decision to use either a global or local optimization strategy
+is often influenced by factors such as the available time budget and the
+preferences of the decision maker. While~\acrshort{global-optimization} aims to
+find the optimal solution to a problem, the search process may be time-consuming
+or, in some cases, computationally infeasible due to the size of the search
+space.  On the other hand,~\acrshort{local-optimization}, while lacking the
+optimality guarantees of, is able to quickly generate good solutions that may be
+acceptable to the decision maker. Nonetheless, the quality of the solutions may
+be poor due to the ruggedness of the objective function fitness landscape (many
+local optima). Ultimately, the performance of both methods is closely tied to
+problem-specific knowledge.
+
+In the Google Hash Code competition, due to the time imposed by the competition
+setting, it is often not in the interest of the contestants to use global
+optimization methods, as they are unlikely to finish on more complex problem
+instances. Instead, a balance between global and local optimization
+(\textit{exploration} and \textit{exploitation}) is typically employed. To
+elaborate, the strategy typically involves~\textit{exploring} the search space
+via~\acrshort{global-optimization} methods to find \textquote{good} starting
+solutions, that~\acrshort{local-optimization} methods can
+further~\textit{exploit}.
+
+\subsection{Black-Box and Glass-Box Optimization}
+
+In the field of optimization, two settings are commonly recognized:
+\acrfull{black-box-optimization} and \acrfull{glass-box-optimization}.
+
+In \acrshort{black-box-optimization} optimization settings there is no
+information about the landscape of the function being optimized, constraints
+defining the set of feasible solutions~\cite{alarie2021two} or the objective
+function is too complex to be approached from an analytical perspective. As
+such, algorithms for achieving solutions for these problems do so only by
+interacting with the problem through the evaluation of potential candidate
+solutions~\cite{doerr2020complexity}. Meta-Heuristics, as will be later detailed
+are examples of methods that follow this approach for finding/improving
+solutions. By contrast, in \acrshort{glass-box-optimization} optimization, also
+known as \textit{white box} optimization, there is a good understanding of the
+problem instance being optimized and the objective function
+properties~\cite{doerr2020complexity}. Hence, the algorithms used may take
+advantage of more analytical properties of the problem since they are
+transparent to the solver.
+
+For the purpose of clarification, with regard to the previously mentioned
+\acrshort{knapsack-problem}, a~\acrshort{black-box-optimization} strategy would
+entail the utilization of a search heuristic such as simulated
+annealing~\cite{luke2013essentialsa} to obtain solutions. This is because the
+algorithm only necessitates knowledge of how to evaluate the quality of
+solutions through the objective function and not any specific information about
+the function being optimized. Alternatively, if the problem were to be
+formulated as an~\acrfull{ilp}~\cite{nocedal2006numerical,papadimitriou1998combinatorial}
+problem, it would become amenable to a~\acrshort{glass-box-optimization}
+approach, as the objective function would be accessible, and additional
+information about the problem could be inferred from it and provided to the
+algorithm.
+
+In the context of the Hash Code competition, contestants typically engage the
+problems from a~\acrshort{black-box-optimization} perspective, as the underlying
+objective function of the is too complex to formalize. Additionally, the process
+of formalization can be time-consuming and, as a result, the usage of a
+~\acrshort{glass-box-optimization} methods post-formalization would not be
+justified, as they could turn out to be computationally slower. However, it is
+in many cases, possible to use~\acrshort{glass-box-optimization}
+methods,~\eg{},~\acrshort{ilp} to tackle sub-problems that are more simple to
+formalize as more knowledgeable contestants have demonstrated in the past.
