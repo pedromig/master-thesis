@@ -1,0 +1,11 @@
+\KwIn{Ground Set ($\mathcal{G}$)}
+\KwOut{Solution ($s$)}
+
+$s$ $\gets$ $\emptyset$\;
+$C$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
+\While{$C \neq \emptyset$}{
+  $c$ $\gets$ \texttt{SelectComponent($C$)}\;
+  $s$ $\gets$ $s \cup \{c\}$\;
+  $C$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
+}
+\Return{$s$}

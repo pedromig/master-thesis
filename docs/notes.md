@@ -1,5 +1,32 @@
 Incremental Bound -> property testing
 
+% Due to the inherent discreteness of decision spaces
+% within~\acrshort{combinatorial-optimization} optimization problems, solutions
+% can be understood as compositions of objects (components) selected from a finite
+% set that including all elements capable of contributing to a solution.  This
+% set, commonly known as the~\textit{ground set}, can be defined as shown:
+% 
+% \begin{definition}[Ground Set]
+%   \label{def:ground-set}
+%   The ground set $\mathcal{G}$ of a~\acrshort{combinatorial-optimization}
+%   problem is a finite set of containing all possible components for the problem.
+% 
+%   \begin{equation}
+%     \label{eq:ground-set}
+%     \mathcal{G} \colon \{c_{1}, c_{2}, c_{3}, \ldots, c_{i}\}
+%   \end{equation}
+% \end{definition}
+% 
+% Hence, within the context of~\acrshort{combinatorial-optimization} problems, a
+% feasible solution constitutes a subset of the ground set, denoted as $s \in
+%   \mathcal{S} \subseteq 2^{\mathcal{G}}$, where the included components satisfy
+% problem-specific constraints. Moreover, a \textit{partial solution} is defined by its
+% capacity to incorporate additional components from the~\textit{ground set}. In contrast,
+% a \textit{complete solution} is incapable of accepting further components without
+% violating feasibility, as opposed to the former which can be infeasible.
+
+
+
 A `superset` of these algorithms.
 It is evident `its not so evident`. 
 `engineering problems` -> problems arising in 
@@ -187,3 +214,10 @@ problems. That is a thing that we left as an open possibility and as future work
 % meta-heuristics
 % -> Talk about mathematical optimization example in the background
 % -> Recommendation given by the jury (give an example)
+
+
+% Why (link with the next definition)
+with the highest quality solution $s^{*} \in \mathcal{S}$ being referred to as the global optimal solution or just global optimum.
+
+% Countably Infite (papadimitrou + outeiro + vieira)
+

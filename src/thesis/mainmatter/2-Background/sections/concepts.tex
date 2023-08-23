@@ -1,8 +1,8 @@
 Optimization, as defined by Papadimitriou and
 Steiglitz~\cite{papadimitriou1998combinatorial}, is the task concerning the
-search for the optimal configuration or set of parameters that maximizes or
+search for an optimal configuration or set of parameters that maximizes or
 minimizes a given objective function. In other words, optimizing involves
-finding the~\textquote{best} solution to a given problem among a set of feasible
+finding the best solution to a given problem among a set of feasible
 solutions. Formally, an optimization problem can be defined as follows:
 
 \begin{definition}[Optimization Problem~\cite{papadimitriou1998combinatorial}]
@@ -17,8 +17,7 @@ solutions. Formally, an optimization problem can be defined as follows:
   \end{equation}
 
   That is, each solution $s \in \mathcal{S}$, is assigned a real value
-  representing its quality, with the highest quality solution $s^{*} \in
-    \mathcal{S}$ being referred to as the global optimal solution or just global optimum.
+  representing its quality.
 \end{definition}
 
 \begin{definition}[Global Optimum~\cite{hiriart-urruty1995conditions,papadimitriou1998combinatorial}]
@@ -40,29 +39,18 @@ using the identity:
 
 \begin{equation}
   \label{eq:max2min}
-  \max{-f(s)} = \min{f(s)}
+  \min{f(s)} = \max{-f(s)}
 \end{equation}
 
 \subsection{Combinatorial Optimization}
-\label{sec:combinatorial-optimization}
-
-Optimization problems can be divided into~\textit{discrete}
-and~\textit{continuous} based on the domain of their variables. In problems with
-~\textit{discrete} variables, solutions are defined on a finite, possibly
-countably infinite, set of values~\cite{papadimitriou1998combinatorial}. As for
-problems with~\textit{continuous} variables, the solutions take on any value on
-a continuous (infinite) subset of real numbers. Nevertheless, there are problems
-that involve both~\textit{discrete} and~\textit{continuous} variables, commonly
-denominated as mixed~\cite{nocedal2006numerical}.
+\label{subsec:combinatorial-optimization}
 
 \acrfull{combinatorial-optimization} problems are a subset of optimization
 problems characterized by a discrete solution space that typically involves
 different permutations, groupings, or orderings of objects that satisfy some
-problem-specific criteria~\cite{papadimitriou1998combinatorial,vieira2009uma}.
-As such, solutions for these problems are represented objects related to the
-combinatorics~\eg{} integers, permutations sets and
-graphs~\cite{blummetaheuristics,yu2010combinatorial}. Thus, regarding the
-previous definition of an optimization problem,
+problem-specific
+criteria~\cite{papadimitriou1998combinatorial,vieira2009uma,blummetaheuristics,yu2010combinatorial}.
+Thus, regarding the previous definition of an optimization problem,
 a~\acrshort{combinatorial-optimization} can be formally defined as follows:
 
 \begin{definition}[Combinatorial Optimization Problem~\cite{papadimitriou1998combinatorial}]
@@ -74,57 +62,137 @@ a~\acrshort{combinatorial-optimization} can be formally defined as follows:
 
 Typical examples of~\acrshort{combinatorial-optimization} problems include
 network flow, matching, scheduling, shortest path and decision problems.
-Notably, the~\acrfull{knapsack-problem} is a
-well-known~\cite{cacchiani2022knapsack, yu2010combinatorial,festa2014brief}
-example of a~\acrshort{combinatorial-optimization} problem where the goal is to
-find the subset of items with the highest total profit that can fit in a
-knapsack without exceeding its maximum capacity.
+Notably, the~\acrfull{knapsack-problem}~\cite{cacchiani2022knapsack,
+  yu2010combinatorial,festa2014brief} is a well-known example of
+a~\acrshort{combinatorial-optimization} problem where the goal is to find the
+subset of items with the highest total profit that can fit in a knapsack without
+exceeding its maximum capacity.
 
-Due to the inherent discreteness of decision spaces
-within~\acrshort{combinatorial-optimization} optimization problems, solutions
-can be understood as compositions of objects (components) selected from a finite
-set that including all elements capable of contributing to a solution.  This
-set, commonly known as the~\textquote{ground set}, can be defined as shown:
+Due to the combinatorial nature of~\acrshort{combinatorial-optimization}
+problems, solutions are often defined in terms of a~\emph{ground set}.
 
 \begin{definition}[Ground Set~\cite{outeiro2021application,festa2014brief,marti2013multistart}]
-  \label{def:ground-set}
-  The ground set $\mathcal{G}$ of a~\acrshort{combinatorial-optimization}
-  problem is a finite set of containing all possible components for the problem.
+  The ground set of a CO problem is a finite set of
+  components $\mathcal{G} = \{c_1, c_2, \ldots, c_k\}$, such that every solution to the
+  problem, feasible or not, can be defined as a subset of $\mathcal{G}$.  \end{definition}
 
-  \begin{equation}
-    \label{eq:ground-set}
-    \mathcal{G} \colon \{c_{1}, c_{2}, c_{3}, \ldots, c_{i}\}
-  \end{equation}
+For this work, it is also relevant to define the notion of empty, partial and
+complete solutions.
+
+\begin{definition}[Empty Solution]
+  \label{def:empty-solution}
+  A solution $s \in 2^\mathcal{G}$, where $2^\mathcal{G}$ denotes the powerset of $\mathcal{G}$,
+  is said to be an empty solution if $s = \emptyset$.
 \end{definition}
 
-Hence, within the context of~\acrshort{combinatorial-optimization} problems, a
-feasible solution constitutes a subset of the ground set, denoted as $s \in
-  \mathcal{S} \subseteq 2^{\mathcal{G}}$, where the included components satisfy
-problem-specific constraints. Moreover, a partial solution is defined by its
-former capacity to incorporate additional components from the ground set. In
-contrast, a complete solution is incapable of accepting further components
-without violating feasibility, as opposed to the former which can be infeasible.
+\begin{definition}[Partial Solution]
+  \label{def:partial-solution} A solution $s \in 2^\mathcal{G}$ is said to be a
+  partial solution if there is a feasible solution $s' \in \mathcal{S}$ such
+  that $s' \supseteq s$.
+\end{definition}
+
+\begin{definition}[Complete Solution]
+  \label{def:complete-solution} A feasible solution $s \in \mathcal{S}$ is said
+  to be a complete solution if there is no feasible solution $s' \in
+    \mathcal{S}$ such that $s' \supset s$.
+\end{definition}
+
+It is worth noting that, according to our definition, a partial solution is not
+required to be feasible, unlike a complete solution.
 
 To illustrate these concepts, let's consider the practical example of the
 \acrshort{knapsack-problem}. In this context, the ground set is the set of all
 the available items (components). As such, a feasible solution is one in which
-items placed within the knapsack do not exceed its capacity limit. A partial
-solution is one where the knapsack is not yet full and additional items can
-still be accommodated. Notably, in this case, the partial solution is still
-feasible. Finally, a complete solution is a feasible solution where no further
-items can be added due to capacity constraints.
+the sum of the weights of the items placed within the knapsack (select
+components) does not exceed its capacity. A partial solution is one where
+additional items (components) can be still be added to the current solution
+without exceeding the capacity of the knapsack. Note that, for
+the~\acrshort{knapsack-problem} every partial solution is feasible. Finally, a
+complete solution is a feasible solution where no further items can be added due
+to capacity constraints.
 
 In essence, since \acrshort{combinatorial-optimization} problems involve
-choosing a combination of objects any algorithm that is able to enumerate the
-entirety of the solution space can be used to solve these problems. However,
+choosing a combination of components any algorithm that is able to enumerate all
+possible combinations can be used can be used to solve these problems. However,
 finding an optimal solution can be difficult, and exhaustive search strategies
 may not be able to solve many of these problems, which are often
-NP-Hard~\cite{yu2010combinatorial,festa2014brief} and thus not approachable by
-algorithms in a reasonable amount of time. In these cases, approximation,
-heuristic and~\acrshort{meta-heuristic} methods present themselves as effective
+NP-Hard~\cite{yu2010combinatorial,festa2014brief}. In these cases, heuristic
+and~\acrshort{meta-heuristic} methods present themselves as effective
 alternatives to be considered.
 
+\subsection{Bounds}
+\label{subsec:bounds}
+
+In mathematics, the notion of bounds has its origins in set (order) theory. More
+precisely, upper and lower bounds are defined as the sets of~\textit{majorants}
+and ~\textit{minorants} of a given parent set. Majorants are the
+elements greater or equal to the highest value within the parent set.
+Likewise, minorants are the elements smaller or equal to the smallest
+value in the parent set. Furthermore, an upper bound is regarded as
+\textit{tight} or~\textit{strong} when no smaller value can serve as an upper
+bound, a concept known as the~\textit{supremum} or~\textit{least upper bound} of
+a set. Similarly, a lower bound is considered tight when no higher value can
+function as a lower bound, which is known as the~\textit{infimum} or
+~\textit{greatest lower bound} of a set.
+
+This concept holds significance in~\acrshort{combinatorial-optimization} and is
+frequently employed when aiming to optimize the objective value of (partial)
+solutions. In essence, the upper and lower bounds of a (partial) solution
+encompass the range of values for an objective function that are either
+greater/smaller than or equal to the optimal value achievable through the
+partial solution. The same logic applies to the concept of tight upper and lower
+bounds.
+
+Formally speaking, the upper bound and lower
+bound~\cite{papadimitriou1998combinatorial,outeiro2021application} of a
+(partial) solution can be defined as follows.
+
+\begin{definition}[Upper Bound]
+  \label{def:upper-bound}
+  An upper bound of a (partial) solution $s' \in 2^\mathcal{G}$ is a numeric
+  value given by a function $\Phi_\text{ub}\colon 2^{\mathcal{G}} \rightarrow
+    \mathbb{R} $ such that:
+  \begin{equation}
+    \forall s \in \mathcal{S} \land s \supseteq s' \colon f(s) \le \Phi_\text{ub}(s')
+  \end{equation}
+\end{definition}
+
+\begin{definition}[Lower Bound]
+  \label{def:lower-bound}
+  A lower bound of a (partial) solution $s' \in 2^\mathcal{G}$ is a numeric
+  value given by a function $\Phi_\text{lb}\colon 2^{\mathcal{G}} \rightarrow
+    \mathbb{R}$ such that:
+  \begin{equation}
+    \forall s \in \mathcal{S} \land s \supseteq s'\colon \Phi_\text{lb}(s') \le f(s)
+  \end{equation}
+\end{definition}
+
+The usage of bounds is often common in~\acrshort{combinatorial-optimization}
+algorithms, especially in exact approaches, as will be later detailed.
+Nonetheless, concerning~\acrshort{meta-heuristic} methods, bounds can be helpful
+tools for guiding the solution construction process. The rationale is that, when
+faced with a choice between adding one of two components, considering the upper
+bound's value becomes valuable as opting for the component having a lesser
+negative impact on the bound's value preserves the solutions' future potential
+for improvement. Note that the tightness of a bound is a determining factor for
+keeping this potential.
+
+Moreover, while the objective function holds significance in directing the
+optimization process, there are situations where evaluating the quality of a
+partial solution might not be possible. Additionally, the objective function
+might pose a bottleneck, obstructing the optimizer's ability to measure the
+impact of changes on solution quality. Nevertheless, the value for an upper
+bound can consistently be defined, thus emphasizing the importance of
+bounds in this context.
+
+In essence, the upper bound value provides an optimistic look at the quality of
+a (partial) solution and its potential to improve. Conversely, the lower bound,
+provides a realistic perspective on the objective value of the solution.
+Moreover, for a complete solution, the upper bound value will always match the
+objective value.
+
 \subsection{Global and Local Optimization}
+\label{subsec:go-and-lo}
 
 With regard to the search of solutions for optimization problems, there are two
 primary strategies: \acrfull{global-optimization} and \acrfull{local-optimization}.
@@ -194,7 +262,7 @@ preferences of the decision maker. While~\acrshort{global-optimization} aims to
 find the optimal solution to a problem, the search process may be time-consuming
 or, in some cases, computationally infeasible due to the size of the search
 space.  On the other hand,~\acrshort{local-optimization}, while lacking the
-optimality guarantees of, is able to quickly generate good solutions that may be
+optimality guarantees of, is able to quickly generate~\textquote{good} solutions that may be
 acceptable to the decision maker. Nonetheless, the quality of the solutions may
 be poor due to the ruggedness of the objective function fitness landscape (many
 local optima). Ultimately, the performance of both methods is closely tied to
@@ -206,16 +274,17 @@ optimization methods, as they are unlikely to finish on more complex problem
 instances. Instead, a balance between global and local optimization
 (\textit{exploration} and \textit{exploitation}) is typically employed. To
 elaborate, the strategy typically involves~\textit{exploring} the search space
-via~\acrshort{global-optimization} methods to find \textquote{good} starting
+via~\acrshort{global-optimization} methods to find~\textquote{good} starting
 solutions, that~\acrshort{local-optimization} methods can
 further~\textit{exploit}.
 
 \subsection{Black-Box and Glass-Box Optimization}
+\label{subsec:bbo-and-gbo}
 
 In the field of optimization, two settings are commonly recognized:
 \acrfull{black-box-optimization} and \acrfull{glass-box-optimization}.
 
-In \acrshort{black-box-optimization} optimization settings there is no
+In~\acrshort{black-box-optimization} optimization settings there is no
 information about the landscape of the function being optimized, constraints
 defining the set of feasible solutions~\cite{alarie2021two} or the objective
 function is too complex to be approached from an analytical perspective. As
@@ -223,15 +292,15 @@ such, algorithms for achieving solutions for these problems do so only by
 interacting with the problem through the evaluation of potential candidate
 solutions~\cite{doerr2020complexity}. Meta-Heuristics, as will be later detailed
 are examples of methods that follow this approach for finding/improving
-solutions. By contrast, in \acrshort{glass-box-optimization} optimization, also
-known as \textit{white box} optimization, there is a good understanding of the
+solutions. By contrast, in~\acrshort{glass-box-optimization} optimization, also
+known as~\textit{white box} optimization, there is a good understanding of the
 problem instance being optimized and the objective function
 properties~\cite{doerr2020complexity}. Hence, the algorithms used may take
 advantage of more analytical properties of the problem since they are
 transparent to the solver.
 
 For the purpose of clarification, with regard to the previously mentioned
-\acrshort{knapsack-problem}, a~\acrshort{black-box-optimization} strategy would
+~\acrshort{knapsack-problem}, a~\acrshort{black-box-optimization} strategy would
 entail the utilization of a search heuristic such as simulated
 annealing~\cite{luke2013essentialsa} to obtain solutions. This is because the
 algorithm only necessitates knowledge of how to evaluate the quality of
@@ -246,7 +315,7 @@ algorithm.
 In the context of the Hash Code competition, contestants typically engage the
 problems from a~\acrshort{black-box-optimization} perspective, as the underlying
 objective function of the is too complex to formalize. Additionally, the process
-of formalization can be time-consuming and, as a result, the usage of a
+of formalization can be time-consuming and, as a result, the usage of
 ~\acrshort{glass-box-optimization} methods post-formalization would not be
 justified, as they could turn out to be computationally slower. However, it is
 in many cases, possible to use~\acrshort{glass-box-optimization}

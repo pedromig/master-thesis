@@ -48,7 +48,7 @@
 \setmonofont{Inconsolatazi4-Regular}
 
 % Algorithm Pseudo Code
-\usepackage[algochapter,ruled,lined]{algorithm2e}
+\usepackage[algochapter,ruled,lined,linesnumbered,boxed]{algorithm2e}
 
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
@@ -161,7 +161,7 @@
   % Two-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm}
   \usepackage{varioref}
-  \usepackage[hidelinks,breaklinks]{hyperref}
+  \usepackage[hidelinks,breaklinks,bookmarks=true,unicode=true]{hyperref}
   \usepackage{cleveref}
 
   \let\tmp\oddsidemargin
@@ -183,7 +183,7 @@
   % One-Sided Version
   \geometry{a4paper,textwidth=13.3cm,top=2.5cm,bottom=3cm,hcentering}
   \usepackage{varioref}
-  \usepackage[breaklinks,colorlinks=true,citecolor=RoyalBlue,linkcolor=RoyalBlue,urlcolor=ForestGreen]{hyperref}
+  \usepackage[breaklinks,colorlinks=true,citecolor=RoyalBlue,linkcolor=RoyalBlue,urlcolor=ForestGreen,bookmarks=true,unicode=true]{hyperref}
   \usepackage{cleveref}
 
   \renewcommand{\sectionmark}[1]{\markright{#1}}
