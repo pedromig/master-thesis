@@ -1,0 +1,19 @@
+% Simulated Annealing (algorithm2e pseudocode)
+
+\KwIn{Solution ($s'$), Initial Temperature ($t_{0}$), Cooling Rate ($\alpha$), Objective Function ($f$) }
+\KwOut{Solution ($s^{*}$)}
+
+\SetKwFunction{Random}{\texttt{Random}}
+\SetKwFunction{Perturb}{\texttt{Perturb}}
+
+$t \gets t_{0}$\;
+$s^{*} \gets$ $s'$\;
+\While{\texttt{stopping criteria not met}}{
+  $s \gets$ \Perturb{$s^{*}$}\;
+  $\delta$ $\gets$ $f(s^{*})$ - $f(s)$\;
+  \If{$\delta < 0$ $\lor$ \Random{$0, 1$} $ < $ $e^{-\frac{\delta}{t}}$}{
+    $s^{*}$ $\gets$ $s$\;
+  }
+  $t$ $\gets$ $t \cdot \alpha$\;
+}
+\Return{$s^{*}$}

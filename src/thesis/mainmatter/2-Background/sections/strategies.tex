@@ -18,7 +18,7 @@ solutions. However, in large problem instances, this may prove to be
 computationally infeasible.~In the context
 of~\acrshort{combinatorial-optimization} problems, two general exact algorithms
 are well-known and widely studied:~\textit{Branch and Bound} and~\textit{Dynamic
-  Programming}~\cite{clausenbranch,festa2014brief}.
+  Programming}~\cite{clausen1999branch,festa2014brief}.
 
 These algorithms operate by iteratively breaking down a problem into smaller,
 interconnected or standalone sub-problems. The solutions to these are then
@@ -50,9 +50,24 @@ problems~\cite{johnson1974approximation}.
 experimentation. These methods do not provide any guarantees of optimality, as
 they are derived from intuition and their effectiveness is closely tied to the
 characteristics of the problem at hand. Nevertheless, they are reliable means of
-finding solutions in difficult~\acrshort{combinatorial-optimization} problems. A
-well-known class of algorithms that further extends these methods are meta-heuristics
-as will be further discussed.
+finding solutions in difficult~\acrshort{combinatorial-optimization} problems,
+typically yielding good solutions in a short time frame when compared to exact
+methods.~A well-known class of algorithms that further extends these methods are
+meta-heuristics as will be further discussed and detailed in~\Cref{sec:meta-heuristics}.
+
+A~\acrshort{meta-heuristic} is as a high-level heuristic method,
+as alluded by the word \textquote{meta}, which describes a concept as an
+abstraction of other. In the literature, the definition of meta-heuristic varies
+across different sources, resulting in a lack of consensus on a formal
+description~\cite{osman1996metaheuristics,blum2003metaheuristics,festa2014brief,luke2013essentialsa}.
+Nonetheless, one commonly accepted definition,
+by~\citet{osman1996metaheuristics}, captures the essence
+of~\acrshort{meta-heuristic} methods, which can be defined as iterative
+generation processes that~\emph{
+  \textquote{guide and intelligently combine subordinate heuristics for
+    exploring and exploiting solutions in the search space}
+}.~Moreover, most, if not all heuristic and meta-heuristic approaches are defined
+in terms of constructive and local search approaches, which we describe next.
 
 \subsection{Constructive Search}
 \label{subsec:contructive-search}
@@ -65,41 +80,61 @@ heuristic in nature or informed by other relevant information,~\eg{}, objective
 value and bounds.~These rules determine what components from the ground set can
 be included in the solution at each iteration. The construction stops when no
 more components can be added to the solution,~\ie{}, the solution is complete.
-
-A generic pseudo code for a~\acrshort{constructive-search}
+For clarification, a generic pseudocode for a~\acrshort{constructive-search}
 procedure~\cite{marti2013multistart} is shown in~\Cref{algorithm:cs}.
 
 \begin{algorithm}
-  \DontPrintSemicolon
   \input{mainmatter/2-Background/algorithms/cs.tex}
-  \caption{Constructive Procedure}
+  \caption{\acrlong{constructive-search} Procedure}
   \label{algorithm:cs}
 \end{algorithm}
 
 It's important to observe that a constructive search approach hinges on a
-strategy for choosing a component to add to a solution. This process is
-represented in~\Cref{algorithm:cs} through the~\texttt{SelectComponent}
-function. Additionally, a multitude of problem-specific information is at play,
-encompassing tasks like generating an empty solution,assessing the feasibility,
-enumerating components, and adding components. These elements directly influence
-the constructive search procedures as will be detailed further.
+strategy for selecting a component to add to a solution, represented
+in~\Cref{algorithm:cs} through the~\texttt{SelectComponent} function.~Moreover,
+various other problem-specific details come into play. These encompass
+activities such as enumerating components~($\mathcal{C}$), creating an empty solution, adding
+a component to a solution, and evaluating its feasibility.~Notably, these details
+directly influence the \acrshort{constructive-search} procedure's ability to
+construct good solutions. This highlights the importance of having a solid
+problem \textit{model}, a concept we will delve into further in this thesis.
 
 \subsection{Local Search}
 \label{subsec:local-search}
 
-\acrfull{local-search} approaches with, begin feasible solution to a given
+\acrfull{local-search} approaches begin, with feasible solution to a given
 problem, and then make modifications by adding or removing components in order
-to improve it. These transformations, are typically localized and aim to exploit
+to improve it. These modifications, are typically localized and aim to exploit
 the solution's neighborhood, as defined by the neighborhood structure of the
 problem. The procedure concludes when no further alterations can enhance the
-solution's quality, ultimately leading to a local optimum.
+solution's quality, ultimately leading to a local optimum. In the scope of this
+work, a transformation that can be applied to a solution within in the context
+of a \acrshort{local-search} procedure will be referred to as~\textit{local move}.
 
-Although the primary objective of~\acrshort{local-search} is to improve a
-solution in the direction of finding a local optimum. However, it is common for
-such a~\acrshort{local-search} approach to intentionally worsen a solution in
-order to allow for further exploration of previously unseen regions of the
-search space. This action commonly referred to as
-a~\textit{perturbation}~\cite{lourenco2010iterateda}. Furthermore, this
-approach is frequently applied in sequence to a constructive search phase, where
-a~\acrshort{constructive-search} algorithm is used to construct a good initial
-solution, which is then further improved by a local search approach.
+The primary objective of a~\acrshort{local-search} process is to improve a
+solution in the direction of the local optimum. However, it is common in
+a~\acrshort{local-search} approach to eventually worsen a solution in order
+to allow for further exploration of previously unseen regions of the search
+space. This action is commonly referred to as a~\textit{perturbation}~\cite{lourenco2010iterateda}.
+Furthermore,~\acrshort{local-search} is frequently applied in sequence to a
+constructive search phase, where a~\acrshort{constructive-search} algorithm is
+used to construct a good initial solution, which is then further improved through
+a~\acrshort{local-search} approach.
+
+A generic pseudocode for a local search procedure is outlined
+in~\Cref{algorithm:ls}. It's crucial to clarify that within the pseudocode, the
+\texttt{Step} function signifies the execution of a local move, while the
+\texttt{Perturb} function represents an optional action introducing a
+perturbation to the solution, if possible. Additionally, the enumeration of
+possible local moves~($\mathcal{M}$) and the selection of a specific local move to incorporate
+into the solution are abstracted through the \texttt{LocalMoves} and
+\texttt{SelectLocalMove} functions, respectively. Note that, as
+in~\acrshort{constructive-search}, the problem-specific choices made regarding
+the implementation of each of these functions will significantly influence the
+effectiveness of the~\acrshort{local-search} procedure.
+
+\begin{algorithm}
+  \input{mainmatter/2-Background/algorithms/ls.tex}
+  \caption{\acrlong{local-search} Procedure}
+  \label{algorithm:ls}
+\end{algorithm}

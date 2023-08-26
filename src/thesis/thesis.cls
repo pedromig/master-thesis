@@ -48,7 +48,7 @@
 \setmonofont{Inconsolatazi4-Regular}
 
 % Algorithm Pseudo Code
-\usepackage[algochapter,ruled,lined,linesnumbered,boxed]{algorithm2e}
+\usepackage[algochapter,ruled,lined,linesnumbered]{algorithm2e}
 
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
@@ -147,7 +147,12 @@
 \newtheorem{example}{Example}[section]
 
 % Algorithm Style
+\SetKwInOut{KwIn}{Input}
+\SetKwInOut{KwOut}{Output}
+
 \SetKwComment{Comment}{$\vartriangleright$\ }{}
+
+\DontPrintSemicolon
 
 % Custom Operators
 \DeclareMathOperator*{\argmax}{argmax}

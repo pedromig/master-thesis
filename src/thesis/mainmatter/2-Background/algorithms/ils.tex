@@ -1,0 +1,17 @@
+% Constructive Search Procedure (algorithm2e pseudocode)
+
+\KwIn{Solution ($s'$), Objective Function ($f$)}
+\KwOut{Solution ($s^{*}$).}
+
+\SetKwFunction{Perturb}{\texttt{Perturb}}
+\SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
+
+$s^{*} \gets$ $s'$\;
+\While{\texttt{stopping criteria not met}}{
+  $s$ $\gets$ \LocalSearch{$s^{*}$}\;
+  $s$ $\gets$ \Perturb{$s$}\;
+  \If{$f(s) > f(s^{*}$)}{
+    $s^{*}$ $\gets$ $s$\;
+  }
+}
+\Return{$s^{*}$}

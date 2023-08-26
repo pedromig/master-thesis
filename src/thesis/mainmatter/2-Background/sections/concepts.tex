@@ -49,7 +49,7 @@ using the identity:
 problems characterized by a discrete solution space that typically involves
 different permutations, groupings, or orderings of objects that satisfy some
 problem-specific
-criteria~\cite{papadimitriou1998combinatorial,vieira2009uma,blummetaheuristics,yu2010combinatorial}.
+criteria~\cite{papadimitriou1998combinatorial,vieira2009uma,blum2003metaheuristics,yu2010combinatorial}.
 Thus, regarding the previous definition of an optimization problem,
 a~\acrshort{combinatorial-optimization} can be formally defined as follows:
 
@@ -207,7 +207,7 @@ among proximate that are close in some way, which is commonly referred to as
 of a neighborhood, which for a given solution is specified by a particular
 neighborhood structure defined as follows:
 
-\begin{definition}[Neighborhood Structure~\cite{papadimitriou1998combinatorial, blummetaheuristics}]
+\begin{definition}[Neighborhood Structure~\cite{papadimitriou1998combinatorial,blum2003metaheuristics}]
   \label{def:neighborhood-structure}
 
   A neighborhood structure for an optimization problem is a mapping:
@@ -226,7 +226,7 @@ In general, the neighborhood structure refers to the set of rules that must be
 applied to a solution in order to generate all of its neighbors.  Additionally,
 we can define a local optimal solution or just local optimum as follows:
 
-\begin{definition}[Local Optimum~\cite{hiriart-urruty1995conditions,blummetaheuristics,nocedal2006numerical}]
+\begin{definition}[Local Optimum~\cite{hiriart-urruty1995conditions,blum2003metaheuristics,nocedal2006numerical}]
   \label{def:local-optimum}
 
   Assuming maximization without loss of generality, a solution $\hat{s}$ is
@@ -281,6 +281,11 @@ further~\textit{exploit}.
 \subsection{Black-Box and Glass-Box Optimization}
 \label{subsec:bbo-and-gbo}
 
+%% NOTE: Stochastic-Search in Meta-Heuristics
+%% One may imagine then that the algorithm A repeatedly calls a “black-box”
+%% procedure returning fitness values to given solutions x, but A does not “know” how
+%% these fitness values are determined. In this case, A is called a black-box optimizer.
+
 In the field of optimization, two settings are commonly recognized:
 \acrfull{black-box-optimization} and \acrfull{glass-box-optimization}.
 
@@ -290,11 +295,11 @@ defining the set of feasible solutions~\cite{alarie2021two} or the objective
 function is too complex to be approached from an analytical perspective. As
 such, algorithms for achieving solutions for these problems do so only by
 interacting with the problem through the evaluation of potential candidate
-solutions~\cite{doerr2020complexity}. Meta-Heuristics, as will be later detailed
-are examples of methods that follow this approach for finding/improving
-solutions. By contrast, in~\acrshort{glass-box-optimization} optimization, also
-known as~\textit{white box} optimization, there is a good understanding of the
-problem instance being optimized and the objective function
+solutions~\cite{doerr2020complexity,gutjahr2010stochastic}. Meta-Heuristics, as
+will be later detailed are examples of methods that follow this approach for
+finding/improving solutions. By contrast, in~\acrshort{glass-box-optimization}
+optimization, also known as~\textit{white box} optimization, there is a good
+understanding of the problem instance being optimized and the objective function
 properties~\cite{doerr2020complexity}. Hence, the algorithms used may take
 advantage of more analytical properties of the problem since they are
 transparent to the solver.

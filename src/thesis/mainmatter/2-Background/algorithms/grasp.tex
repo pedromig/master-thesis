@@ -1,0 +1,17 @@
+% Greedy Randomized Adaptive Search Procedure (algorithm2e pseudocode)
+
+\KwIn{Objective Function ($f$)}
+\KwOut{Solution ($s^{*}$).}
+
+\SetKwFunction{GreedyRandomizedConstruction}{\texttt{GreedyRandomizedConstruction}}
+\SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
+
+$s^{*}$ $\gets$ $\emptyset$\;
+\While{\texttt{stopping criteria not met}}{
+  $s$ $\gets$ \GreedyRandomizedConstruction{}\;
+  $s$ $\gets$ \LocalSearch{$s$}\;
+  \If{$f(s)$ > $f(s^{*})$}{
+    $s^{*}$ $\gets$ $s$\;
+  }
+}
+\Return{$s^{*}$}

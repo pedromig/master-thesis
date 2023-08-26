@@ -1,0 +1,26 @@
+% Beam Search (algorithm2e pseudocode)
+
+\KwIn{Beam Width ($w$), Objective Function $f$}
+\KwOut{Solution ($s^{*})$}
+
+\SetKwFunction{Perturb}{\texttt{Perturb}}
+\SetKwFunction{Branch}{\texttt{Branch}}
+
+$s^{*}$ $\gets$ $\emptyset$\;
+$\mathcal{B}$ $\gets$ $\{ s' \}$\;
+\While{ $\mathcal{B} \vee \emptyset\ $ $\land\ $ \texttt{stopping criteria not met}}{
+  $\mathcal{B'}$ $\gets$ $\emptyset$\;
+  \ForEach{ $s \in \mathcal{B}$ }{
+    $\mathcal{B'}$ $\gets$ $\mathcal{B'}\ \cup\ $ \Branch{$s$}
+  }
+  \If{ $\mathcal{B'} \neq \emptyset$ } {
+    $\mathcal{S}$ $\gets$ $\underset{\substack{s\ \in\ \mathcal{B'}}}{\argmax_{w}}\ f(s)$ \Comment*[f]{Select the \textquote{w} best solutions}\;
+    \ForEach{ $s \in \mathcal{S}$ }{
+      \If{$f(s) > f(s^{*})$}{
+        $s^{*}$ $\gets$ $s'$\;
+      }
+      $\mathcal{B}$ $\gets$ $\mathcal{B}\ \cup\ \{ s \}$
+    }
+  }
+}
+\Return{ $s^{*}$ }

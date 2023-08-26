@@ -1,0 +1,21 @@
+% Ant Colony Optimization (algorithm2e pseudocode)
+
+\KwIn{Population ($\mathcal{S}$), Pheromone Update Rule ($\mathcal{R}$), Pheromone Values ($\vec{\tau}$), Evaporation Rate ($\alpha$)}
+\KwOut{Solution ($s^{*}$)}
+
+\SetKwFunction{AntBasedSolutionConstruction}{\texttt{AntBasedSolutionConstruction}}
+\SetKwFunction{PheromoneUpdate}{\texttt{PheromoneUpdate}}
+\SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
+
+$s^{*} \gets$ $s'$\;
+$\mathcal{S} \gets \{ \emptyset \}$\;
+\While{\texttt{not stopping criteria met}}{
+  $\mathcal{S}$ $\gets$ \AntBasedSolutionConstruction{$\mathcal{P}$, $\vec{\tau}$}\;
+  $\mathcal{S}$ $\gets$ \LocalSearch{$\mathcal{P}$} \Comment*[f]{Optional} \;
+  $s$ $\gets$ $\underset{s\ \in\ \mathcal{P}}{\argmax}\ f(s)$ \Comment*[f]{Select best solution}\;
+  \If{$f(s)$ > $f(s^{*})$}{
+    $s^{*} \gets s$;
+  }
+  $\mathcal{S} \gets$ \PheromoneUpdate{$\mathcal{P}$, $\mathcal{R}$, $\vec{\tau}$, $\alpha$}\;
+}
+\Return{$s^{*}$}

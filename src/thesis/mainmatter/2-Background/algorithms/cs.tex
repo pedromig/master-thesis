@@ -1,11 +1,15 @@
+% Constructive Search Procedure (algorithm2e pseudocode)
+
 \KwIn{Ground Set ($\mathcal{G}$)}
 \KwOut{Solution ($s$)}
 
+\SetKwFunction{SelectComponent}{\texttt{SelectComponent}}
+
 $s$ $\gets$ $\emptyset$\;
-$C$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
-\While{$C \neq \emptyset$}{
-  $c$ $\gets$ \texttt{SelectComponent($C$)}\;
+$\mathcal{C}$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
+\While{$\mathcal{C} \neq \emptyset$}{
+  $c$ $\gets$ \SelectComponent{$\mathcal{C}$}\;
   $s$ $\gets$ $s \cup \{c\}$\;
-  $C$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
+  $\mathcal{C}$ $\gets$ $\{$  $c\in \mathcal{G} \setminus s$ $|$ $s \cup \{c\}$ \texttt{is feasible} $\}$ \;
 }
 \Return{$s$}
