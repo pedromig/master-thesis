@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  27 AUG 2023 01:52
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  27 AUG 2023 21:39
  system commands enabled.
 **thesis.tex
 (./thesis.tex
@@ -2776,11 +2776,11 @@ c.ttf]:mode=node;language=dflt;"
 \glo@main@file=\write6
 
 \openout6 = thesis.glo
-Package glossaries Info: Writing glossary file thesis.glo on input line 60.
+Package glossaries Info: Writing glossary file thesis.glo on input line 66.
 \glo@acronym@file=\write7
 
 \openout7 = thesis.acn
-Package glossaries Info: Writing glossary file thesis.acn on input line 60.
+Package glossaries Info: Writing glossary file thesis.acn on input line 66.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -2789,58 +2789,58 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./build/thesis.aux)
 \openout1 = thesis.aux
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 62.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 68.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
- 62.
+ 68.
  (/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 6
-2.
+8.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 68.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-62.
+68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 68.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 62.
+ 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 68.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 62.
+e 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -2903,18 +2903,18 @@ e
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-LaTeX Info: Redefining \microtypecontext on input line 62.
-Package microtype Info: Applying patch `item' on input line 62.
-Package microtype Info: Applying patch `toc' on input line 62.
-Package microtype Info: Applying patch `eqnum' on input line 62.
-Package microtype Info: Applying patch `footnote' on input line 62.
+LaTeX Info: Redefining \microtypecontext on input line 68.
+Package microtype Info: Applying patch `item' on input line 68.
+Package microtype Info: Applying patch `toc' on input line 68.
+Package microtype Info: Applying patch `eqnum' on input line 68.
+Package microtype Info: Applying patch `footnote' on input line 68.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 62.
+LaTeX Info: Redefining \showhyphens on input line 68.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
@@ -2944,9 +2944,9 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
 
 (./build/thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 62.
-Package biblatex Info: Reference segment=0 on input line 62.
-Package hyperref Info: Link coloring ON on input line 62.
+Package biblatex Info: Reference section=0 on input line 68.
+Package biblatex Info: Reference segment=0 on input line 68.
+Package hyperref Info: Link coloring ON on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -2960,21 +2960,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 \c@section@level=\count522
 LaTeX Info: Redefining \Ref on input line 520.
 )
-LaTeX Info: Redefining \ref on input line 62.
-LaTeX Info: Redefining \pageref on input line 62.
-LaTeX Info: Redefining \nameref on input line 62.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
 
 (./build/thesis.out) (./build/thesis.out)
 \@outlinefile=\write8
 
 \openout8 = thesis.out
-LaTeX Info: Redefining \Ref on input line 62.
+LaTeX Info: Redefining \Ref on input line 68.
 
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
 your preamble.
- on input line 62.
+ on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
@@ -3029,14 +3029,12 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
 (Font)              scaled to size 24.88pt on input line 2.
 LaTeX Font Info:    Font shape `TU/Roboto(0)/b/n' will be
 (Font)              scaled to size 24.88pt on input line 2.
-
-(/usr/share/texlive/texmf-dist/tex/generic/hyph-utf8/loadhyph/loadhyph-la.tex
-UTF-8 Latin hyphenation patterns
-(/usr/share/texlive/texmf-dist/tex/generic/hyph-utf8/patterns/tex/hyph-la.tex)) [3
+ [3
 
 
 
-] [4] [5]) (./frontmatter/acknowledgements.tex [6
+])
+(./frontmatter/acknowledgements.tex [4
 
 
 
@@ -3093,7 +3091,7 @@ LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
-) [7
+) [5
 
 
 ])
@@ -3102,25 +3100,25 @@ File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 \openout9 = thesis.toc
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
 (Font)              scaled to size 12.0pt on input line 5.
- [8]
+ [6]
 (./build/thesis.lof)
 \tf@lof=\write10
 
 \openout10 = thesis.lof
- [9
+ [7
 
 ] (./build/thesis.lot)
 \tf@lot=\write11
 
 \openout11 = thesis.lot
- [10
+ [8
 
 ] (./build/thesis.loa)
 \tf@loa=\write12
 
 \openout12 = thesis.loa
 )
-[11
+[9
 
 ] (./mainmatter/1-Introduction/main.tex
 Chapter 1.
@@ -3183,23 +3181,33 @@ ine 25.
 (./mainmatter/2-Background/algorithms/hc.tex) [21]
 (./mainmatter/2-Background/algorithms/ils.tex) [22]
 (./mainmatter/2-Background/algorithms/sa.tex) [23]
-(./mainmatter/2-Background/algorithms/ts.tex) [24])
-(./mainmatter/2-Background/sections/modelling.tex [25]
+(./mainmatter/2-Background/algorithms/ts.tex) [24]
+(./mainmatter/2-Background/tables/meta-heuristics.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 1--350
+
+ []
+
+) (./mainmatter/2-Background/sections/modelling.tex [25]
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
+(Font)              scaled to size 8.8pt on input line 32.
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
+(Font)              scaled to size 6.6pt on input line 32.
+ [26]
 warning  (file ../assets/modelling/modelling.pdf) (pdf inclusion): PDF inclusion
 : found PDF version '1.7', but at most version '1.5' allowed
-<../assets/modelling/modelling.pdf, id=994, 549.97469pt x 81.4242pt>
+<../assets/modelling/modelling.pdf, id=1015, 549.97469pt x 81.4242pt>
 File: ../assets/modelling/modelling.pdf Graphic file (type pdf)
 <use ../assets/modelling/modelling.pdf>
 Package luatex.def Info: ../assets/modelling/modelling.pdf  used on input line 
-54.
+73.
 (luatex.def)             Requested size: 378.42174pt x 56.02496pt.
+[27<../assets/modelling/modelling.pdf>]
 
 LaTeX Font Warning: Font shape `TU/Inconsolatazi4-Regular(0)/b/n' undefined
 (Font)              using `TU/Inconsolatazi4-Regular(0)/m/n' instead on input l
-ine 74.
+ine 131.
 
-[26<../assets/modelling/modelling.pdf>] [27]))
-(./mainmatter/3-GoogleHashCodeCompetition/main.tex [28]
+[28] [29])) (./mainmatter/3-GoogleHashCodeCompetition/main.tex [30]
 Chapter 3.
 
 LaTeX Warning: Reference `sec:hashcode-instance' on page 1 undefined on input l
@@ -3208,44 +3216,44 @@ ine 12.
 (./mainmatter/3-GoogleHashCodeCompetition/sections/format.tex
 (../assets/histogram/histogram.tex
 ===== Image 'tikz/thesis-figure1' is up-to-date. ======
-) [29
+) [31
 
 ]) (./mainmatter/3-GoogleHashCodeCompetition/sections/problems.tex
-[30<build/tikz/thesis-figure1.pdf>] [31] [32] [33] [34] [35] [36] [37] [38]
-[39] [40] (./mainmatter/3-GoogleHashCodeCompetition/tables/hashcode.tex)
+[32<build/tikz/thesis-figure1.pdf>] [33] [34] [35] [36] [37] [38] [39] [40]
+[41] [42] (./mainmatter/3-GoogleHashCodeCompetition/tables/hashcode.tex)
 Underfull \hbox (badness 10000) in paragraph at lines 1--485
 
  []
 
-) (./mainmatter/3-GoogleHashCodeCompetition/sections/instances.tex [41])
-(./mainmatter/3-GoogleHashCodeCompetition/sections/remarks.tex [42]))
-(./mainmatter/4-PrincipledModellingFramework/main.tex [43]
+) (./mainmatter/3-GoogleHashCodeCompetition/sections/instances.tex [43])
+(./mainmatter/3-GoogleHashCodeCompetition/sections/remarks.tex [44]))
+(./mainmatter/4-PrincipledModellingFramework/main.tex [45]
 Chapter 4.
-) (./mainmatter/5-OptimizeADataCenter/main.tex [44
+) (./mainmatter/5-OptimizeADataCenter/main.tex [46
 
 ]
 Chapter 5.
-) (./mainmatter/6-BookScanning/main.tex [45
+) (./mainmatter/6-BookScanning/main.tex [47
 
 ]
 Chapter 6.
-) (./mainmatter/7-Conclusion/main.tex [46
+) (./mainmatter/7-Conclusion/main.tex [48
 
 ]
 Chapter 7.
-) [47
+) [49
 
-] (./backmatter/misc.tex (./build/thesis.acr [48
+] (./backmatter/misc.tex (./build/thesis.acr [50
 
 
 
-]) [49]
+]) [51]
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
 (Font)              scaled to size 12.0pt on input line 5.
- [50
+ [52
 
-] [51] [52])
-[53] (./build/thesis.aux)
+] [53] [54])
+[55] (./build/thesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -3253,23 +3261,23 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 1ABDCB5C333C3C27477FF1795D6D39BE;7006.
+(rerunfilecheck)             Checksum: E4D0AC1741435583828ABF3BA624801D;7338.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 
 \openout1 = thesis.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 72950 strings out of 477805
+ 73081 strings out of 477805
  125086,2848258 words of node,token memory allocated
- 1633 words of node memory still in use:
+ 1657 words of node memory still in use:
    11 hlist, 3 vlist, 2 rule, 1 disc, 2 local_par, 12 glue, 5 kern, 3 penalty, 2
- margin_kern, 15 glyph, 92 attribute, 153 glue_spec, 52 attribute_list, 2 write,
- 17 pdf_action, 2 pdf_colorstack nodes
-   avail lists: 1:9,2:1867,3:420,4:372,5:630,6:170,7:7168,8:183,9:717,10:19,11:7
-15,12:1
- 90382 multiletter control sequences out of 65536+600000
- 257 fonts using 33993615 bytes
+ margin_kern, 15 glyph, 98 attribute, 153 glue_spec, 55 attribute_list, 2 write,
+ 18 pdf_action, 2 pdf_colorstack nodes
+   avail lists: 1:7,2:1945,3:420,4:380,5:633,6:173,7:7173,8:189,9:795,10:18,11:6
+33,12:1
+ 90508 multiletter control sequences out of 65536+600000
+ 259 fonts using 34849951 bytes
  106i,22n,136p,2012b,2247s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/opentype/public/inconsolata/Inconsolatazi4-
 Regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLi
@@ -3283,14 +3291,14 @@ MI7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathRM.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/txfonts/txsya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-txfonts/txsyb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.
-pfb>
-Output written on thesis.pdf (64 pages, 519860 bytes).
+-dist/fonts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/tx
+fonts/txsya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
+Output written on thesis.pdf (64 pages, 525830 bytes).
 
-PDF statistics: 1390 PDF objects out of 1440 (max. 8388607)
- 1267 compressed objects within 13 object streams
- 343 named destinations out of 1000 (max. 131072)
+PDF statistics: 1476 PDF objects out of 1728 (max. 8388607)
+ 1351 compressed objects within 14 object streams
+ 349 named destinations out of 1000 (max. 131072)
  408 words of extra memory for PDF output out of 10000 (max. 100000000)
 

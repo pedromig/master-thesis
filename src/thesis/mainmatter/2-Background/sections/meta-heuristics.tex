@@ -19,10 +19,10 @@ described by a couple of distinctive traits~\cite{blum2003metaheuristics} such a
     solutions that may be revisited or disregarded in subsequent stages of the
     optimization process.
 
-  \item[\textbf{Population vs. Trajectory.}] This pertains to the number of
-    solutions being evolved during the construction phase.~In~\emph{population
-      methods}, multiple solutions are worked with at each iteration, while in
-    ~\emph{trajectory methods}, only a single solution improved at a time.
+  \item[\textbf{State Size.}] This pertains to the number of solutions being
+    evolved during the construction phase.~In~\emph{population methods}, multiple
+    solutions are worked with at each iteration, while in~\emph{trajectory methods} (single-state),
+    only a single solution improved at a time.
 \end{description}
 
 In this section, we will offer a brief overview of select state-of-the-art
@@ -142,7 +142,7 @@ destroying a solution, respectively.
 
 \subsection{Ant Colony Optimization}
 \label{subsec:aco}
-% TODO: FIXME
+
 \acrfull{aco}~\cite{dorigo2010anta,outeiro2021application,luke2013essentialsa,blum2003metaheuristics}
 is a stochastic population based,~\acrshort{constructive-search}
 and~\acrshort{local-search},~\acrshort{meta-heuristic} that is inspired by the
@@ -155,30 +155,35 @@ choices based on the~\textit{pheromone} trail left by previous ants and other
 heuristic information. Notably, the pheromones, associated with the components
 $c_{i}$ of the ground set $\mathcal{G}$, weigh the relevance of the integration
 of a specific component in a solution during the construction process.
+Moreover, the~\textit{pheromones} are associated with each component of the
+ground set, and in practice consist in a parametrized probabilistic model.
 
-One of the key features of ACO is the incorporation of a learning component
+One of the key features of~\acrshort{aco} is the incorporation of a learning component
 through the use of a pheromone update rule that adapts the pheromone trail based
 on the quality of the solutions constructed by the ants, with the aim of guiding
 the ants towards better solutions over subsequent iterations. As such, the
 algorithm requires the tuning of several parameters such as the pheromone
 evaporation rate, the choice of the pheromone update rule, and the
-initialization of the pheromone trail.
+initialization of the pheromone model. Notably, there are different models
+which gave origin to many variations of this~\acrshort{meta-heuristic}.
 
-In summary, the~\acrshort{aco} meta-heuristic can be described as a process that
-comprises of a solution construction phase, in which each solution of the
-population is constructed using both~\textit{pheromone model} and heuristic
-information, followed by an optional phase of exploiting these solutions through
-local search, and culminating in a pheromone update phase. This process is then
-repeated for multiple iterations, until certain stopping criteria is met.
-
-as can be observed in the pseudo-code
-provided in Algorithm ~\ref{algorithm:aco}.
+The pseudocode provided in~\ref{algorithm:aco} illustrates the basic functioning
+of this~\acrshort{meta-heuristic}
 
 \begin{algorithm}
   \input{mainmatter/2-Background/algorithms/aco.tex}
   \caption{\acrlong{aco}}
   \label{algorithm:aco}
 \end{algorithm}
+
+In summary, the~\acrshort{aco} meta-heuristic can be described as a process that
+comprises of a solution construction
+phase~(~\texttt{AntBasedSolutionConstruction} function), in which each solution
+of the population is constructed using both the~\textit{pheromone model} and
+heuristic information, followed by an optional phase of exploiting these
+solutions through local search~(\texttt{LocalSearch} function), and culminating
+in a pheromone update phase~(\texttt{PheromoneUpdate} function). This process is
+then repeated for multiple iterations, until certain stopping criteria is met.
 
 \subsection{Hill-Climbing}
 \label{subsec:hill-climbing}
@@ -320,11 +325,28 @@ this meta-heuristic.
 
 Notably, the size and duration of the tabu list ($l_{\max}$), as well as the
 rules for adding and removing solutions from the list, are user-specified
-parameters that need to be fine-tuned for each problem.~Additionally, a
-common criterion for the removal of an element from the tabu list is based on
-its age. This aspect related to age-based removal is depicted
+parameters that need to be fine-tuned for each problem.~Additionally, a common
+criterion for the removal of an element from the tabu list is based on its age.
+This aspect related to age-based removal is depicted
 in~\Cref{algorithm:tabu-search} through the utilization of the~\texttt{Oldest}
 function, which retrieves the oldest solution stored within the tabu list.
 
 \subsection{Outline}
 \label{subsec:Outline}
+
+In this section, we provided a concise overview of well-known state-of-the-art
+meta-heuristic algorithms that hold relevance to our study. Our intention was to
+offer the reader a general understanding of the conceptual foundation behind each
+algorithm, without delving into an exhaustive exploration. Furthermore, we
+categorized each meta-heuristic based on the employed search strategy
+(\acrshort{constructive-search} or~\acrshort{local-search}), the utilization of a memory archive for
+solutions, and the state size (\textit{Population} vs. \textit{Trajectory}).
+
+The~\Cref{tab:meta-heuristics-summary} presents a succinct summary of various
+meta-heuristic methods, organized according to these properties.
+
+\begin{table}[ht]
+  \input{mainmatter/2-Background/tables/meta-heuristics.tex}
+  \caption{Meta-Heuristics Summary}
+  \label{tab:meta-heuristics-summary}
+\end{table}
