@@ -3,7 +3,7 @@
 \KwIn{Solution ($s'$), Tabu Length ($l_{max}$), Objective Function ($f$)}
 \KwOut{Solution ($s^{*}$)}
 
-\SetKwFunction{RemoveOldest}{\texttt{RemoveOldest}}
+\SetKwFunction{Oldest}{\texttt{Oldest}}
 
 $s^{*} \gets$ $s'$\;
 $\mathcal{T}$ $\gets$ $\{ \emptyset \}$\;
@@ -14,7 +14,7 @@ $\mathcal{T}$ $\gets$ $\{ \emptyset \}$\;
     $\mathcal{T} \gets \mathcal{T} \cup \{s\}$\;
   }
   \If{$\left\lvert \mathcal{T} \right\rvert$ $>$ $l_{\max}$} {
-    \RemoveOldest{$\mathcal{T}$}\;
+    $\mathcal{T}$ $\gets$ $\mathcal{T}\ \setminus $ \Oldest{$\mathcal{T}$}\;
   }
 }
 \Return{$s^{*}$}

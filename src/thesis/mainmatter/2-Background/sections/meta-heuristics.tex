@@ -11,9 +11,8 @@ described by a couple of distinctive traits~\cite{blum2003metaheuristics} such a
 
 \begin{description}
   \item[\textbf{Search Strategy.}] This refers to the method used to construct a
-    solution. It can be one of three main types: constructive (building step by
-    step), local (making small improvements), or a composite approach that
-    combines both strategies.
+    solution. It can be one of three main types: constructive, local, or a
+    \emph{composite} approach that combines both strategies.
 
   \item[\textbf{Memoization.}] This concept involves maintaining a record or
     archive of previously explored solutions.~This record helps in identifying
@@ -23,7 +22,7 @@ described by a couple of distinctive traits~\cite{blum2003metaheuristics} such a
   \item[\textbf{Population vs. Trajectory.}] This pertains to the number of
     solutions being evolved during the construction phase.~In~\emph{population
       methods}, multiple solutions are worked with at each iteration, while in
-    ~\emph{trajectory methods}, only a single solution is dealt with at a time.
+    ~\emph{trajectory methods}, only a single solution improved at a time.
 \end{description}
 
 In this section, we will offer a brief overview of select state-of-the-art
@@ -33,100 +32,168 @@ and will be utilized and implemented in the context of this work.
 \subsection{Beam Search}
 \label{subsec:beam-search}
 
-\acrfull{beam-search}~\cite{ow1988filtered,outeiro2021application}
+\acrfull{beam-search}~\cite{ow1988filtered,outeiro2021application} is a
+\acrshort{constructive-search} trajectory~\acrfull{meta-heuristic} inspired by
+the~\emph{breadth-first search} algorithm~\cite{papadimitriou1998combinatorial}.
+However, it deviates from the conventional practice of expanding all solutions
+in the search tree during each iteration. Instead, this technique maintains a
+fixed-size archive of previous solutions, which are expanded at each
+step~(\textit{beam}). Subsequently, the expanded solutions undergo filtering,
+and only the best solutions, determined based on heuristic information or bound
+values, are retained within the archive. These selected solutions act as the
+starting points for the next iteration. It's important to acknowledge that the
+size of this archive, and consequently the number of solutions filtered at each
+step, is dictated by a parameter referred to as the~\emph{beam width}.
+
+The construction process of~\acrshort{beam-search} concludes either when there
+are no more candidate solutions to expand or when other predetermined stopping
+criteria are satisfied. For illustration purposes, the pseudocode for
+\acrshort{beam-search} is presented in \Cref{algorithm:beam-search}.
 
 \begin{algorithm}
-  \label{algorithm:beam-search}
-  \caption{\acrlong{beam-search}}
   \input{mainmatter/2-Background/algorithms/bs.tex}
+  \caption{\acrlong{beam-search}}
+  \label{algorithm:beam-search}
 \end{algorithm}
 
-\subsection{Iterated Greedy}
-\label{subsec:iterated-greedy}
-
-\acrfull{iterated-greedy}~\cite{stutzle2018iterated,outeiro2021application}
-
-\begin{algorithm}
-  \label{algorithm:iterated-greedy}
-  \caption{\acrlong{iterated-greedy}}
-  \input{mainmatter/2-Background/algorithms/ig.tex}
-\end{algorithm}
+The pseudocode assumes that the~\texttt{Branch} function generates the set of
+all potential (partial) solutions achieved by incorporating components from the
+ground set that are not currently part of the solution. It's worth noting that,
+since the solution is constructed incrementally, the solutions obtained through
+branching might not always be feasible.~As a result, an additional step for
+feasibility verification is required before updating the best solution~($s^{*}$)
+identified during the search process. Moreover, it's important to emphasize that
+the ~\emph{beam width} parameter directly influences the quality of the
+solutions discovered.~Smaller values might lead to premature convergence to a
+local optimum, while larger values, although capable of producing better-quality
+solutions, could lead to increased memory and computational requirements.
 
 \subsection{Greedy Randomized Adaptive Search Procedure}
 \label{subsec:grasp}
 
 \acrfull{grasp}~\cite{resende2010greedya,outeiro2021application,blum2003metaheuristics}
+is a stochastic,~\acrshort{constructive-search}
+and~\acrshort{local-search},~\acrshort{meta-heuristic} that iteratively build
+solutions by sequencing a construction phase with a local search phase.~The
+construction phase begins with an empty solution and iteratively adds a new
+component at each step. This component is chosen at random from a
+\emph{restricted candidate list} of components. This list consists of the best
+available components for extending the current (partial) solution, based on
+either a heuristic value or an upper bound.~Additionally, there's an option to
+apply a local search phase to the partial solution obtained during the
+construction phase. The goal of this local search is to further exploit the
+solution, with algorithm concluding when some predefined stopping criteria are
+met.
 
-% Greedy Randomized Adaptive Search Procedures
-% (GRASP) are
-% simple, single-state, stochastic meta-heuristics that iteratively build solutions by
-% combining a greedy construction phase with a local search phase. The
-% construction phase involves the selection of components from the ground set
-% $\mathcal{G}$ based on their contribution to the objective function, using a
-% greedy criterion, and subsequently incorporating them into a partial solution
-% $s^{p}$. However, the constructed solution may not be feasible, requiring a
-% repair process to improve its quality. The local search phase is then applied to
-% the partial solution $s^{p}$ obtained during the construction phase, with the
-% goal of further completing and improving the solution. The pseudo-code provided
-% in Algorithm~\ref{algorithm:grasp} illustrates the functioning of a basic
-% implementation of the GRASP algorithm.
+The provided pseudocode in~\Cref{algorithm:grasp} offers an overview of how the
+\acrshort{grasp} algorithm functions.
+
+It's important to highlight that this meta-heuristic, GRASP, provides a means of
+controlling the balance between randomization and greediness in solution
+construction (\texttt{GreedyRandomizedConstruction} function). This control is
+achieved through the parameter $\alpha$, which serves as a threshold for the
+quality of solutions within the candidate list.~Specifically, when $\alpha = 1$,
+the construction process is entirely random, and all possible components are
+included in the candidate list, regardless of their quality. Conversely, with
+$\alpha = 0$, only the best component is considered at each step, rendering this
+\acrshort{meta-heuristic} purely greedy. It's worth noting that the inclusion of
+the optional local search step (\texttt{LocalSearch} function) can significantly
+enhance the quality of the randomized greedy process. However, the crux of
+fine-tuning lies in determining an appropriate value for $\alpha$.
 
 \begin{algorithm}
-  \label{algorithm:grasp}
-  \caption{\acrlong{grasp}}
   \input{mainmatter/2-Background/algorithms/grasp.tex}
+  \caption{\acrlong{grasp}}
+  \label{algorithm:grasp}
+\end{algorithm}
+
+\subsection{Iterated Greedy}
+\label{subsec:iterated-greedy}
+
+\acrfull{iterated-greedy}~\cite{stutzle2018iterated,outeiro2021application} is a
+\acrshort{constructive-search} trajectory~\acrshort{meta-heuristic} that
+revolves around the concept of iteratively destroying a solution and
+subsequently reconstructing it to break free from local optima. In its basic
+form, this \acrshort{meta-heuristic} begins by constructing an initial solution,
+for example through a randomized greedy approach. Subsequently, it proceeds to
+remove one or more randomly chosen solution components before initiating the
+construction process anew. This sequence of operations continues until some
+predefined stopping criteria are satisfied.
+
+Some less-common variations of this algorithm incorporate local search methods
+to further exploit the solution following the construction phase. Furthermore,
+certain versions of this~\acrshort{meta-heuristic}, as detailed in the
+literature~\cite{stutzle2018iterated}, implement an acceptance criterion that
+probabilistically permits the acceptance of solutions of inferior quality, akin
+to the mechanisms employed in~\acrshort{simulated-annealing}, which will be
+elaborated upon in~\Cref{subsec:simulated-annealing}.
+
+As an illustration, the pseudocode for an ~\acrshort{iterated-greedy} algorithm
+utilizing a randomized greedy strategy, is outlined
+in~\Cref{algorithm:iterated-greedy}. Here, the functions \texttt{Construct}
+and~\texttt{Destruct} signify the approach used for (re-)constructing and
+destroying a solution, respectively.
+
+\begin{algorithm}
+  \input{mainmatter/2-Background/algorithms/ig.tex}
+  \caption{\acrlong{iterated-greedy}}
+  \label{algorithm:iterated-greedy}
 \end{algorithm}
 
 \subsection{Ant Colony Optimization}
 \label{subsec:aco}
-
+% TODO: FIXME
 \acrfull{aco}~\cite{dorigo2010anta,outeiro2021application,luke2013essentialsa,blum2003metaheuristics}
+is a stochastic population based,~\acrshort{constructive-search}
+and~\acrshort{local-search},~\acrshort{meta-heuristic} that is inspired by the
+foraging behavior of ants, which in the context algorithm represent (partial)
+solutions undergoing construction.
 
-% Ant Colony Optimization (ACO is a population-based, stochastic,
-% constructive meta-heuristic that is inspired by the foraging behavior of ants.
-% 
-% The algorithm simulates the movement of ``ants'' through the search space, where
-% each ant constructs a solution by making a sequence of probabilistic choices
-% based on the ``pheromone'' trail left by previous ants. Notably, the pheromones,
-% associated with the components $c_{i}$ of the ground set $\mathcal{G}$, weigh
-% the relevance of the integration of a specific component in a solution during
-% the construction process.
-% 
-% One of the key features of ACO is the incorporation of a learning component
-% through the use of a pheromone update rule that adapts the pheromone trail based
-% on the quality of the solutions constructed by the ants, with the aim of guiding
-% the ants towards better solutions over subsequent iterations. As such, the
-% algorithm requires the tuning of several parameters such as the pheromone
-% evaporation rate, the choice of the pheromone update rule, and the
-% initialization of the pheromone trail.
-% 
-% In summary, the ACO meta-heuristic can be described as a process that comprises
-% of a solution construction phase, in which solutions (referred to as ``ants'')
-% are constructed, followed by an optional phase of exploiting these solutions
-% through local search, and culminating in a pheromone update phase. This process
-% is then repeated for multiple iterations, as can be observed in the pseudo-code
-% provided in Algorithm ~\ref{algorithm:aco}.
-% 
+The algorithm simulates the movement of~\textit{ants} through the search space,
+where each ant constructs a solution by making a sequence of probabilistic
+choices based on the~\textit{pheromone} trail left by previous ants and other
+heuristic information. Notably, the pheromones, associated with the components
+$c_{i}$ of the ground set $\mathcal{G}$, weigh the relevance of the integration
+of a specific component in a solution during the construction process.
+
+One of the key features of ACO is the incorporation of a learning component
+through the use of a pheromone update rule that adapts the pheromone trail based
+on the quality of the solutions constructed by the ants, with the aim of guiding
+the ants towards better solutions over subsequent iterations. As such, the
+algorithm requires the tuning of several parameters such as the pheromone
+evaporation rate, the choice of the pheromone update rule, and the
+initialization of the pheromone trail.
+
+In summary, the~\acrshort{aco} meta-heuristic can be described as a process that
+comprises of a solution construction phase, in which each solution of the
+population is constructed using both~\textit{pheromone model} and heuristic
+information, followed by an optional phase of exploiting these solutions through
+local search, and culminating in a pheromone update phase. This process is then
+repeated for multiple iterations, until certain stopping criteria is met.
+
+as can be observed in the pseudo-code
+provided in Algorithm ~\ref{algorithm:aco}.
+
 \begin{algorithm}
-  \label{algorithm:aco}
-  \caption{\acrlong{aco}}
   \input{mainmatter/2-Background/algorithms/aco.tex}
+  \caption{\acrlong{aco}}
+  \label{algorithm:aco}
 \end{algorithm}
 
 \subsection{Hill-Climbing}
 \label{subsec:hill-climbing}
 
 \acrfull{hill-climbing}~\cite{luke2013essentialsa,vieira2009uma} is a simple
-stochastic, memory-less,~\acrshort{local-search} trajectory algorithm that works
-by iteratively attempting to improve a starting solution through a sequence of
-incremental changes,~\ie{}, by selecting the solution in the neighborhood that
-yields the best increment with respect to the objective value. This process
-terminates when the best solution possible is found or another stopping
-criteria is met. Despite the simplicity of this method it is worth noting that,
-due to the inherent greedy choice of the best at each step this approach is
-susceptible to getting trapped in local optima. For illustration purposes the
-pseudocode of simple version of an~\acrshort{hill-climbing} method is shown
-in~\Cref{algorithm:hill-climbing}.
+stochastic,~\acrshort{local-search} trajectory~\acrshort{meta-heuristic} that
+works by iteratively attempting to improve a starting solution through a
+sequence of incremental changes,~\ie{}, by selecting the solution in the
+neighborhood that yields the best increment with respect to the objective value.
+This process terminates when the best solution possible is found or another
+stopping criteria is met. Despite the simplicity of this method it is worth
+noting that, due to the inherent greedy choice of the best at each step this
+approach is susceptible to getting trapped in local optima. For illustration
+purposes the pseudocode of simple version of an~\acrshort{hill-climbing}
+algorithm is shown in~\Cref{algorithm:hill-climbing}.
 
 \begin{algorithm}
   \input{mainmatter/2-Background/algorithms/hc.tex}
@@ -136,14 +203,14 @@ in~\Cref{algorithm:hill-climbing}.
 
 It's worth noting that the presented algorithm's effectiveness is rooted in the
 efficiency of a random process, which strives to improve solution quality
-through a sequence of perturbation attempts (\texttt{Perturb} function).
+through a sequence of random perturbation attempts (\texttt{Perturb} function).
 Nevertheless, there exist two noteworthy variations that more thoroughly explore
 the solution's neighborhood and take steps in the direction of the most
 substantial improvement. These are commonly known as~\acrfull{first-improvement}
 and~\acrfull{best-improvement}. The latter is also known in the literature as
 \textit{steepest ascent}~\acrshort{hill-climbing}~\cite{luke2013essentialsa}.
 
-In a~\acrshort{first-improvement} approach, the first neighboring solution that
+In a~\acrshort{first-improvement} approach, the first random neighboring solution that
 improves the current solution's quality is retained. Conversely, in a
 \acrshort{best-improvement} scenario, the entire neighborhood of the current
 solution is examined, and the best neighboring solution is selected for the
@@ -153,68 +220,111 @@ subsequent iteration.
 \label{subsec:iterated-local-search}
 
 \acrfull{iterated-local-search}~\cite{lourenco2010iterateda,luke2013essentialsa,blum2003metaheuristics}
+is a stochastic \acrshort{local-search} trajectory~\acrshort{meta-heuristic} that
+extends the \acrshort{hill-climbing} method. This algorithm operates through a
+series of iterations, where each iteration aims to explore a solution by
+applying a~\acrshort{local-search} procedure,
+typically~\acrshort{first-improvement}. When an improvement is achieved, the
+best solution found is retained and serves as the reference solution for
+subsequent iterations. This iterative process continues until the algorithm
+either converges to the local optimum or meets predefined stopping criteria.
 
-% The  is a single-state, stochastic, local search meta-heuristic
-% that builds upon the ideas of Hill Climbing (HC) by incorporating repeated local
-% searches starting from different solutions, allowing for exploration of the
-% search space. In its simplest form, ILS can be implemented according to the
-% pseudo-code shown in Algorithm~\ref{algorithm:iterated-local-search}. Variants
-% of the ILS algorithm also exist, such as the memory-based, which store previously
-% visited starting solutions to avoid re-exploration of the same regions of the
-% search space.
-% 
+An integral feature of the~\acrshort{iterated-local-search} is the introduction
+of a perturbation step at the end of each iteration. This perturbation injects
+controlled randomness into the current solution, allowing for exploration of
+different regions within the search space. This exploration aids in preventing
+the algorithm from becoming stuck in local optima.~Notably, other many
+variations of this algorithm exist, with certain versions incorporating an
+archive mechanism to store starting solutions for each iteration. This approach
+helps prevent repeated exploration of the same regions within the search space.
+
+The core framework of the \acrshort{iterated-local-search} algorithm is
+illustrated in Algorithm~\ref{algorithm:iterated-local-search}. The parameter
+$ks$ in the \texttt{Perturb} function represents the \textit{kick strength},
+determining the intensity of the perturbation movement, and can be
+adjusted accordingly.
+
 \begin{algorithm}
-  \label{algorithm:iterated-local-search}
-  \caption{\acrlong{iterated-local-search}}
   \input{mainmatter/2-Background/algorithms/ils.tex}
+  \caption{\acrlong{iterated-local-search}}
+  \label{algorithm:iterated-local-search}
 \end{algorithm}
 
 \subsection{Simulated Annealing}
 \label{subsec:simulated-annealing}
 
 \acrfull{simulated-annealing}~\cite{kirkpatrick1983optimization,nikolaev2010simulateda,eglese1990simulated}
+is a stochastic,~\acrshort{local-search} trajectory~\acrshort{meta-heuristic}
+that draws inspiration from the \emph{annealing} process in metallurgy. The core
+concept adopted from metallurgy and applied to the algorithmic context is the
+notion of accepting poorer quality solutions in the early stages of the search
+and gradually tightening the acceptance criteria as the search progresses. This
+strategy is based on the understanding that in the initial phases, accepting
+suboptimal solutions as the best available option promotes exploration of the
+search space. As the search advances towards its final stages, the emphasis
+shifts towards convergence to a local optimum, favoring exploitation.
 
-%is a single-state, stochastic, local
-% search meta-heuristic that is inspired by the process of annealing in
-% metallurgy.  The algorithm works by iteratively applying small perturbations to
-% a candidate solution with the aim of improving it, and accepting new solutions
-% based on their quality and a probability function that simulates the cooling
-% process of a metal. The probability function is controlled by a temperature
-% parameter, which gradually decreases over time, thus reducing the acceptance
-% probability of worse solutions. This allows the algorithm to initially explore a
-% wider range of solutions and escape local optima, ultimately improving the
-% exploration of the search space. The details of the process can be found in the
-% pseudo-code provided in Algorithm~\ref{algorithm:simmulated-annealing}.
-% 
+Essentially,~\acrshort{simulated-annealing} works by iteratively applying small
+perturbations to a candidate solution in order to enhance it. The algorithm
+accepts or rejects these new solutions based on their quality and a probability
+function that emulates the cooling process of a metal.~This probability function
+depends on a temperature parameter, which decreases as the algorithm proceeds,
+causing the acceptance probability of worst solutions to decrease as well.
+Ultimately, the algorithm halts when further improvements to the solution are no
+longer feasible or when predefined stopping criteria are met.
+
+The details of the~\acrshort{simulated-annealing} algorithm are illustrated in the
+pseudocode provided in~\Cref{algorithm:simulated-annealing}.
+
 \begin{algorithm}
-  \label{algorithm:simmulated-annealing}
-  \caption{\acrlong{simulated-annealing}}
   \input{mainmatter/2-Background/algorithms/sa.tex}
+  \caption{\acrlong{simulated-annealing}}
+  \label{algorithm:simulated-annealing}
 \end{algorithm}
+
+Importantly, the~\acrshort{simulated-annealing} algorithm is tunable, allowing
+for parameter adjustments to suit the specific problem at hand.~Parameters such
+as the initial temperature, cooling function, and acceptance criteria can be
+fine-tuned for optimal performance.~In~\Cref{algorithm:simulated-annealing}, the
+acceptance criteria is defined using an exponential function, while the cooling
+process is held constant and governed by the parameter $\alpha$.
 
 \subsection{Tabu Search}
 \label{subsec:tabu-search}
 
 \acrfull{tabu-search}~\cite{glover1999tabu,gendreau2010tabua,luke2013essentialsa}
+is a stochastic,~\acrshort{local-search}~trajectory~\acrshort{meta-heuristic}
+that incorporates the use of a memory to aid the search process.
 
-% Tabu Search (TS)~\cite{} is a single-state, stochastic, local search meta-heuristic
-% that incorporates the use of memory to guide the search process. The algorithm
-% iteratively explores the solution space by performing neighborhood searches for
-% the best solutions, while maintaining a tabu list $\mathcal{T}$ of recently
-% visited solutions that are temporarily forbidden from being revisited. The main
-% idea behind this approach is that by avoiding previously visited solutions, the
-% algorithm can escape local optima and explore new regions of the search space.
-% The size and duration of the tabu list, as well as the rules for adding and
-% removing solutions from the list, are user-specified parameters that need to be
-% fine-tuned for each problem. The pseudo-code in
-% Algorithm~\ref{algorithm:tabu-search} illustrates a simple version of this
-% meta-heuristic.
+In essence,the \acrshort{tabu-search} algorithm operates by conducting an
+iterative exploration of the solution space through the repeated application of
+a series of \acrshort{best-improvement} procedures. During each step, the best
+solution is updated and added to a list of recently visited solutions known as
+the \emph{tabu list}.~The tabu list has a predefined size and serves as a
+short-term memory mechanism.~This approach aims to prevent the algorithm from
+revisiting solutions that have been explored before, thereby avoiding premature
+convergence to local optima.~By incetivizing exploration of new regions in the
+search space, the algorithm enhances its ability to find better
+solutions.~Similar to other \acrshort{local-search} meta-heuristics, the
+\acrfull{tabu-search} algorithm terminates when no further improvement to the
+solution is achievable.
+
+The pseudocode in~\Cref{algorithm:tabu-search} illustrates a simple version of
+this meta-heuristic.
 
 \begin{algorithm}
-  \label{algorithm:tabu-search}
-  \caption{\acrlong{tabu-search}}
   \input{mainmatter/2-Background/algorithms/ts.tex}
+  \caption{\acrlong{tabu-search}}
+  \label{algorithm:tabu-search}
 \end{algorithm}
+
+Notably, the size and duration of the tabu list ($l_{\max}$), as well as the
+rules for adding and removing solutions from the list, are user-specified
+parameters that need to be fine-tuned for each problem.~Additionally, a
+common criterion for the removal of an element from the tabu list is based on
+its age. This aspect related to age-based removal is depicted
+in~\Cref{algorithm:tabu-search} through the utilization of the~\texttt{Oldest}
+function, which retrieves the oldest solution stored within the tabu list.
 
 \subsection{Outline}
 \label{subsec:Outline}

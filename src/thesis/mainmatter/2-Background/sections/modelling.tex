@@ -24,14 +24,14 @@ available to a meta-heuristic solver of this kind, certain key aspects must
 certainly be considered, such as:
 
 \begin{itemize}
-  \item \textbf{Instance Parameters}: Description of the problem instance.
-  \item \textbf{Decision Space}: Description of the solution and component
-        structure. Moreover, it should detail concepts such as: empty
-        solution, partial solution, complete solution and feasibility.
-  \item \textbf{Construction Rules}: Description of how components can be
-        joined to form a feasible solution.
-  \item \textbf{Objective Function \& Bounds}: Description of how partial or
-        complete solutions could be evaluated.
+      \item \textbf{Instance Parameters}: Description of the problem instance.
+      \item \textbf{Decision Space}: Description of the solution and component
+            structure. Moreover, it should detail concepts such as: empty
+            solution, partial solution, complete solution and feasibility.
+      \item \textbf{Construction Rules}: Description of how components can be
+            joined to form a feasible solution.
+      \item \textbf{Objective Function \& Bounds}: Description of how partial or
+            complete solutions could be evaluated.
 \end{itemize}
 
 Therefore, an approach that incorporates these considerations could facilitate a
@@ -49,6 +49,13 @@ al.~\cite{outeiro2021application} which builds upon these concepts and applies
 them to CS approaches. The upcoming sections provide a succinct summary of the
 most relevant features and contributions of these works.
 
+\begin{figure}[h]
+      \centering
+      \includegraphics[width=\textwidth,keepaspectratio]{../assets/modelling/modelling.pdf}
+      \caption{Principled Modelling Framework}
+      \label{fig:problem-solving}
+\end{figure}
+
 \subsubsection{Python Optimization Framework (POF)}
 
 This framework, developed in the context of the work by Vieira et
@@ -64,20 +71,20 @@ Generally, the POF is implemented by  them means of three main classes:
 \texttt{Problem}, \texttt{Solver} and \texttt{Simulator}:
 
 \begin{itemize}
-  \item \textbf{\texttt{Problem}}: This class is where the modeling-related
-        aspects are implemented. Specifically, the solution generation and
-        evaluation are described by a series of classes and methods that, when
-        implemented, comprise the ``model''. These classes and methods allow the user
-        to specify how solutions are generated, how they can be modified to improve
-        them, and how they are evaluated, thus constituting the ``internal'' interface.
-  \item \textbf{\texttt{Solver}}: This class is where meta-heuristics can be implemented in
-        a problem-independent manner. By calling upon the methods defined int the \texttt{Problem}
-        class the development of these algorithms is standardized and constitutes the ``external''
-        interface of this framework.
-  \item \textbf{\texttt{Simulator}}: This class servers as a general-purpose utility
-        that allows the step-by-step execution of an implemented \texttt{Solver} with an
-        implemented \texttt{Problem}, thus being responsible for the execution of the
-        algorithms and gathering of solutions.
+      \item \textbf{\texttt{Problem}}: This class is where the modeling-related
+            aspects are implemented. Specifically, the solution generation and
+            evaluation are described by a series of classes and methods that, when
+            implemented, comprise the ``model''. These classes and methods allow the user
+            to specify how solutions are generated, how they can be modified to improve
+            them, and how they are evaluated, thus constituting the ``internal'' interface.
+      \item \textbf{\texttt{Solver}}: This class is where meta-heuristics can be implemented in
+            a problem-independent manner. By calling upon the methods defined int the \texttt{Problem}
+            class the development of these algorithms is standardized and constitutes the ``external''
+            interface of this framework.
+      \item \textbf{\texttt{Simulator}}: This class servers as a general-purpose utility
+            that allows the step-by-step execution of an implemented \texttt{Solver} with an
+            implemented \texttt{Problem}, thus being responsible for the execution of the
+            algorithms and gathering of solutions.
 \end{itemize}
 
 Furthermore, this work defines several primitives that a model must implement in
@@ -87,7 +94,7 @@ components. These concepts are further refined in the API for constructive
 search proposed by Outeiro et al.~\cite{outeiro2021application}.
 
 \subsubsection{Not Another Software Framework for Nature-Inspired Optimisation
-  --- Constructive Search}
+      --- Constructive Search}
 
 In his work, Outeiro et al.~\cite{outeiro2021application} builds upon the
 concepts presented in the POF and an existing implementation of a framework for
@@ -104,16 +111,16 @@ meta-heuristics.
 In terms of the data structures, the API defines the following:
 
 \begin{itemize}
-  \item \textbf{\texttt{Problem}}: This data structure is responsible for recording
-        all the problem instance specific features and other relevant information
-        that may be acquired and that pertains to the problem at hand and thus not
-        being changed by the solver in any way
-  \item \textbf{\texttt{Solution}}: This data structure is responsible for storing the
-        data pertaining to a complete/partial solution for a particular problem
-        instance.
-  \item \textbf{\texttt{Component}}: This data structure stores the data relative to a
-        component from the ground set $\mathcal{G}$ that may added, removed, permitted
-        or forbidden w.r.t. a given solution.
+      \item \textbf{\texttt{Problem}}: This data structure is responsible for recording
+            all the problem instance specific features and other relevant information
+            that may be acquired and that pertains to the problem at hand and thus not
+            being changed by the solver in any way
+      \item \textbf{\texttt{Solution}}: This data structure is responsible for storing the
+            data pertaining to a complete/partial solution for a particular problem
+            instance.
+      \item \textbf{\texttt{Component}}: This data structure stores the data relative to a
+            component from the ground set $\mathcal{G}$ that may added, removed, permitted
+            or forbidden w.r.t. a given solution.
 \end{itemize}
 
 With regards to the operations, by focusing on the ones that are specifically
@@ -122,19 +129,19 @@ implementation details such as inspection, assignment and memory management, we 
 categorize them into three primary groups.
 
 \begin{itemize}
-  \item \textbf{Generation}: In this category we find operations such
-        as:~\textit{emptySolution} and~\textit{heuristicSolution}~which are used to
-        generate solutions for a given problem.
-  \item \textbf{Construction}: Under this category fall operation that
-        allow a partial solution to be further improved constructively. These include
-        the functions \textit{applyMove}, \textit{enumMove}, \textit{heuristicMove},
-        \textit{heuristicMoveWOR}, \textit{randomMove} and \textit{randomMoveWOR},
-        which allow for the application, enumeration and selection of moves.
-        In this context, a move refers to the modification of a given solution by
-        performing an action on its components.
-  \item \textbf{Evaluation}: In this category appear functions such
-        as \textit{getObjectiveVector} and \textit{getObjectiveLB} which allow for
-        evaluation of the quality of the solution w.r.t. objective value and bounds.
+      \item \textbf{Generation}: In this category we find operations such
+            as:~\textit{emptySolution} and~\textit{heuristicSolution}~which are used to
+            generate solutions for a given problem.
+      \item \textbf{Construction}: Under this category fall operation that
+            allow a partial solution to be further improved constructively. These include
+            the functions \textit{applyMove}, \textit{enumMove}, \textit{heuristicMove},
+            \textit{heuristicMoveWOR}, \textit{randomMove} and \textit{randomMoveWOR},
+            which allow for the application, enumeration and selection of moves.
+            In this context, a move refers to the modification of a given solution by
+            performing an action on its components.
+      \item \textbf{Evaluation}: In this category appear functions such
+            as \textit{getObjectiveVector} and \textit{getObjectiveLB} which allow for
+            evaluation of the quality of the solution w.r.t. objective value and bounds.
 \end{itemize}
 
 In summary, this API is a comprehensive tool for modeling meta-heuristics in a

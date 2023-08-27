@@ -1,6 +1,6 @@
 % Constructive Search Procedure (algorithm2e pseudocode)
 
-\KwIn{Solution ($s'$), Objective Function ($f$)}
+\KwIn{Solution ($s'$), Kick Strength ($k$), Objective Function ($f$)}
 \KwOut{Solution ($s^{*}$).}
 
 \SetKwFunction{Perturb}{\texttt{Perturb}}
@@ -9,7 +9,7 @@
 $s^{*} \gets$ $s'$\;
 \While{\texttt{stopping criteria not met}}{
   $s$ $\gets$ \LocalSearch{$s^{*}$}\;
-  $s$ $\gets$ \Perturb{$s$}\;
+  $s$ $\gets$ \Perturb{$s, k$}\;
   \If{$f(s) > f(s^{*}$)}{
     $s^{*}$ $\gets$ $s$\;
   }

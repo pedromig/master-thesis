@@ -100,12 +100,6 @@ specification to generate solutions.
 approach proposed in the framework highlighting the clear separation between the
 model and solver in the problem-solving effort.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth,keepaspectratio]{../assets/modelling/modelling.pdf}
-  \caption{Modelling and Problem Solving}
-  \label{fig:problem-solving}
-\end{figure}
 
 * possibly due to skepticism about its feasibility and effectiveness
 

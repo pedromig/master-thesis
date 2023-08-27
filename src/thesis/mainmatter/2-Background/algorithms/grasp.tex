@@ -1,6 +1,6 @@
 % Greedy Randomized Adaptive Search Procedure (algorithm2e pseudocode)
 
-\KwIn{Objective Function ($f$)}
+\KwIn{Alpha ($\alpha$), Objective Function ($f$), Upper Bound Function ($\Phi_{ub}$)}
 \KwOut{Solution ($s^{*}$).}
 
 \SetKwFunction{GreedyRandomizedConstruction}{\texttt{GreedyRandomizedConstruction}}
@@ -8,9 +8,9 @@
 
 $s^{*}$ $\gets$ $\emptyset$\;
 \While{\texttt{stopping criteria not met}}{
-  $s$ $\gets$ \GreedyRandomizedConstruction{}\;
+  $s$ $\gets$ \GreedyRandomizedConstruction{$\Phi_{ub}, \alpha$}\;
   $s$ $\gets$ \LocalSearch{$s$}\;
-  \If{$f(s)$ > $f(s^{*})$}{
+  \If{ $s\ $ \texttt{is feasible} $\land$ $f(s) > f(s^{*})$}{
     $s^{*}$ $\gets$ $s$\;
   }
 }

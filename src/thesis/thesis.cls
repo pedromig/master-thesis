@@ -232,19 +232,6 @@
       \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
-% Header style for front and back matter
-\fancypagestyle{fbmatter}{
-  \ifthenelse{\boolean{@twoside}}{
-  }{
-    \fancyhead{}
-    \fancyhead[R]{}
-    \fancyhead[L]{{\nouppercase\leftmark}}
-
-    \fancyfoot{}
-    \fancyfoot[L]{\hfill\thepage\hfill}
-  }
-}
-
 % Acronyms and Glossaries
 \usepackage[acronym,toc]{glossaries}
 
