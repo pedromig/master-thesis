@@ -1,6 +1,6 @@
 Modelling refers to the process of creating a simplified representation or
 approximation of a real-world system, process, or phenomenon in order to improve
-understanding and facilitate analysis. It is commonly used in the fields of
+understanding and facilitate analysis.~It is commonly used in the fields of
 physics and mathematics, where mathematical equations are used to depict reality
 and capture the important factors of a particular system in a manageable and
 understandable format~\cite{witelski2015methods}.
@@ -17,13 +17,13 @@ or~\textit{GLPK}, to address any problem in a principled manner.
 As an example of this~\acrshort{glass-box-optimization} modelling approach
 consider the~\acrshort{knapsack-problem} for which an~\acrshort{ilp}
 model~\cite{yu2010combinatorial} is represented by the
-formulation~\ref{eq:knapsack-ilp}.  Herein, the parameter $n$ signifies the
-count of items, while $W$ designates the knapsack's maximum capacity.
-Additionally, the variables $w_{i}$ and $p_{i}$ correspond to the weight and
-profit, respectively, associated with each individual item $i$. Furthermore, the
-binary variable $x_{i}$ is employed to denote whether a particular item is
-included (assigned a value of 1) or excluded (assigned a value of 0) from the
-knapsack, for a given solution.
+formulation~\ref{eq:knapsack-ilp}.~Herein, the parameter $n$ signifies the count
+of items, while $W$ designates the knapsack's maximum capacity.  Additionally,
+the variables $w_{i}$ and $p_{i}$ correspond to the weight and profit,
+respectively, associated with each individual item $i$. Furthermore, the binary
+variable $x_{i}$ is employed to denote whether a particular item is included
+(assigned a value of 1) or excluded (assigned a value of 0) from the knapsack,
+for a given solution.
 
 \begin{equation}
       \label{eq:knapsack-ilp}
@@ -35,7 +35,7 @@ knapsack, for a given solution.
 \end{equation}
 
 It's crucial to recognize that this formulation highlights several significant
-aspects of the problem. These include the decision space, which defines the
+aspects of the problem.~These include the decision space, which defines the
 range of values each variable can take; the objective function, which expresses
 the optimization goal; the construction rules (constraints) that guide the
 creation of a valid solution; and the problem instance parameters necessary for
@@ -45,10 +45,11 @@ When approaching problems from a~\acrshort{black-box-optimization} perspective,
 particularly through \acrshort{meta-heuristic} solvers, the notion of developing
 a reusable model has yet to be established, as far as our knowledge extends.
 However, for such a model to come into existence, it would need to address, at
-the very least, the same details as the aforementioned model.~Furthermore,
-considering the strategies employed by~\acrshort{meta-heuristic} solvers to
-explore solutions~(\Cref{sec:meta-heuristics}), certain recurring aspects emerge
-as essential questions that a model must address:
+the very least, the same details as the
+aforementioned~\acrshort{knapsack-problem} model.~Furthermore, considering the
+strategies employed by~\acrshort{meta-heuristic} solvers to explore
+solutions~(\Cref{sec:meta-heuristics}), certain recurring aspects emerge as
+essential questions that a model must address:
 
 \begin{description}
       \item[\textbf{Problem Instance.}] What information is required to characterize a particular problem (instance)?
@@ -89,10 +90,11 @@ avoids the need for distinct functions for each problem, which would defeat the
 purpose of creating a standardized approach.
 
 Notably, this framework for tackling problems in the context of meta-heuristics,
-which we reffed to as principled modelling approach has been seldomly researched
-and constitutes an undergoing research effort were we identify two noteworthy
-studies in the literature and three attempts in practically developing
-an~\acrfull{api} for this modelling framework~\cite{vieira2009uma,outeiro2021application,fonseca2021nasf4nio}.
+which we refer to as the principled modelling approach, has been seldomly
+researched and constitutes an ongoing research effort. In fact, we identify two
+noteworthy studies in the literature and three attempts in practically
+developing an~\acrfull{api} for this modelling
+framework~\cite{vieira2009uma,outeiro2021application,fonseca2021nasf4nio}.
 
 \subsection{Software}
 
@@ -158,7 +160,7 @@ abiding by the concepts proposed in the~\acrshort{pof} culminating in
 \acrshort{nasf4nio}~\cite{fonseca2021nasf4nio}. In general, this~\acrshort{api}
 follows the same concepts as the~\acrshort{nasf4nio-cs}, which we will detail
 next.~Regarding~\acrshort{constructive-search}, the work
-by~\citet{outeiro2021application} was builds upon the concepts presented in
+by~\citet{outeiro2021application} was built upon the concepts presented in
 the~\acrshort{pof} and the existing implementation of~\acrshort{nasf4nio},
 further unifying the concepts and providing both a conceptual model and an
 implementation of a C~\acrshort{api} for constructive search
@@ -185,14 +187,14 @@ In terms of the core data structures, the API defines the following:
             permitted or forbidden with respect to a given solution.
 \end{description}
 
-In the context of~\acrshort{nasf4nio}, the majority of classes are retained,
-save for the substitution of the \texttt{Component} class with the \texttt{Move}
-class. This latter class stores information pertaining to local moves that can
-be applied to a solution.
+In the context of~\acrshort{nasf4nio}, the majority of the data structures are
+retained, save for the substitution of the \texttt{Component} structure with the
+\texttt{Move} structure. The latter stores information pertaining to local moves
+that can be applied to a solution.
 
 Focusing again in~\acrshort{nasf4nio-cs} and narrowing our focus to functions
-primarily concerned with solution manipulation and excluding those related to
-implementation intricacies like inspection, assignment, and memory management,
+primarily concerned with~\texttt{Solution} manipulation and excluding those related to
+implementation intricacies, such as, inspection, assignment, and memory management,
 we can classify them into three main categories:
 
 \begin{description}
@@ -200,12 +202,14 @@ we can classify them into three main categories:
             as:~\textit{emptySolution} and~\textit{heuristicSolution}~which are used to
             generate solutions for a given problem.
       \item[\textbf{Construction.}] Under this category fall operation that
-            allow a partial solution to be further improved constructively. These include
-            the functions \textit{applyMove}, \textit{enumMove}, \textit{heuristicMove},
-            \textit{heuristicMoveWOR}, \textit{randomMove} and \textit{randomMoveWOR},
-            which allow for the application, enumeration and selection of moves.
-            In this context, a move refers to the modification of a given solution by
-            performing an action on its components.
+            allow a partial solution to be further improved constructively.
+            These include the functions \textit{applyMove}, \textit{enumMove},
+            \textit{heuristicMove}, \textit{heuristicMoveWOR},
+            \textit{randomMove} and \textit{randomMoveWOR}, which allow for the
+            application, enumeration and selection of moves.  In this context, a
+            move refers to the modification of a given solution by performing an
+            action on its components,~\ie{},from
+            a~\acrshort{constructive-search} perspective.
       \item[\textbf{Evaluation.}] In this category appear functions such as
             \textit{getObjectiveVector} and \textit{getObjectiveLB} which allow for
             evaluation of the quality of the solution with respect to the objective
@@ -213,8 +217,8 @@ we can classify them into three main categories:
 \end{description}
 
 Similarly, the same principles apply to~\acrshort{nasf4nio}. However, the
-operations are primarily designed to interact with solutions and (local) moves,
-as opposed to solutions and components. Importantly, there remains yet a
-connection to be made between both implementations of this \acrshort{api} for
-constructive and local search. This connection will be further explored and
-formalized in the upcoming chapters of this work.
+\textquote{construction} operations are primarily designed to interact with
+solutions and (local) moves, as opposed to solutions and components.
+Importantly, there remains yet a connection to be made between both
+implementations of this~\acrshort{api} for constructive and local search. This
+connection will be further explored and formalized in~\Cref{ch:principled-modelling-framework}.

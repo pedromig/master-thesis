@@ -1,0 +1,446 @@
+This section, establishes a collection of operations that a model must
+support, all while motivating their necessity and applicability in the
+context of meta-heuristic solver development. To achieve this, our description
+will draw from the Python-based implementation that we've devised. However, it is
+crucial to underline that our implementation serves as a demonstration of a
+plausible way to materialize an~\acrshort{api} that facilitates modeling
+operations. As such, considerations such as naming conventions and programming
+language-specific concepts ought to be viewed as secondary.
+
+Moreover, it's important to underscore that this framework represents a
+consolidation of prior efforts undertaken by~\citet{vieira2009uma,
+  fonseca2021nasf4nio, outeiro2021application}.  Consequently, it should be
+perceived as an enhancement of the prerequisites and specifications established
+in those works, tailored to encompass constructive and local search techniques,
+as well as the comprehensive modeling procedure.
+
+\subsection{Data Structures}
+
+This framework is based around a set data structures that are standard and
+utilized as a way to return information from the model. This design allows for
+data hiding and isolation of the problem-specific details, which
+any~\acrshort{meta-heuristic} solver can query and manipulate in a black-box
+fashion. In the our implementation of the framework this corresponds to the
+following four classes.
+
+\begin{itemize}
+  \item \inlinecode{class Problem: ...}\\
+        Contains data that is known a priori and fully characterizes
+        a problem instance. It is not meant to be modified by the solver.
+
+  \item \inlinecode{class Solution: ...}\\
+        Holds data that defines an empty or partially
+        complete solution. It serves as the mutable state that a solver can
+        modify during the optimization process.
+
+  \item \inlinecode{class Component: ...}\\
+        Characterizes any component within the ground set of a given problem.
+
+  \item \inlinecode{class LocalMove: ...}\\
+        Characterizes any local move that can be applied to a solution
+\end{itemize}
+
+Concerning the~\texttt{Problem} class, since it holds problem-specific data, it
+might be advantageous to include methods within it for loading or parsing input
+data, in addition to the class constructor. However, the primary intent remains
+focused on storing problem-specific data and providing a away to initialize a
+solution for a specific problem instance. This can be achieved through the
+following methods, which return empty and random solution, respectively.
+
+\begin{center}
+  \inlinecode{def empty_solution(self: Problem) -> Solution: ...}
+
+  \inlinecode{def random_solution(self: Problem) -> Solution: ...}
+\end{center}
+
+It is important to acknowledge that the definition of an empty solution or the
+construction of a random solution is tied to the specific problem under
+consideration. Therefore, these concepts are dependent upon the characteristics
+of the model being developed. Nevertheless, these methods when invoked return an
+encapsulated solution object that abstracts the specific model intricacies.
+
+As previously mentioned, the~\texttt{Component} class serves as a representation
+of a component from the ground set, encapsulating its relevant data.
+Nonetheless, certain~\acrshort{meta-heuristic} methods, such as,~\acrshort{aco},
+require a means for identifying specific components during solution
+construction. To address this requirement, the following method was
+incorporated:
+
+\begin{center}
+  \inlinecode{def id(self: Component) -> Hashable: ...}\\
+\end{center}
+
+As can be inferred by the function's type signature, this method should return
+an unique~(\texttt{Hashable}) identifier for a given component. Concerning the
+~\texttt{LocalMove} class, it primarily encapsulates information about a
+specific local move applicable to a particular solution, and it does not
+necessitate any additional functionality.~Notably, these two classes are
+frequently used in the model as they embody the dynamic aspects, encompassing
+actions capable of altering solution states. Thus, their instances should be
+kept lightweight as they can have a significant impact on performance
+
+The~\texttt{Solution} class is of extreme importance as it represents object
+undergoing optimization. Apart from housing data fields that correspond to the
+solution representation -- which will be populated during solver execution --
+this class also contains the method definitions that we consider fundamental and
+which describe the~\emph{model}. Consequently, in the subsequent sections, we
+will comprehensively detail the methods within this class. These methods
+represent the operations that a model should implement to
+allow~\acrshort{constructive-search},~\acrshort{local-search} procedures and
+other essential functionality.
+
+\subsection{Inspection Methods}
+
+The methods outlined in this section provide access to metrics that characterize
+the state a solution. In terms of implementation, these function
+as~\emph{getters} for the model's properties and should not be utilized for
+executing resource-intensive computations, given the high frequency at which
+they are meant to be invoked by solvers.
+
+\subsubsection*{Objective Value}
+
+\begin{center}
+  \inlinecode{def objective(self: Solution) -> Optional[T]: ...}
+\end{center}
+
+This method returns the objective value of a solution. In the type
+signature for this method, the return type~\texttt{T} signifies a
+generic type.~While this type is usually numeric, it can be any other
+comparable type.~This requisite is fundamental from the solver's standpoint, as
+it's through comparing this value that a solver evaluates whether a particular
+solution outperforms others.
+
+The~\texttt{Optional} type indicates that a method has the option to either return
+a value or, if the value is not available or not defined, it can emit a sentinel
+value. In our implementation, this sentinel value is represented by~\texttt{None}.
+This convention will be consistently applied to all methods where the
+~\texttt{Optional} type is employed.
+
+\subsubsection*{Upper Bound}
+
+\begin{center}
+  \inlinecode{def upper_bound(self: Solution) -> Optional[T]: ...}
+\end{center}
+
+This method returns the upper bound value of a given solution.~Similar to the
+\texttt{objective} method, the parameter~\texttt{T} in the function's type
+signature signifies a generic type, typically numeric.
+
+\subsubsection*{Feasibility}
+
+\begin{center}
+  \inlinecode{def feasible(self: Solution) -> bool: ...}
+\end{center}
+
+This method is used to query the feasibility of a candidate solution.
+
+\subsection{Constructive Search}
+
+The subsequent methods delineate modeling operations
+for~\acrshort{constructive-search}. As such, these methods revolve around
+operations involving components, specifically encompassing their enumeration,
+selection, application, and evaluation of the contribution with respect to the
+objective and upper bound values.
+
+\subsubsection*{Component Enumeration}
+
+From a~\acrshort{constructive-search} perspective, a central operation involves
+recognizing the components that constitute the problem's ground set -- those
+that can be incorporated, or removed from a specific solution.~Therefore, it is
+imperative for a model to offer a means through which a solver can access this
+essential information. This is accomplished in our implementation via the
+following set of methods.
+
+\begin{center}
+  \inlinecode{def add_moves(self: Solution) -> Iterable[Component]: ...}
+
+  \inlinecode{def remove_moves(self: Solution) -> Iterable[Component]: ...}
+\end{center}
+
+Notably, all these methods yield a list of components specific to their
+corresponding operations, denoted as~\texttt{Iterable[Component]} in the return
+type signature. However, in our implementation, these methods are implemented
+as~\emph{iterators}, signifying that upon invocation, they provide the first
+available item and then pause until the next call is initiated. This approach
+holds significance from a performance standpoint, both in conserving memory, as
+storing all components for a given problem could be infeasible, and in terms of
+execution speed, since there's no necessity to enumerate more components than
+what is required.
+
+Furthermore, the intention behind these methods is for them to yield all
+conceivable components that can be either added or removed from a specific
+solution.  However, in practice, this might become unfeasible if the ground set
+is excessively large. In such cases, an alternative strategy for component
+enumeration may need to be contemplated.
+
+Finally, within the context of~\acrshort{aco}, there arises a requirement to
+list all components that are already considered within a solution. This need
+arises from the necessity for updating the~\textit{pheromone model}.
+Consequently, this justified the introduction of the following method.
+
+\begin{center}
+  \inlinecode{def components(self: Solution) -> Iterable[Component]: ...}
+\end{center}
+
+\subsubsection*{Heuristic Component Enumeration}
+
+In the context of component enumeration, it can be advantageous to follow a
+problem-specific heuristic order. With this in mind, we introduced the
+~\texttt{heuristic\_add\_moves} method, designed to offer an iterator for components
+enumerated in accordance with the heuristic. Additionally, for convenience, our
+implementation includes a method that exclusively returns the first heuristic
+move generated by the~\texttt{heuristic\_add\_moves} method. The type signatures for
+both methods are shown below.
+
+\begin{center}
+  \inlinecode{def heuristic_add_moves(self: Solution) -> Iterable[Component]: ...}
+
+  \inlinecode{def heuristic_add_move(self: Solution) -> Optional[Component]: ...}
+\end{center}
+
+\subsubsection*{Random Component Selection}
+
+As components can be enumerated in a heuristic order, there are situations where
+selecting components randomly is advantageous. This is particularly relevant,
+for instance, during processes like random solution construction or
+destruction~(\acrshort{iterated-greedy}). The subsequent methods, when called,
+provide randomized components that can potentially be added or removed,
+contingent upon the current state of the solution.
+
+\begin{center}
+  \inlinecode{def random_add_move(self: Solution) -> Optional[Component]: ...}
+
+  \inlinecode{def random_remove_move(self: Solution) -> Optional[Component]: ...}
+\end{center}
+
+\subsubsection*{Component Application}
+
+It is essential for all constructive search methods to possess a mechanism for
+incorporating or removing a component from a solution under construction.
+Therefore, the ensuing methods have been introduced, and upon invocation, they
+allow the addition or removal of the specified component from the solution.
+
+\begin{center}
+  \inlinecode{def add(self: Solution, c: Component) -> None: ...}
+
+  \inlinecode{def remove(self: Solution, c: Component) -> None: ...}
+\end{center}
+
+\subsubsection*{Objective Increment Calculation}
+
+When evaluating the objective value of a particular solution, two perspectives
+can be taken into account. The first approach involves recalculating the
+objective value from scratch each time a component is added or removed from the
+solution (full evaluation). The second approach entails incremental evaluation.
+As such, the latter method holds substantial performance advantages and should
+consistently be favored over a full evaluation.
+
+In either scenario, the following methods have been implemented, granting a
+solver the capability to quantify the objective value contribution (increment)
+that arises from adding or removing a designated component relative to the
+current state of the solution. Reiterating, the return type of these functions
+is generic (denoted as~\texttt{T}), with the precondition that it must be comparable.
+
+\begin{center}
+  \inlinecode{def objective_increment_add(self: Solution, c: Component) -> Optional[T]: ...}
+
+  \inlinecode{def objective_increment_remove(self: Solution, c: Component) -> Optional[T]: ...}
+\end{center}
+
+\subsubsection*{Upper Bound Increment Calculation}
+
+Just as there's a need to calculate increments concerning the objective value,
+the same functionality is essential for upper bounds. This leads to the
+introduction of the following methods, which serve the purpose of quantifying
+the increment in the upper bound resulting from the addition or
+removal of a component from a solution. Once more, the preference should lean
+towards incremental evaluation for determining this value, as it's often even
+more resource-intensive than calculating a contribution to the objective value.
+
+\begin{center}
+  \inlinecode{def upper_bound_increment_add(self: Solution, c: Component) -> Optional[T]: ...}
+
+  \inlinecode{def upper_bound_increment_remove(self: Solution, c: Component) -> Optional[T]: ...}
+\end{center}
+
+\subsubsection*{Component Heuristic Value}
+
+The concept of a heuristic value is associated with a component and offers a
+means to rank the importance of components with respect to the current solution
+via a problem-specific heuristic.~The method's type signature is as follows.
+
+\begin{center}
+  \inlinecode{def heuristic_value(self: Solution, c: Component) -> \ \ \ \ \ Optional[T]: ...}
+\end{center}
+
+Notably, this method was introduced to offer an alternative approach for the
+~\acrshort{grasp} algorithm to construct a randomized solution.
+
+\subsection{Local Search}
+
+The subsequent methods define modeling operations for~\acrshort{local-search}
+approaches.~These methods are centered on operations concerning local moves,
+encompassing their enumeration, selection, application, and evaluation.
+
+\subsubsection*{Local Move Enumeration}
+
+In a manner similar to the approach adopted for~\acrshort{constructive-search},
+the same principle holds when addressing~\acrshort{local-search}. Here, the
+necessity arises to enumerate all plausible alternatives for optimizing
+(exploiting) a candidate solution, which in turn pertains to the exploration of
+neighboring solutions. To fulfill this requirement, the following method serves
+as a mechanism for enumerating all the local moves that can be executed on a
+given solution. This method adheres to the same pattern as previous enumeration
+methods as it is meant to function as an~\emph{iterator} for feasible local
+moves.
+
+\begin{center}
+  \inlinecode{def local_moves(self: Solution) -> Iterable[LocalMove]: ...}
+\end{center}
+
+\subsubsection*{Random Local Move Enumeration}
+
+While local moves can indeed be enumerated in a specific order, as enabled by
+the~\texttt{local\_moves} method, the majority of local search strategies depend on random
+processes for selecting moves. This motivation gives rise to the subsequent two
+methods: one for systematically~\emph{iterating} all potential local moves in a
+randomized manner without repeating the same local move twice,~\ie{}, without
+replacement~(\texttt{random\_local\_moves\_wor} method), and the other for returning a random local
+move~(\texttt{random\_local\_move} method).
+
+\begin{center}
+  \inlinecode{def random_local_moves_wor(self: Solution) ->\ \ \ \ \ \ \ \ \ \ \ \ \ \ Iterable[LocalMove]: ...}
+
+  \inlinecode{def random_local_move(self: Solution) -> Optional[LocalMove]: ...}
+\end{center}
+
+When it comes to random enumeration of a candidate solution's neighborhood
+without replacement, as performed by the ~\texttt{random\_local\_moves\_wor} method,
+important insights can be obtained regarding its efficient implementation.
+
+Conventionally, a naive method would involve shuffling all $M$ possible local
+moves, selecting a local move, utilizing it, and then repeating the shuffling
+process minus the $k$ moves that were rendered infeasible due to the use of the
+chosen move. This would leave the remaining $M - k$ moves for selection.
+Nonetheless, repeating this until exhausting all local moves would result in an
+additional space complexity of $\mathcal{O}(M)$. However, as this approach can
+be memory-intensive, we propose an alternative method that achieves the same
+outcome with a space complexity of $\mathcal{O}(1)$.
+
+The alternative approach entails employing a~\acrfull{lcg} to achieve the same
+outcome with a constant spacial complexity, thereby eliminating the need for
+additional space.
+
+\begin{definition}[Linear Congruential Generator~\cite{knuth2014art}]
+  A linear congruential generator is a pseudo-random number generator
+  described by the following recurrence relation:
+
+  \begin{equation}
+    \mathcal{X}_{n+1} = (a\mathcal{X}_{n} + c) \bmod m
+  \end{equation}
+  Where,
+  \begin{align*}
+    m,               & \quad 0 < m \text{ — is the modulus}                                                              \\
+    a,               & \quad 0 < a < m \text{ — is the multiplier}                                                       \\
+    c,               & \quad 0 \leq c < m \text{ — is the increment}                                                     \\
+    \mathcal{X}_{0}, & \quad 0 \leq \mathcal{X}_{0} < m \text{ — is the \textquote{seed} or \textquote{starting value}"}
+  \end{align*}
+\end{definition}
+
+For a~\acrshort{lcg} it is studied there is a choice of parameters that
+guaranteed that the period of the generator is maximal and equal to $m$. This in
+means that all the numbers until $m$ will be emitted by the random generator
+once. This choice of parameters obeys the following
+conditions~\cite{knuth2014art}:
+
+\begin{enumerate}
+  \item $c$ is relatively prime to $m$
+  \item $a - 1$ is a multiple of all prime factors dividing $m$
+  \item $a - 1$ is multiple of 4, if m is a multiple of 4
+\end{enumerate}
+
+For example, the choice of $a = 5$, $m = 8$ and $c = 1$ is an example of
+a~\acrshort{lcg} that has maximal period. Remarkably, the choice of $m$ as a
+power of two has important implications in terms of performance from a
+computational perspective, allowing for faster modulus operations.
+
+With this in mind, a properly configured~\acrshort{lcg} can be harnessed for the
+purpose of random local move enumeration without replacement. This is achieved
+by associating each local move with a number $0 < i < m$, which, upon
+generation, is decoded into the corresponding~\texttt{LocalMove} object. Notably, the
+parameter $m$ needs to be adjusted in order to contemplate all possible moves.
+
+\subsubsection*{Local Move Application}
+
+This method is designed to implement a problem-specific perturbation to a given
+solution during~\acrshort{local-search}. The integer parameter in the method
+signature provided below is employed to determine the~\textquote{kick strength},
+which signifies the magnitude of the perturbation to be applied.
+
+\begin{center}
+  \inlinecode{def step(self: Solution, m: LocalMove) -> None: ...}
+\end{center}
+
+\subsubsection*{Objective Increment Calculation}
+
+Similar to the approach used for~\acrshort{constructive-search}, where the
+~\texttt{objective\_increment\_add} method is employed to evaluate the
+incremental contribution of a particular component to the objective value, a
+comparable functionality is necessary for local search. However, in this case,
+the evaluation pertains to local moves. This requirement is addressed through
+the following method.
+
+\begin{center}
+  \inlinecode{def objective_increment_local(self: Solution, m: LocalMove) -> Optional[T]: ...}
+\end{center}
+
+From an implementation perspective, similar to all incremental evaluations
+(including those for~\acrshort{constructive-search}), this operation should
+maintain efficiency.~Arguably, this could be one of the most frequently used
+operations within an optimization process, as it enables the assessment of
+whether a candidate solution has improved or worsened following a particular
+action.
+
+\subsubsection*{Perturbation}
+
+This method serves the purpose of applying a problem-specific perturbation to
+a given solution undergoing~\acrshort{local-search}.~The integer parameter in the
+method signature shown bellow is used to identify the~\textquote{kick strength},~\ie{}
+the intensity of the perturbation to be applied.
+
+\begin{center}
+  \inlinecode{def perturb(self: Solution, ks: int) -> None: ...}
+\end{center}
+
+\subsection{Utility Methods}
+
+From an implementation perspective, there exists a need for a~\emph{copy} operation to
+manage the preservation of the best solution(s) found in memory. This operation
+prevents the unintended overwriting of a given solution due to modifications
+made during the optimization process. In the specific context of this framework,
+this operation applies to the~\texttt{Solution} object and is significant for both
+\acrshort{constructive-search} and~\acrshort{local-search} approaches.
+
+Although it might be perceived as an implementation detail, we consider that it
+deserves its distinct place within the model definition. This stems from the
+critical aspect that a solution object must consistently access the problem
+object, which contains problem-specific information. However, during the copying
+process of a solution, duplicating this information is usually unnecessary, and
+referencing it suffices. With this in mind, the following method was, introduced
+to address this requirement.
+
+\begin{center}
+  \inlinecode{def copy(self: Solution) -> Solution: ...}
+\end{center}
+
+\subsection{Outline}
+
+In summary, this specification encompasses what we consider as the model within
+the realm of meta-heuristics. While not formulated mathematically but rather in
+computational terms, this representation through the described constructs
+effectively captures the attributes of a problem. It enables the problem to be
+addressed in a black-box manner by solvers, which make use of this standardized
+set of functions. The modeling endeavor then involves implementing each of these
+methods in accordance with their context within a particular problem.
+Subsequently, solvers can be developed in a manner that is independent of the
+specific problem, as we will demonstrate next.

@@ -50,6 +50,9 @@
 % Algorithm Pseudo Code
 \usepackage[algochapter,ruled,lined,linesnumbered]{algorithm2e}
 
+% Code Listing
+\usepackage{listings}
+
 % Abreviations
 \usepackage[abbreviations,british]{foreign}
 
@@ -145,6 +148,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{example}{Example}[section]
+\newtheorem{property}{Property}[section]
 
 % Algorithm Style
 \SetKwInOut{KwIn}{Input}
@@ -292,3 +296,6 @@
   \epigraph{#1}{---~\textup{#2}\ifthenelse{\equal{#3}{}}{}{,~\emph{#3}}}
   \vspace{0.5cm}
 }
+
+% Inline Code Listing
+\newcommand{\inlinecode}[1]{\lstinline[basicstyle=\ttfamily]!#1!}

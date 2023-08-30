@@ -30,6 +30,36 @@
 % Bibliography
 \addbibresource{../references.bib}
 
+
+% Code Listings Style
+\lstset{ %
+  language=Python,
+  backgroundcolor=\color{white},
+  basicstyle=\footnotesize,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  captionpos=b,
+  literate={->}{$\rightarrow$}2,
+  postbreak=\mbox{\textcolor{cb_gray}{$\hookrightarrow$}\space},
+  commentstyle=\color{cb_gray},
+  escapeinside={\%*}{*)},
+  keywordstyle=\color{cb_blue}\bfseries,
+  stringstyle=\color{cb_pink},
+  morekeywords={},
+  keywords=[2]{Problem, Solution, Component, LocalMove, 
+               Iterable, Hashable, None, int, T, bool, Optional},
+  keywordstyle=[2]\color{cb_green}\bfseries,
+  emph={empty_solution, random_solution, id, objective, upper_bound,
+        feasible, add_moves, remove_moves, components,
+        heuristic_add_move, heuristic_add_moves, random_add_move,
+        random_remove_move, add, remove, upper_bound_increment_add,
+        upper_bound_increment_remove,objective_increment_add,
+        objective_increment_remove, local_moves,random_local_moves_wor,
+        random_local_move, step, objective_increment_local, perturb, copy, heuristic_value},
+  emphstyle=\color{cb_orange}
+}
+
 % Acronyms
 \newacronym{beam-search}{BS}{Beam Search}
 \newacronym{iterated-greedy}{IG}{Iterated Greedy}
@@ -46,6 +76,7 @@
 \newacronym{ilp}{ILP}{Integer Linear Programing}
 
 \newacronym{api}{API}{Application Programming Interface}
+\newacronym{lcg}{LCG}{Linear Congruential Generator}
 
 \newacronym{pof}{POF}{Python Optimization Framework}
 \newacronym{nasf4nio}{nasf4nio}{Not Another Framework for nature-inspired optimization}

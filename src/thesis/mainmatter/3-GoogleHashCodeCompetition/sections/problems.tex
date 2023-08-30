@@ -1,8 +1,9 @@
-Its main objective is to provide the reader with a comprehensive understanding
-of the relevant details of the problems that drive connections with well-studied
-topics in combinatorial optimization literature instead of and exhaustively
-review the problem details, as the problem statements consulted in the
-coding~\cite{googlellc2023codingcompetitionsarchive}.
+The primary focus of this section is to provide a comprehensive understanding of
+the relevant details of the Google Hash Code problems and drive connections with
+well-studied topics in combinatorial optimization literature.~For an exhaustive
+review of the problem specifics, the reader can refer to the problem statements
+made freely available in the Google Coding Competitions
+Archive~\cite{googlellc2023codingcompetitionsarchive}
 
 \subsection{Google Hash Code 2014}
 \label{subsec:hashcode-2014}
@@ -35,39 +36,37 @@ city, in the most time-efficient manner possible.
 \subsection{Google Hash Code 2015}
 \label{subsec:hashcode-2015}
 
-\subsubsection*{Optimise a Data Center}
+\subsubsection*{Optimize a Data Center}
 \label{subsubsec:hashcode-2015-qualification}
 
-The optimization of server placement problem is a concern that pertains to the
-design of data centers, as various factors must be taken into account to ensure
-optimal efficiency. In this context, the `optimizing servers'' problem portrays
-a scenario in which contestants are in the position of designing a data center
-and seeking to determine the optimal distribution of servers. The data center
-is physically organized in rows of slots where servers can be placed. Hence,
-the challenge is to efficiently fill the available slots in a Google data center
-with servers of varying sizes and computing capacities, while also ensuring that
-each server is assigned to a specific resource pool.
+The optimization of server placement within data centers is a critical aspect,
+revolving around achieving optimal design efficiency. In this scenario, the
+problem presents participants with the task of designing a data center and
+devising the most effective server allocation. The data center's structure is
+represented by a collection of rows, each containing slots where servers of
+varying sizes and computing capacities can be positioned. When placed, these
+servers are also assigned to specific resource pools, allowing them to
+contribute their computing capacity to those pools.
 
 Objectively, the goal is to assign multiple servers to available slots and
-resource pools in such a way as to maximize the guaranteed capacity for all
+resource pools in a manner that maximizes the guaranteed capacity for all
 resource pools. This metric serves as the criterion for evaluating solutions to
-this problem. The guaranteed capacity, in this context, refers to the lowest
-amount of computing power that will remain for a specific resource pool in the
-event of a failure of an arbitrary row of the data center. It is important to
-note that this objective function is considered a bottleneck, as small changes
-in a solution may not result in significant changes in the score, making the
-optimization process more difficult.
+this problem and can be defined as the lowest amount of computing power that
+will remain for a specific resource pool in the event of a failure of any
+arbitrary row in the data center. Notably, this objective is considered a
+bottleneck, as even minor changes in a solution might not yield significant
+score changes, rendering the optimization process more challenging.
 
-Notably, the problem of optimization the placement of servers in a data center can
-be thought of as a combination of a Multiple-Knapsack Problem and an assignment
-problem. This is because the servers must be placed within the constraints of
-the available space in the data center rows, and subsequently, they must be
-assigned to resource pools.
+Importantly, the problem of optimizing the placement of servers in a data center
+can be conceptualized as a combination of a Multiple-Knapsack Problem and an
+assignment problem. This is because the servers must fit within the available
+space constraints of the data center rows and, subsequently, must be assigned to
+resource pools.
 
 \subsubsection*{Loon}
 \label{subsubsec:hashcode-2015-final}
 
-Project \textit{Loon}, which was a research endeavor undertaken by Google, aimed at
+Project~\textit{Loon}, which was a research endeavor undertaken by Google, aimed at
 expanding internet coverage globally by utilizing high altitude balloons. The
 problem presented in this competition drew inspiration from this concept,
 requiring contestants to devise plans for position adjustments for a set of
@@ -335,7 +334,7 @@ scheduling problem as the order in which libraries are signed up needs to be
 determined. It involves assignment, since libraries can share books,
 necessitating a decision on which libraries will scan each book. The covering
 aspect is apparent in the scoring mechanism, where the aim is to maximize the
-number of unique books scanned.  Lastly, the problem also incorporates a
+number of unique books scanned.~Lastly, the problem also incorporates a
 knapsack-like element. While the time-related simulation factor exists, it can
 be abstracted into a knapsack scenario where the goal is to optimize the overall
 score by considering the number of books a library can scan until the deadline

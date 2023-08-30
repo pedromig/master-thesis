@@ -1,0 +1,187 @@
+<mxfile host="Electron" modified="2023-08-28T21:42:06.117Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="HccxlyF5m-OdiydqzA3h" version="21.6.8" type="device">
+  <diagram name="example" id="hwzFVTMM_uJyrM2o6dDl">
+    <mxGraphModel dx="658" dy="481" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-2" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="520" as="sourcePoint" />
+            <mxPoint x="240" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-3" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="520" as="sourcePoint" />
+            <mxPoint x="600" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-4" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#009E73;" parent="1" vertex="1">
+          <mxGeometry x="240" y="480" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-5" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#56B4E9;" parent="1" vertex="1">
+          <mxGeometry x="360" y="400" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-7" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;dashed=1;dashPattern=1 1;" parent="1" source="ofYdp0S4x2xCZE4zrVgu-4" target="ofYdp0S4x2xCZE4zrVgu-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="450" as="sourcePoint" />
+            <mxPoint x="440" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-9" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#A9C4EB;" parent="1" vertex="1">
+          <mxGeometry x="370" y="487.75" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-10" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#FFD966;" parent="1" vertex="1">
+          <mxGeometry x="370" y="450" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-11" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#67AB9F;" parent="1" vertex="1">
+          <mxGeometry x="410" y="450" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-13" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#FFB570;" parent="1" vertex="1">
+          <mxGeometry x="410" y="487.75" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-14" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fontColor=default;labelBackgroundColor=default;fillColor=#FFD966;" parent="1" vertex="1">
+          <mxGeometry x="450" y="407.75" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-15" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#B5739D;" parent="1" vertex="1">
+          <mxGeometry x="450" y="450" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-16" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#67AB9F;" parent="1" vertex="1">
+          <mxGeometry x="490" y="407.75" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-19" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.concepts.book_journal;fillColor=#F8CECC;" parent="1" vertex="1">
+          <mxGeometry x="530" y="407.75" width="20" height="24.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-20" value="&lt;font style=&quot;font-size: 7px;&quot;&gt;Signup Time&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="265" y="497" width="70" height="17.25" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-21" value="&lt;font style=&quot;font-size: 7px;&quot;&gt;Signup Time&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="365" y="420" width="70" height="12.25" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-23" value="" style="shape=collate;html=1;fontSize=10;strokeColor=default;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="295" y="490" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-26" value="" style="shape=collate;html=1;fontSize=10;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="395" y="410.75" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-27" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="377" y="457.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-30" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;2&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="377" y="495" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-31" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;3&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="417" y="457.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-32" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;4&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="417" y="495" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-33" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="457" y="415" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-34" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;3&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="497" y="415" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-35" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;6&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="537" y="415" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-39" value="&lt;font style=&quot;font-size: 5px;&quot;&gt;5&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=5;" parent="1" vertex="1">
+          <mxGeometry x="457" y="457.25" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-43" value="" style="endArrow=none;html=1;rounded=0;fontColor=#FF3838;labelBackgroundColor=default;strokeColor=#FF0000;dashed=1;dashPattern=8 8;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="520" as="sourcePoint" />
+            <mxPoint x="520" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-44" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="250" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-45" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;2&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="290" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-46" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;3&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="330" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-47" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;4&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="372" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-48" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;5&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="410" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-49" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;6&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="450" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-50" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;7&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="492" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-51" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;8&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="530" y="520" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-52" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 10px;&quot;&gt;Day&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="558" y="514.25" width="40" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-53" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 9px;&quot;&gt;Library&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="203" y="373" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ofYdp0S4x2xCZE4zrVgu-56" value="&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 9px;&quot;&gt;(deadline)&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="490" y="360" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="525" as="sourcePoint" />
+            <mxPoint x="280" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="525" as="sourcePoint" />
+            <mxPoint x="320" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-7" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="525" as="sourcePoint" />
+            <mxPoint x="360" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-8" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="399.89" y="525" as="sourcePoint" />
+            <mxPoint x="399.89" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-9" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="525" as="sourcePoint" />
+            <mxPoint x="440" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="525" as="sourcePoint" />
+            <mxPoint x="480" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-11" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="519.9799999999999" y="524.25" as="sourcePoint" />
+            <mxPoint x="519.9799999999999" y="514.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-12" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="525" as="sourcePoint" />
+            <mxPoint x="560" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-14" value="&lt;font face=&quot;Linux Libertine&quot;&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;1&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="213" y="492.25" width="23" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GnozD-dMwyIqzFIo_3tQ-15" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Linux+Libertine&quot; face=&quot;Linux Libertine&quot; style=&quot;font-size: 8px;&quot;&gt;2&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="214.5" y="410" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
