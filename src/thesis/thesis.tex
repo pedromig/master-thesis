@@ -30,12 +30,15 @@
 % Bibliography
 \addbibresource{../references.bib}
 
-
 % Code Listings Style
 \lstset{ %
+  showstringspaces=false,
   language=Python,
+  numbers=left,
+  numberstyle=\scriptsize,
+  numbersep=5pt,
   backgroundcolor=\color{white},
-  basicstyle=\footnotesize,
+  basicstyle=\footnotesize\ttfamily,
   columns=fullflexible,
   keepspaces=true,
   breaklines=true,
@@ -48,7 +51,7 @@
   stringstyle=\color{cb_pink},
   morekeywords={},
   keywords=[2]{Problem, Solution, Component, LocalMove, 
-               Iterable, Hashable, None, int, T, bool, Optional},
+               Iterable, Hashable, None, int, T, bool, Optional, Timer},
   keywordstyle=[2]\color{cb_green}\bfseries,
   emph={empty_solution, random_solution, id, objective, upper_bound,
         feasible, add_moves, remove_moves, components,
@@ -56,8 +59,14 @@
         random_remove_move, add, remove, upper_bound_increment_add,
         upper_bound_increment_remove,objective_increment_add,
         objective_increment_remove, local_moves,random_local_moves_wor,
-        random_local_move, step, objective_increment_local, perturb, copy, heuristic_value},
-  emphstyle=\color{cb_orange}
+        random_local_move, step, objective_increment_local, perturb, copy,
+         heuristic_value},
+  emphstyle=\color{cb_orange},
+  frame=lines,
+  framerule=1pt,
+  rulecolor=\color{black},
+  framexleftmargin=5mm,
+  xleftmargin=10mm,
 }
 
 % Acronyms

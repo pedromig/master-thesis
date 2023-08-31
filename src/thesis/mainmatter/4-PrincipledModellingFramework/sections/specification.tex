@@ -70,14 +70,16 @@ incorporated:
   \inlinecode{def id(self: Component) -> Hashable: ...}\\
 \end{center}
 
-As can be inferred by the function's type signature, this method should return
-an unique~(\texttt{Hashable}) identifier for a given component. Concerning the
-~\texttt{LocalMove} class, it primarily encapsulates information about a
-specific local move applicable to a particular solution, and it does not
+As can be inferred by the methods's type signature, this method should return
+an unique~(\texttt{Hashable}) identifier for a given component.
+
+Concerning the~\texttt{LocalMove} class, it primarily encapsulates information
+about a specific local move applicable to a particular solution, and it does not
 necessitate any additional functionality.~Notably, these two classes are
 frequently used in the model as they embody the dynamic aspects, encompassing
-actions capable of altering solution states. Thus, their instances should be
-kept lightweight as they can have a significant impact on performance
+actions capable of altering solution states. Thus, from a practical standpoint,
+their instances should be kept lightweight as they can have a significant impact
+on performance.
 
 The~\texttt{Solution} class is of extreme importance as it represents object
 undergoing optimization. Apart from housing data fields that correspond to the
@@ -103,18 +105,18 @@ they are meant to be invoked by solvers.
   \inlinecode{def objective(self: Solution) -> Optional[T]: ...}
 \end{center}
 
-This method returns the objective value of a solution. In the type
-signature for this method, the return type~\texttt{T} signifies a
-generic type.~While this type is usually numeric, it can be any other
-comparable type.~This requisite is fundamental from the solver's standpoint, as
-it's through comparing this value that a solver evaluates whether a particular
-solution outperforms others.
+This method returns the objective value of a solution. In the type signature for
+this method, the return type~\texttt{T} signifies a generic type.~While this
+type is usually numeric, it can be any other ~\emph{comparable} type.~This
+requisite is fundamental from the solver's standpoint, as it's through comparing
+this value that a solver evaluates whether a particular solution outperforms
+others.
 
-The~\texttt{Optional} type indicates that a method has the option to either return
-a value or, if the value is not available or not defined, it can emit a sentinel
-value. In our implementation, this sentinel value is represented by~\texttt{None}.
-This convention will be consistently applied to all methods where the
-~\texttt{Optional} type is employed.
+The wrapping~\texttt{Optional} type indicates that a method has the option to
+either return a value or, if the value is not available or not defined, it can
+emit a sentinel value. In our implementation, this sentinel value is represented
+by~\texttt{None}.~This convention will be consistently applied to all methods
+where the ~\texttt{Optional} type is employed.
 
 \subsubsection*{Upper Bound}
 
@@ -132,21 +134,23 @@ signature signifies a generic type, typically numeric.
   \inlinecode{def feasible(self: Solution) -> bool: ...}
 \end{center}
 
-This method is used to query the feasibility of a candidate solution.
+This method can be used to assess the feasibility of a candidate solution,
+yielding a Boolean value of~\texttt{True} when the solution is feasible, and
+~\texttt{False} otherwise.
 
 \subsection{Constructive Search}
 
 The subsequent methods delineate modeling operations
 for~\acrshort{constructive-search}. As such, these methods revolve around
-operations involving components, specifically encompassing their enumeration,
-selection, application, and evaluation of the contribution with respect to the
+operations involving components. Specifically, these action involve enumeration,
+selection, application, and evaluation of their contribution with respect to the
 objective and upper bound values.
 
 \subsubsection*{Component Enumeration}
 
 From a~\acrshort{constructive-search} perspective, a central operation involves
 recognizing the components that constitute the problem's ground set -- those
-that can be incorporated, or removed from a specific solution.~Therefore, it is
+that can be added, or removed from a specific solution.~Therefore, it is
 imperative for a model to offer a means through which a solver can access this
 essential information. This is accomplished in our implementation via the
 following set of methods.
@@ -161,22 +165,25 @@ Notably, all these methods yield a list of components specific to their
 corresponding operations, denoted as~\texttt{Iterable[Component]} in the return
 type signature. However, in our implementation, these methods are implemented
 as~\emph{iterators}, signifying that upon invocation, they provide the first
-available item and then pause until the next call is initiated. This approach
-holds significance from a performance standpoint, both in conserving memory, as
-storing all components for a given problem could be infeasible, and in terms of
-execution speed, since there's no necessity to enumerate more components than
-what is required.
+available item and then pause until the next call to the same method is
+initiated, essentially maintaining state. This approach holds significance from
+a performance standpoint, both in conserving memory, as storing all components
+for a given problem could be infeasible, and in terms of execution speed, since
+there's no necessity to enumerate more components than what is required.
 
 Furthermore, the intention behind these methods is for them to yield all
 conceivable components that can be either added or removed from a specific
-solution.  However, in practice, this might become unfeasible if the ground set
+solution.~However, in practice, this might become unfeasible if the ground set
 is excessively large. In such cases, an alternative strategy for component
-enumeration may need to be contemplated.
+enumeration may need to be contemplated.~It's important to note that this
+consideration is relevant to the implementation of the method itself by the user
+who models the problem, but it doesn't alter the method signature in any way.
 
-Finally, within the context of~\acrshort{aco}, there arises a requirement to
-list all components that are already considered within a solution. This need
-arises from the necessity for updating the~\textit{pheromone model}.
-Consequently, this justified the introduction of the following method.
+
+Finally, within the context of~\acrshort{aco}, there's a need to enumerate all
+components that are already included in a solution. This requirement is due to
+the necessity to update the~\textit{pheromone model}. As a result, this
+justifies the introduction of the following method.
 
 \begin{center}
   \inlinecode{def components(self: Solution) -> Iterable[Component]: ...}
@@ -185,7 +192,7 @@ Consequently, this justified the introduction of the following method.
 \subsubsection*{Heuristic Component Enumeration}
 
 In the context of component enumeration, it can be advantageous to follow a
-problem-specific heuristic order. With this in mind, we introduced the
+problem-specific heuristic order.~With this in mind, we introduced the
 ~\texttt{heuristic\_add\_moves} method, designed to offer an iterator for components
 enumerated in accordance with the heuristic. Additionally, for convenience, our
 implementation includes a method that exclusively returns the first heuristic
@@ -217,8 +224,8 @@ contingent upon the current state of the solution.
 
 It is essential for all constructive search methods to possess a mechanism for
 incorporating or removing a component from a solution under construction.
-Therefore, the ensuing methods have been introduced, and upon invocation, they
-allow the addition or removal of the specified component from the solution.
+Therefore, the ensuing methods have been introduced, and upon invocation, allow
+the addition and removal of the specified component to/from the solution.
 
 \begin{center}
   \inlinecode{def add(self: Solution, c: Component) -> None: ...}
@@ -228,24 +235,35 @@ allow the addition or removal of the specified component from the solution.
 
 \subsubsection*{Objective Increment Calculation}
 
-When evaluating the objective value of a particular solution, two perspectives
-can be taken into account. The first approach involves recalculating the
-objective value from scratch each time a component is added or removed from the
-solution (full evaluation). The second approach entails incremental evaluation.
-As such, the latter method holds substantial performance advantages and should
-consistently be favored over a full evaluation.
+When evaluating the contribution of a component to the objective value of a
+solution, there are two approaches to consider. The first approach involves
+recalculating the entire objective value from scratch each time a component is
+added or removed from the solution (full evaluation). The second approach
+involves incremental evaluation, where only the change in objective value due to
+the addition or removal of the component is computed. The latter method is
+more efficient as it avoids the potentially expensive operation of recomputing
+the entire objective value and should be preferred for its performance advantages.
 
-In either scenario, the following methods have been implemented, granting a
-solver the capability to quantify the objective value contribution (increment)
-that arises from adding or removing a designated component relative to the
-current state of the solution. Reiterating, the return type of these functions
-is generic (denoted as~\texttt{T}), with the precondition that it must be comparable.
+This fact motivates the overall design of the~\texttt{Solution}~\acrshort{api}
+and thus all operations involving evaluations are considered in function of
+their increments. Albeit, it is possible for a user to implement
+a full evaluation and return only the increment, but that aspect is
+practical and beyond the scope of this specification.
+
+That being said, the following methods are exposed, granting a solver the
+capability to quantify the objective value contribution (increment) that is
+obtained from adding or removing a designated component with respect to the
+current state of the solution.
 
 \begin{center}
   \inlinecode{def objective_increment_add(self: Solution, c: Component) -> Optional[T]: ...}
 
   \inlinecode{def objective_increment_remove(self: Solution, c: Component) -> Optional[T]: ...}
 \end{center}
+
+The return type of these methods is generic (denoted as~\texttt{T}), with the
+precondition that it must be comparable and for all increment related methods it
+must support the basic arithmetic operations of addition and subtraction.
 
 \subsubsection*{Upper Bound Increment Calculation}
 
@@ -267,7 +285,8 @@ more resource-intensive than calculating a contribution to the objective value.
 
 The concept of a heuristic value is associated with a component and offers a
 means to rank the importance of components with respect to the current solution
-via a problem-specific heuristic.~The method's type signature is as follows.
+state via a problem-specific heuristic.~The method's type signature is as
+follows.
 
 \begin{center}
   \inlinecode{def heuristic_value(self: Solution, c: Component) -> \ \ \ \ \ Optional[T]: ...}
@@ -347,11 +366,11 @@ additional space.
   \end{align*}
 \end{definition}
 
-For a~\acrshort{lcg} it is studied there is a choice of parameters that
-guaranteed that the period of the generator is maximal and equal to $m$. This in
-means that all the numbers until $m$ will be emitted by the random generator
-once. This choice of parameters obeys the following
-conditions~\cite{knuth2014art}:
+For a~\acrshort{lcg} it is known~\cite{knuth2014art} there is a choice of
+parameters that guarantees a maximal period for generator, and equal to $m$.
+This in means that all the numbers until $m$ will be emitted by the generator in
+a random order exactly once.Albeit, the choice of parameters must obey the
+following conditions~\cite{knuth2014art}:
 
 \begin{enumerate}
   \item $c$ is relatively prime to $m$
@@ -359,7 +378,7 @@ conditions~\cite{knuth2014art}:
   \item $a - 1$ is multiple of 4, if m is a multiple of 4
 \end{enumerate}
 
-For example, the choice of $a = 5$, $m = 8$ and $c = 1$ is an example of
+For example, the choice of the parameters $a = 5$, $m = 8$ and $c = 1$, yields
 a~\acrshort{lcg} that has maximal period. Remarkably, the choice of $m$ as a
 power of two has important implications in terms of performance from a
 computational perspective, allowing for faster modulus operations.
@@ -367,8 +386,9 @@ computational perspective, allowing for faster modulus operations.
 With this in mind, a properly configured~\acrshort{lcg} can be harnessed for the
 purpose of random local move enumeration without replacement. This is achieved
 by associating each local move with a number $0 < i < m$, which, upon
-generation, is decoded into the corresponding~\texttt{LocalMove} object. Notably, the
-parameter $m$ needs to be adjusted in order to contemplate all possible moves.
+generation, is decoded into the corresponding~\texttt{LocalMove} object.
+Notably, the parameter $m$ needs to be adjusted in order to contemplate all
+possible moves.
 
 \subsubsection*{Local Move Application}
 
@@ -437,10 +457,11 @@ to address this requirement.
 
 In summary, this specification encompasses what we consider as the model within
 the realm of meta-heuristics. While not formulated mathematically but rather in
-computational terms, this representation through the described constructs
-effectively captures the attributes of a problem. It enables the problem to be
-addressed in a black-box manner by solvers, which make use of this standardized
-set of functions. The modeling endeavor then involves implementing each of these
-methods in accordance with their context within a particular problem.
-Subsequently, solvers can be developed in a manner that is independent of the
-specific problem, as we will demonstrate next.
+computational terms, this representation through the described constructs, from
+our perspective, effectively captures the attributes of a problem. It enables
+the problem to be addressed in a black-box manner by solvers, which make use of
+this standardized set of methods, as we will describe next,
+in~\Cref{sec:solver}.~The modeling endeavor then involves implementing each of
+these methods in accordance with their context within a particular problem.
+
+% Table with the model outline

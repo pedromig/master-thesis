@@ -1,0 +1,48 @@
+This section introduces a potential implementation of solvers using the proposed
+framework. The aim is to provide an overview of how meta-heuristic algorithms
+can be developed utilizing the methods provided by the model API. To accomplish
+this, we will start by describing a basic solver that utilizes heuristic
+information for constructing solutions. Subsequently, we will demonstrate how
+solvers for both~\acrshort{constructive-search} and~\acrshort{local-search}
+methods can be implemented, using~\acrshort{beam-search}
+and~\acrshort{iterated-local-search} meta-heuristics as illustrative examples.
+
+\subsection{Heuristic Construction}
+\label{subsec:heuristic-construction}
+
+\Cref{lst:hc} describes a possible implementation of a
+~\acrshort{meta-heuristic} solver that iteratively constructs a solution using
+only heuristic information. This solver takes as input a~\texttt{Problem}
+instance and returns a~\texttt{Solution}.
+
+\input{mainmatter/4-PrincipledModellingFramework/listings/hc.tex}
+
+This solver can be summarized as follows:
+
+\begin{enumerate}
+  \item \textbf{Initialization}: Initialize a new empty~\texttt{Solution}
+        and select a~\texttt{Component} to be added heuristically.~(lines 2-3)
+  \item \textbf{Construction}: Build the solution.~(lines 4-6)
+        \begin{enumerate}
+          \item If there is a component (\texttt{c}) available for addition to the
+                current solution,~(\ie{},~\texttt{c} is not the~\texttt{None}
+                sentinel value), proceed; otherwise stop.
+          \item Add the selected component to the solution.
+          \item Heuristically select a new component and repeat the process.
+        \end{enumerate}
+  \item \textbf{Termination} Return the final~\texttt{Solution}.~(line 7)
+\end{enumerate}
+
+As it can be observed this solver is simple and can be also used for easily
+testing the model, given its only dependence on two basic methods:
+the~\texttt{add} method for adding a component to the solution and the
+~\texttt{heuristic\_add\_move} for selecting the next component to be added.
+
+
+\subsection{Beam Search}
+\label{subsec:beam-search-solver}
+\input{mainmatter/4-PrincipledModellingFramework/listings/bs.tex}
+
+\subsection{Iterated Local Search}
+\label{subsec:ils}
+\input{mainmatter/4-PrincipledModellingFramework/listings/ils.tex}

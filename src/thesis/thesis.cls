@@ -61,6 +61,8 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
 
 % Headers, Titles, Paragraphs, etc...
 \usepackage{parskip}
@@ -299,3 +301,4 @@
 
 % Inline Code Listing
 \newcommand{\inlinecode}[1]{\lstinline[basicstyle=\ttfamily]!#1!}
+\renewcommand*\thelstnumber{\arabic{lstnumber}:}
