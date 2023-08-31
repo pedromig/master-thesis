@@ -63,6 +63,7 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{adjustbox}
 
 % Headers, Titles, Paragraphs, etc...
 \usepackage{parskip}

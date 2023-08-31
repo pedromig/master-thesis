@@ -1,6 +1,4 @@
-
-\begin{lstlisting}[float=h,caption={Iterated Local Search Solver},label=lst:ils]
-def ils(solution: Solution, timer: Timer, ks: int) -> Solution
+def ils(solution: Solution, timer: Timer, ks: int) -> Solution:
   best = solution.copy()
   bobj = best.objective()
   while not timer.finished():
@@ -21,9 +19,7 @@ def ils(solution: Solution, timer: Timer, ks: int) -> Solution
       else:
         solution = best.copy()
       solution.perturb(ks)
-  obj = solution.objective()
-  if obj > bobj:
+  if solution.objective() > bobj:
     return solution
   else:
     return best
-\end{lstlisting}

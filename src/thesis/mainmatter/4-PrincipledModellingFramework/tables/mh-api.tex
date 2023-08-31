@@ -1,0 +1,67 @@
+\renewcommand{\arraystretch}{1.2}
+\begin{adjustbox}{max width=\textwidth}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Meta-Heuristic}                           & \textbf{Methods}                                                          \\
+    \midrule
+    \multirow{1}{*}{\acrshort{beam-search}}           & \begin{tabular}{ll}
+                                                          \texttt{copy}                         & \texttt{objective}  \\
+                                                          \texttt{upper\_bound}                 & \texttt{feasible}   \\
+                                                          \texttt{add}                          & \texttt{add\_moves} \\
+                                                          \texttt{upper\_bound\_increment\_add} &                     \\
+                                                        \end{tabular}               \\
+    \midrule
+    \multirow{1}{*}{\acrshort{grasp}}                 & \begin{tabular}{ll}
+                                                          \texttt{copy}                         & \texttt{objective}  \\
+                                                          \texttt{add}                          & \texttt{feasible}   \\
+                                                          \texttt{upper\_bound\_increment\_add} & \texttt{add\_moves} \\
+                                                        \end{tabular}               \\
+    \midrule
+    \multirow{1}{*}{\acrshort{iterated-greedy}}       & \begin{tabular}{ll}
+                                                          \texttt{copy}                         & \texttt{objective}            \\
+                                                          \texttt{add}                          & \texttt{feasible}             \\
+                                                          \texttt{upper\_bound}                 & \texttt{remove}               \\
+                                                          \texttt{add\_moves}                   & \texttt{random\_remove\_move} \\
+                                                          \texttt{upper\_bound\_increment\_add} &                               \\
+                                                        \end{tabular}     \\
+
+    \midrule
+    \multirow{1}{*}{\acrshort{aco}}                   & \begin{tabular}{ll}
+                                                          \texttt{copy}                         & \texttt{feasible}     \\
+                                                          \texttt{objective}                    & \texttt{add}          \\
+                                                          \texttt{add\_moves}                   & \texttt{upper\_bound} \\
+                                                          \texttt{upper\_bound\_increment\_add} & \texttt{components}   \\
+                                                        \end{tabular}             \\
+
+    \midrule
+    \multirow{1}{*}{\acrshort{first-improvement}}     & \begin{tabular}{ll}
+                                                          \texttt{step}                      & \texttt{objective\_increment\_local} \\
+                                                          \texttt{random\_local\_moves\_wor} &                                      \\
+                                                        \end{tabular} \\
+    \midrule
+    \multirow{1}{*}{\acrshort{best-improvement}}      & \begin{tabular}{ll}
+                                                          \texttt{step}                        & \texttt{local\_moves} \\
+                                                          \texttt{objective\_increment\_local} &                       \\
+                                                        \end{tabular}              \\
+    \midrule
+    \multirow{1}{*}{\acrshort{iterated-local-search}} & \begin{tabular}{ll}
+                                                          \texttt{objective}                 & \texttt{copy}                        \\
+                                                          \texttt{step}                      & \texttt{perturb}                     \\
+                                                          \texttt{random\_local\_moves\_wor} & \texttt{objective\_increment\_local} \\
+                                                        \end{tabular} \\
+    \midrule
+    \multirow{1}{*}{\acrshort{iterated-local-search}} & \begin{tabular}{ll}
+                                                          \texttt{copy}                        & \texttt{objective}                 \\
+                                                          \texttt{step}                        & \texttt{random\_local\_moves\_wor} \\
+                                                          \texttt{objective\_increment\_local} &                                    \\
+                                                        \end{tabular} \\
+
+    \midrule
+    \multirow{1}{*}{\acrshort{tabu-search}}           & \begin{tabular}{ll}
+                                                          \texttt{copy}                        & \texttt{objective}                 \\
+                                                          \texttt{step}                        & \texttt{random\_local\_moves\_wor} \\
+                                                          \texttt{objective\_increment\_local} & \
+                                                        \end{tabular} \\
+    \bottomrule
+  \end{tabular}
+\end{adjustbox}

@@ -1,16 +1,16 @@
 \resizebox{\textwidth}{!}{% 
   \begin{tabular}{@{}cccccc@{}}
     \toprule
-    \multirow{2}{*}{\textbf{Meta-Heuristic}}    & \multicolumn{2}{c}{\textbf{Search Strategy}} & \multicolumn{2}{c}{\textbf{State Size}} & \multirow{2}{*}{\textbf{Memoization}}                           \\
+    \multirow{2}{*}{\textbf{Meta-Heuristic}} & \multicolumn{2}{c}{\textbf{Search Strategy}} & \multicolumn{2}{c}{\textbf{State Size}} & \multirow{2}{*}{\textbf{Memoization}}                           \\
     \cmidrule(l){2-3}                               \cmidrule(l){4-5}
-    {}                                          & Constructive Search                          & Local Search                            & Trajectory                            & Population & {}         \\ \midrule
-    Beam Search                                 & \checkmark                                   &                                         & \checkmark                            &            & \checkmark \\
-    Greedy Randomized Adaptive Search Procedure & \checkmark                                   & \checkmark                              & \checkmark                            &            &            \\
-    Iterated Greedy                             & \checkmark                                   &                                         & \checkmark                            &            &            \\
-    Ant Colony Optimization                     & \checkmark                                   & \checkmark                              &                                       & \checkmark &            \\
-    Hill Climbing                               &                                              & \checkmark                              & \checkmark                            &            &            \\
-    Iterated Local Search                       &                                              & \checkmark                              & \checkmark                            &            &            \\
-    Simulated Annealing                         &                                              & \checkmark                              & \checkmark                            &            &            \\
-    Tabu Search                                 &                                              & \checkmark                              & \checkmark                            &            & \checkmark \\ \bottomrule
+    {}                                       & Constructive Search                          & Local Search                            & Single                                & Population & {}         \\ \midrule
+    \acrshort{beam-search}                   & \checkmark                                   &                                         & \checkmark                            &            & \checkmark \\
+    \acrshort{grasp}                         & \checkmark                                   & \checkmark                              & \checkmark                            &            &            \\
+    \acrshort{iterated-greedy}               & \checkmark                                   &                                         & \checkmark                            &            &            \\
+    \acrshort{aco}                           & \checkmark                                   & \checkmark                              &                                       & \checkmark &            \\
+    \acrshort{hill-climbing}                 &                                              & \checkmark                              & \checkmark                            &            &            \\
+    \acrshort{iterated-local-search}         &                                              & \checkmark                              & \checkmark                            &            &            \\
+    \acrshort{simulated-annealing}           &                                              & \checkmark                              & \checkmark                            &            &            \\
+    \acrshort{tabu-search}                   &                                              & \checkmark                              & \checkmark                            &            & \checkmark \\ \bottomrule
   \end{tabular}
 }

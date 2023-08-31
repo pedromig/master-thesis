@@ -1,0 +1,75 @@
+As discussed, this framework offers capabilities in both problem modeling and
+the implementation of meta-heuristic solvers. This versatility allows it to
+satisfy the needs of two distinct user profiles: those primarily focused on
+problem-solving, seeking access to a variety of solvers for effective results,
+and~\acrshort{meta-heuristic} developers who concentrate
+on~\acrshort{meta-heuristic} refinement.~The latter group employs the
+framework's provided problems as a means to rigorously evaluate and test their
+developed meta-heuristics. Albeit, there can also be individuals interested in both
+aspects.
+
+A common thread among all users of the framework is the need to test
+implementations. From the vantage point of a~\acrshort{meta-heuristic}
+developer, the primary objective revolves around constructing tests that assess
+the meta-heuristic's correct implementation,~\eg{},~\textit{unit-tests}. From
+the perspective of a model developer, these tests, while valuable for assessing
+the correctness of the model's implementation, extend beyond mere verification
+of whether methods yield the expected result. Instead, the tests should
+encompass the evaluation of whether these outcomes adhere to fundamental
+properties that should universally held true for any given input-output pair,
+irrespective of the specific problem at hand. This type of testing, is known
+as~\textit{property testing}.
+
+To illustrate, let's take a scenario where a component we intent to add a
+component to a solution.~In a conventional~\textit{unit-test} approach, one
+could verify if the objective value of the solution matches the expected outcome
+after adding that particular component. Yet, a broader property to consider is
+that, irrespective of the specific objective value, the solution's value
+following the component addition should be equivalent to the value prior to the
+addition, plus the incremental contribution attributable to that specific
+component. This property testing goes beyond specific cases and encapsulates the
+core behavior of the operation.
+
+\lstinputlisting[float=ht,caption={Objective Increment Add Property Test},label=lst:test]{../assets/code/test.py}
+
+Importantly, the design of the modeling framework offers a user-friendly
+interface for creating these tests, as exemplified in~\Cref{lst:test}. In
+essence, the implementation of a property test for an objective value increment
+is follows the subsequent steps:
+
+\begin{enumerate}
+      \item \textbf{Initialization}: Start by initializing a random solution and selecting
+            a random component to add to the solution.~(lines 2-3)
+      \item \textbf{Property Test}: Execute a property test by constructing a random solution.~(lines 4-9)
+            \begin{enumerate}
+                  \item If a random component (\texttt{c}) is available for addition to the current
+                        solution~(\ie{},~\texttt{c} is not the~\texttt{None} sentinel value),
+                        proceed; otherwise, conclude the~\textbf{Property Test}.~(line 4)
+                  \item Record the objective value of the current solution and calculate the increment
+                        achieved by applying the chosen component.~(lines 5-6)
+                  \item Add the component to the solution.~(line 7)
+                  \item Assert that the sum of the objective value before adding the component and
+                        the calculated increment equals the current objective value. If this assertion
+                        fails, the property is not verified.~(line 8)
+                  \item Choose a new component and repeat the process.~(line 9)
+            \end{enumerate}
+      \item \textbf{Termination} Conclude the property test and return the~\texttt{Solution}.~(line 10)
+\end{enumerate}
+
+It is worth noting that this type of testing is inherently randomized, and it
+should undergo multiple iterations to ensure statistical validation of the
+implemented model's adherence to the properties. Furthermore, this test is
+designed to take the~\texttt{Problem} instance as an input, illustrating the
+potential for seamlessly integrating~(or~\emph{injecting}) these tests into
+any~\texttt{Problem}.~This offers the same possibility as with implementing solvers ---
+allowing others to also develop and contribute with test implementations in a
+similar manner.
+
+Additionally, this specific example of a property test is just a single
+instance, with the potential for similar tests to be conducted for various types
+of operations. For instance, one could examine the enumeration of local moves ---
+whether performed in a random manner~(\texttt{random\_local\_moves\_wor}) or
+following a specified order~(\texttt{local\_moves}) --- to validate that they
+consistently yield identical components and maintain a consistent count of
+components with each iteration.~This underscores the versatility and ease-of-use
+of property tests in evaluating a range of aspects within the proposed framework.

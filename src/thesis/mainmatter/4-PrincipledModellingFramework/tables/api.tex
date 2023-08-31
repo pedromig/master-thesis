@@ -1,0 +1,39 @@
+\renewcommand{\arraystretch}{1.5}
+\begin{adjustbox}{max width=\textwidth}
+  \begin{tabular}{@{}llcp{4cm}cp{4cm}@{}}
+    \toprule
+    \textbf{Class}                      & \textbf{Methods}                         & \textbf{Input}     & \textbf{Output}              \\
+    \midrule
+    \multirow{2}{*}{\texttt{Problem}}   & \texttt{empty\_solution}                 & ---                & \texttt{Solution}            \\
+                                        & \texttt{random\_solution}                & ---                & \texttt{Solution}            \\
+    \midrule
+    \multirow{23}{*}{\texttt{Solution}} & \texttt{copy}                            & \texttt{Solution}  & \texttt{Solution}            \\
+                                        & \texttt{feasible}                        & ---                & \texttt{bool}                \\
+                                        & \texttt{objective}                       & ---                & \texttt{Optional[T]}         \\
+                                        & \texttt{upper\_bound}                    & ---                & \texttt{Optional[T]}         \\
+                                        & \texttt{components}                      & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{add\_moves}                      & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{heuristic\_add\_moves}           & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{random\_add\_move}               & ---                & \texttt{Optional[Component]} \\
+                                        & \texttt{remove\_moves}                   & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{random\_remove\_move}            & ---                & \texttt{Optional[Component]} \\
+                                        & \texttt{local\_moves}                    & ---                & \texttt{Iterable[LocalMove]} \\
+                                        & \texttt{random\_local\_moves\_wor}       & ---                & \texttt{Iterable[LocalMove]} \\
+                                        & \texttt{random\_local\_move}             & ---                & \texttt{Optional[LocalMove]} \\
+                                        & \texttt{add}                             & \texttt{Component} & \texttt{None}                \\
+                                        & \texttt{remove}                          & \texttt{Component} & \texttt{None}                \\
+                                        & \texttt{step}                            & \texttt{LocalMove} & \texttt{None}                \\
+                                        & \texttt{perturb}                         & \texttt{int}       & \texttt{None}                \\
+                                        & \texttt{heuristic\_value}                & \texttt{Component} & \texttt{Optional[T]}         \\
+                                        & \texttt{objective\_increment\_local}     & \texttt{LocalMove} & \texttt{Optional[T]}         \\
+                                        & \texttt{objective\_increment\_add}       & \texttt{Component} & \texttt{Optional[T]}         \\
+                                        & \texttt{objective\_increment\_remove}    & \texttt{Component} & \texttt{Optional[T]}         \\
+                                        & \texttt{upper\_bound\_increment\_add}    & \texttt{Component} & \texttt{Optional[T]}         \\
+                                        & \texttt{upper\_bound\_increment\_remove} & \texttt{Component} & \texttt{Optional[T]}         \\
+    \midrule
+    \multirow{1}{*}{\texttt{Component}} & \texttt{id}                              & ---                & \texttt{Hashable}            \\
+    \midrule
+    \multirow{1}{*}{\texttt{LocalMove}} & ---                                      & ---                & ---                          \\
+    \bottomrule
+  \end{tabular}
+\end{adjustbox}

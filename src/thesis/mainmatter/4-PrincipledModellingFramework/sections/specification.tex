@@ -7,9 +7,9 @@ plausible way to materialize an~\acrshort{api} that facilitates modeling
 operations. As such, considerations such as naming conventions and programming
 language-specific concepts ought to be viewed as secondary.
 
-Moreover, it's important to underscore that this framework represents a
+Moreover, it is important to underscore that this framework represents a
 consolidation of prior efforts undertaken by~\citet{vieira2009uma,
-  fonseca2021nasf4nio, outeiro2021application}.  Consequently, it should be
+  fonseca2021nasf4nio, outeiro2021application}.~Consequently, it should be
 perceived as an enhancement of the prerequisites and specifications established
 in those works, tailored to encompass constructive and local search techniques,
 as well as the comprehensive modeling procedure.
@@ -359,10 +359,10 @@ additional space.
   \end{equation}
   Where,
   \begin{align*}
-    m,               & \quad 0 < m \text{ — is the modulus}                                                              \\
-    a,               & \quad 0 < a < m \text{ — is the multiplier}                                                       \\
-    c,               & \quad 0 \leq c < m \text{ — is the increment}                                                     \\
-    \mathcal{X}_{0}, & \quad 0 \leq \mathcal{X}_{0} < m \text{ — is the \textquote{seed} or \textquote{starting value}"}
+    m,               & \quad 0 < m \text{ — is the modulus}                                                             \\
+    a,               & \quad 0 < a < m \text{ — is the multiplier}                                                      \\
+    c,               & \quad 0 \leq c < m \text{ — is the increment}                                                    \\
+    \mathcal{X}_{0}, & \quad 0 \leq \mathcal{X}_{0} < m \text{ — is the \textquote{seed} or \textquote{starting value}}
   \end{align*}
 \end{definition}
 
@@ -401,7 +401,7 @@ which signifies the magnitude of the perturbation to be applied.
   \inlinecode{def step(self: Solution, m: LocalMove) -> None: ...}
 \end{center}
 
-\subsubsection*{Objective Increment Calculation}
+\subsubsection*{Local Move Objective Increment Calculation}
 
 Similar to the approach used for~\acrshort{constructive-search}, where the
 ~\texttt{objective\_increment\_add} method is employed to evaluate the
@@ -464,4 +464,17 @@ this standardized set of methods, as we will describe next,
 in~\Cref{sec:solver}.~The modeling endeavor then involves implementing each of
 these methods in accordance with their context within a particular problem.
 
-% Table with the model outline
+The~\Cref{tab:api} serves as a summary of all the methods related to the model
+~\acrshort{api} which were documented in this section and are part of our
+implementation of the principled modeling framework~\cite{rodriguesnasf4niopy}.
+
+\begin{table}[h]
+  \centering
+  \input{mainmatter/4-PrincipledModellingFramework/tables/api.tex}
+  \caption{Modeling API Specification}
+  \caption*{\small Note: The parameter~\texttt{T} denotes a generic comparable
+    type.~In the case of the increment functions this type must also support
+    addition and subtraction.~The class~\texttt{LocalMove} does not expose any methods.
+  }
+  \label{tab:api}
+\end{table}

@@ -10,39 +10,193 @@ and~\acrshort{iterated-local-search} meta-heuristics as illustrative examples.
 \subsection{Heuristic Construction}
 \label{subsec:heuristic-construction}
 
-\Cref{lst:hc} describes a possible implementation of a
+The \Cref{lst:hc} describes a possible implementation of a
 ~\acrshort{meta-heuristic} solver that iteratively constructs a solution using
 only heuristic information. This solver takes as input a~\texttt{Problem}
 instance and returns a~\texttt{Solution}.
 
-\input{mainmatter/4-PrincipledModellingFramework/listings/hc.tex}
+\lstinputlisting[float=ht,caption={Heuristic Construction Solver Implementation},label=lst:hc]{../assets/code/hc.py}
 
 This solver can be summarized as follows:
 
 \begin{enumerate}
-  \item \textbf{Initialization}: Initialize a new empty~\texttt{Solution}
-        and select a~\texttt{Component} to be added heuristically.~(lines 2-3)
-  \item \textbf{Construction}: Build the solution.~(lines 4-6)
+  \item \textbf{Initialization}: Initialize a new empty~\texttt{Solution}.
+        and select a~\texttt{Component} to be added heuristically~(lines 2-3)
+  \item \textbf{Construction}: Build the solution~(lines 4-6).
         \begin{enumerate}
           \item If there is a component (\texttt{c}) available for addition to the
                 current solution,~(\ie{},~\texttt{c} is not the~\texttt{None}
-                sentinel value), proceed; otherwise stop.
-          \item Add the selected component to the solution.
-          \item Heuristically select a new component and repeat the process.
+                sentinel value), proceed; otherwise stop the~\textbf{Construction}.~(line 4)
+          \item Add the selected component to the solution~(line 5).
+          \item Heuristically select a new component~(line 6).
+          \item Repeat the process.
         \end{enumerate}
-  \item \textbf{Termination} Return the final~\texttt{Solution}.~(line 7)
+  \item \textbf{Termination} Return the final~\texttt{Solution}~(line 7).
 \end{enumerate}
 
-As it can be observed this solver is simple and can be also used for easily
-testing the model, given its only dependence on two basic methods:
-the~\texttt{add} method for adding a component to the solution and the
-~\texttt{heuristic\_add\_move} for selecting the next component to be added.
+In fact, this simple solver can serve as practical tool for testing the
+implementation of a model. Its simplicity arises from its reliance on only two
+fundamental methods: the~\texttt{add} method, which introduces a component to
+the solution, and the~\texttt{heuristic\_add\_move} method, which determines the
+next component to be added using a heuristic criterion. For testing purposes,
+other uncomplicated~\acrshort{meta-heuristic} solvers can be crafted using the
+same model. For instance, solvers that handle construction in a random or a
+in greedy manner, based on components that yield the most favorable increments
+with respect to the objective value and/or bound.
 
+From an implementation perspective, this particular version takes a problem
+instance as input and uses it to generate an initial empty solution.~However,
+it is worth noting that this method could have been designed to accept a partial
+solution and then complete its construction from that point onwards.~In regard
+to this, the option to provide the problem instance rather than a solution as a
+parameter was chosen primarily for illustrative purposes and to showcase the
+interaction between the~\texttt{Problem} and the~\texttt{Solution} data structures.
 
 \subsection{Beam Search}
 \label{subsec:beam-search-solver}
-\input{mainmatter/4-PrincipledModellingFramework/listings/bs.tex}
+
+The \Cref{lst:bs} presents a possible implementation of a~\acrshort{beam-search}
+constructive~\acrshort{meta-heuristic} solver.~This~\acrshort{meta-heuristic},
+as discussed earlier in~\Cref{ch:background}, can be viewed as having two phases. In the
+first phase, it generates a candidate list of partial solutions that extend the
+solutions present in a limited-size archive. Then, in the second phase, it
+filters and selects the best solutions based on either the upper bound value or
+a heuristic value. The selected solutions are retained in the archive for the
+next iteration. Additionally, during this process, if a feasible solution is
+encountered, the best solution found thus far is updated accordingly.
+
+The execution time of this algorithm is not limited a stopping criterion is
+required. In this implementation, we define the stopping condition as a time
+budget, which is represented by the~\texttt{Timer} data structure.
+The~\texttt{finished} method of the~\texttt{Timer} indicates whether the
+allocated time budget has been used up. If the time budget is exhausted, the
+algorithm stops.
+
+Additionally, this solver takes other parameters as input in this
+implementation.~These include a~\texttt{Problem} instance and the beam
+width~(\texttt{bw}), which specifies the size of the solution archive. The
+choice for supplying the problem as a parameter instead of a solution follows
+the same motivation as previously explained
+in~\Cref{subsec:heuristic-construction}.
+
+\lstinputlisting[float=ht,caption={Beam Search Solver Implementation},label=lst:bs]{../assets/code/bs.py}
+
+In brief, this~\acrshort{beam-search} solver implementation is described by the
+following steps:
+
+\begin{enumerate}
+  \item \textbf{Initialization}: Start by initializing an empty~\texttt{Solution}. If
+        this initial solution is~\texttt{feasible}, store it as the best solution found so far.
+        Add a tuple representing this solution to the archive~(\texttt{beam}), including its
+        upper bound value.~(lines 2-5)
+  \item \textbf{Construction}: Construct the solution while there is still available time in the budget~(lines 6-22).
+        \begin{enumerate}
+          \item Create an empty candidate list~(\texttt{cs})~(line 7).
+          \item \textbf{Branch}: Expand the current solutions in the archive by adding
+                components to create new partial solutions~(lines 8-10).
+                \begin{enumerate}
+                  \item Select a solution from the archive~(line 8).
+                  \item Enumerate all possible components that can be added to that solution~(line 9).
+                  \item Add these new solutions to the candidate list~\texttt{cs} as tuples containing
+                        the upper bound value, the partial solution, and the component leading to
+                        this contribution~(line 10).
+                  \item Repeat while possible.
+                \end{enumerate}
+          \item If the candidate list~(\texttt{cs}) is not empty, filter the~\texttt{bw} best
+                candidate solutions based on their upper bound values.~(lines 11-13)
+          \item Empty the the~\texttt{beam} list~(line 14).
+          \item \textbf{Update}: Build the beam for the next iteration and update best solution~(lines 15-22).
+                \begin{enumerate}
+                  \item Select a candidate solution (make a~\texttt{copy}) to
+                        potentially update the best solution~(lines 16).
+                  \item Add the respective component to the current candidate solution~(line 17).
+                  \item If the solution is feasible and its objective value is better than
+                        the best solution found so far, update the best solution by replacing
+                        it with the current one~(lines 18-21).
+                  \item Add the candidate solution to the~\texttt{beam} list~(line 22).
+                  \item Repeat while possible.
+                \end{enumerate}
+        \end{enumerate}
+  \item \textbf{Termination} Return the best~\texttt{Solution} found~(line 23).
+\end{enumerate}
+
+It is important to note that, this algorithm requires the implementation of
+certain methods within the model, specifically in~\texttt{Solution} class.
+However, the algorithm can still function successfully even if some of the
+remaining methods are not implemented, as long as these mandatory methods are
+provided.
 
 \subsection{Iterated Local Search}
 \label{subsec:ils}
-\input{mainmatter/4-PrincipledModellingFramework/listings/ils.tex}
+
+The~\Cref{lst:ils} presents a possible implementation of
+an~\acrshort{iterated-local-search} solver which is
+a~\acrshort{local-search}~\acrshort{meta-heuristic}. As discussed
+in~\Cref{ch:background}, This meta-heuristic commences with a feasible solution
+and subsequently employs a~\acrshort{local-search} procedure.~Upon discovering a
+solution that outperforms the current best solution, the algorithm updates the
+best solution, and optionally perturbs the solution, before repeating the entire
+process. In our implementation, we use~\acrshort{first-improvement} for
+as the~\acrshort{local-search} strategy.
+
+Similarly to the previous section's implementation of the~\acrshort{beam-search},
+this algorithm is also not limited by execution time and requires a stopping
+criterion. Here, we utilize a time budget represented by the~\texttt{Timer}
+object, as previously discussed. Additionally, this solver accepts several other
+input parameters. These include a~\texttt{Solution} instance and the
+\textit{kick strength}~(\texttt{ks}), which determines the magnitude of the
+perturbation to be applied to the solution.
+
+\lstinputlisting[float=ht,caption={Iterated Local Search Solver Implementation},label=lst:ils]{../assets/code/ils.py}
+
+In brief, this~\acrshort{iterated-local-search} solver implementation is
+described by the following steps:
+
+\begin{enumerate}
+  \item \textbf{Initialization}: Begin with the current best solution as the starting solution.~(lines 2-3)
+  \item \textbf{Local Search}: Conduct local search on the starting solution
+        while there is available time in the budget.~(lines 4-21)
+        \begin{enumerate}
+          \item \textbf{First Improvement}: Enhance the solution through the first local move that results in
+                a better objective value.~(lines 5-14)
+                \begin{enumerate}
+                  \item Randomly pick a local move from the neighborhood of the current solution.~(line 5)
+                  \item Calculate the incremental change in the objective value due to the local move.~(line 6)
+                  \item Check if applying the current local move results in a better solution.~(line 7)
+                  \item If improvement is achieved, apply the local move and proceed to the \textbf{Update} stage.~(lines 8-9)
+                  \item If the time budget is exhausted during the first improvement stage, halt the \textbf{Local Search}
+                        and return the best solution found so far.~(lines 10-14)
+                  \item Repeat this process until all possible local moves have been explored.
+                \end{enumerate}
+          \item \textbf{Update}: Update the current best solution if an improvement was achieved
+                in the first improvement stage.~(lines 15-20)
+          \item \textbf{Perturb}: Optionally, perturb the best solution with a
+                kick strength of \texttt{ks}, if an improvement was obtained in the
+                first improvement stage.~(line 21)
+        \end{enumerate}
+  \item \textbf{Termination} Return the best~\texttt{Solution} found.~(lines 22-15)
+\end{enumerate}
+
+\subsection{Outline}
+\label{subsec:solver-outline}
+
+This section demonstrated the process of implementing solvers using the provided
+modeling framework.~We provided practical examples for
+both~\acrshort{constructive-search} and~\acrshort{local-search} meta-heuristics.
+However, it is important to note that in this work, all the meta-heuristics
+described in~\Cref{ch:background} were
+implemented~\cite{rodriguesnasf4niopy}.~Furthermore, each of these
+meta-heuristics requires different methods from the model, which we summarize
+in~\Cref{tab:mh-api-methods}.
+
+\begin{table}[h]
+  \centering
+  \input{mainmatter/4-PrincipledModellingFramework/tables/mh-api.tex}
+  \caption{Required Methods from Model API for Multiple Meta-Heuristics}
+  \caption*{\small Note: Only the essential methods according to our
+    implementation are presented, although other implementations may utilize
+    different methods. Additionally, for the context of~\acrshort{aco}, our
+    implementation adopts the~\emph{Max-Min Ant System} variant~\cite{stutzle1999maxmin}. Nevertheless, the
+    method prerequisites should generalize to various other variants of this~\acrshort{meta-heuristic}.}
+  \label{tab:mh-api-methods}
+\end{table}
