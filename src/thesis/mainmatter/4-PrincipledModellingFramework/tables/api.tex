@@ -4,8 +4,7 @@
     \toprule
     \textbf{Class}                      & \textbf{Methods}                         & \textbf{Input}     & \textbf{Output}              \\
     \midrule
-    \multirow{2}{*}{\texttt{Problem}}   & \texttt{empty\_solution}                 & ---                & \texttt{Solution}            \\
-                                        & \texttt{random\_solution}                & ---                & \texttt{Solution}            \\
+    \multirow{1}{*}{\texttt{Problem}}   & \texttt{empty\_solution}                 & ---                & \texttt{Solution}            \\
     \midrule
     \multirow{23}{*}{\texttt{Solution}} & \texttt{copy}                            & \texttt{Solution}  & \texttt{Solution}            \\
                                         & \texttt{feasible}                        & ---                & \texttt{bool}                \\
@@ -13,9 +12,10 @@
                                         & \texttt{upper\_bound}                    & ---                & \texttt{Optional[T]}         \\
                                         & \texttt{components}                      & ---                & \texttt{Iterable[Component]} \\
                                         & \texttt{add\_moves}                      & ---                & \texttt{Iterable[Component]} \\
-                                        & \texttt{heuristic\_add\_moves}           & ---                & \texttt{Iterable[Component]} \\
-                                        & \texttt{random\_add\_move}               & ---                & \texttt{Optional[Component]} \\
                                         & \texttt{remove\_moves}                   & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{heuristic\_add\_moves}           & ---                & \texttt{Iterable[Component]} \\
+                                        & \texttt{heuristic\_add\_move}            & ---                & \texttt{Optional[Component]} \\
+                                        & \texttt{random\_add\_move}               & ---                & \texttt{Optional[Component]} \\
                                         & \texttt{random\_remove\_move}            & ---                & \texttt{Optional[Component]} \\
                                         & \texttt{local\_moves}                    & ---                & \texttt{Iterable[LocalMove]} \\
                                         & \texttt{random\_local\_moves\_wor}       & ---                & \texttt{Iterable[LocalMove]} \\

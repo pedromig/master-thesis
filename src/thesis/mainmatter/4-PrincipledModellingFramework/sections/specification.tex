@@ -45,19 +45,15 @@ might be advantageous to include methods within it for loading or parsing input
 data, in addition to the class constructor. However, the primary intent remains
 focused on storing problem-specific data and providing a away to initialize a
 solution for a specific problem instance. This can be achieved through the
-following methods, which return empty and random solution, respectively.
+following method, which returns an empty solution.
 
 \begin{center}
   \inlinecode{def empty_solution(self: Problem) -> Solution: ...}
-
-  \inlinecode{def random_solution(self: Problem) -> Solution: ...}
 \end{center}
 
-It is important to acknowledge that the definition of an empty solution or the
-construction of a random solution is tied to the specific problem under
-consideration. Therefore, these concepts are dependent upon the characteristics
-of the model being developed. Nevertheless, these methods when invoked return an
-encapsulated solution object that abstracts the specific model intricacies.
+It is important to acknowledge that the definition of an empty solution is tied
+to the specific problem under consideration. Nevertheless, this method when
+invoked returns an encapsulated solution object that abstracts the problem's details.
 
 As previously mentioned, the~\texttt{Component} class serves as a representation
 of a component from the ground set, encapsulating its relevant data.

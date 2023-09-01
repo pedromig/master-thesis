@@ -20,18 +20,18 @@ instance and returns a~\texttt{Solution}.
 This solver can be summarized as follows:
 
 \begin{enumerate}
-  \item \textbf{Initialization}: Initialize a new empty~\texttt{Solution}.
-        and select a~\texttt{Component} to be added heuristically~(lines 2-3)
-  \item \textbf{Construction}: Build the solution~(lines 4-6).
-        \begin{enumerate}
-          \item If there is a component (\texttt{c}) available for addition to the
-                current solution,~(\ie{},~\texttt{c} is not the~\texttt{None}
-                sentinel value), proceed; otherwise stop the~\textbf{Construction}.~(line 4)
-          \item Add the selected component to the solution~(line 5).
-          \item Heuristically select a new component~(line 6).
-          \item Repeat the process.
-        \end{enumerate}
-  \item \textbf{Termination} Return the final~\texttt{Solution}~(line 7).
+      \item \textbf{Initialization}: Initialize a new empty~\texttt{Solution}.
+            and select a~\texttt{Component} to be added heuristically~(lines 2-3)
+      \item \textbf{Construction}: Build the solution~(lines 4-6).
+            \begin{enumerate}
+                  \item If there is a component (\texttt{c}) available for addition to the
+                        current solution,~(\ie{},~\texttt{c} is not the~\texttt{None}
+                        sentinel value), proceed; otherwise stop the~\textbf{Construction}.~(line 4)
+                  \item Add the selected component to the solution~(line 5).
+                  \item Heuristically select a new component~(line 6).
+                  \item Repeat the process.
+            \end{enumerate}
+      \item \textbf{Termination} Return the final~\texttt{Solution}~(line 7).
 \end{enumerate}
 
 In fact, this simple solver can serve as practical tool for testing the
@@ -46,11 +46,11 @@ with respect to the objective value and/or bound.
 
 From an implementation perspective, this particular version takes a problem
 instance as input and uses it to generate an initial empty solution.~However,
-it is worth noting that this method could have been designed to accept a partial
-solution and then complete its construction from that point onwards.~In regard
-to this, the option to provide the problem instance rather than a solution as a
-parameter was chosen primarily for illustrative purposes and to showcase the
-interaction between the~\texttt{Problem} and the~\texttt{Solution} data structures.
+this method could have been designed to accept a partial solution and then
+complete its construction from that point onwards.~Albeit, the option
+to provide the problem instance rather than a solution as a parameter was chosen
+primarily for illustrative purposes and to showcase the interaction between
+the~\texttt{Problem} and the~\texttt{Solution} data structures.
 
 \subsection{Beam Search}
 \label{subsec:beam-search-solver}
@@ -76,8 +76,7 @@ Additionally, this solver takes other parameters as input in this
 implementation.~These include a~\texttt{Problem} instance and the beam
 width~(\texttt{bw}), which specifies the size of the solution archive. The
 choice for supplying the problem as a parameter instead of a solution follows
-the same motivation as previously explained
-in~\Cref{subsec:heuristic-construction}.
+the same motivation as previously mentioned in~\Cref{subsec:heuristic-construction}.
 
 \lstinputlisting[float=ht,caption={Beam Search Solver Implementation},label=lst:bs]{../assets/code/bs.py}
 
@@ -85,39 +84,39 @@ In brief, this~\acrshort{beam-search} solver implementation is described by the
 following steps:
 
 \begin{enumerate}
-  \item \textbf{Initialization}: Start by initializing an empty~\texttt{Solution}. If
-        this initial solution is~\texttt{feasible}, store it as the best solution found so far.
-        Add a tuple representing this solution to the archive~(\texttt{beam}), including its
-        upper bound value.~(lines 2-5)
-  \item \textbf{Construction}: Construct the solution while there is still available time in the budget~(lines 6-22).
-        \begin{enumerate}
-          \item Create an empty candidate list~(\texttt{cs})~(line 7).
-          \item \textbf{Branch}: Expand the current solutions in the archive by adding
-                components to create new partial solutions~(lines 8-10).
-                \begin{enumerate}
-                  \item Select a solution from the archive~(line 8).
-                  \item Enumerate all possible components that can be added to that solution~(line 9).
-                  \item Add these new solutions to the candidate list~\texttt{cs} as tuples containing
-                        the upper bound value, the partial solution, and the component leading to
-                        this contribution~(line 10).
-                  \item Repeat while possible.
-                \end{enumerate}
-          \item If the candidate list~(\texttt{cs}) is not empty, filter the~\texttt{bw} best
-                candidate solutions based on their upper bound values.~(lines 11-13)
-          \item Empty the the~\texttt{beam} list~(line 14).
-          \item \textbf{Update}: Build the beam for the next iteration and update best solution~(lines 15-22).
-                \begin{enumerate}
-                  \item Select a candidate solution (make a~\texttt{copy}) to
-                        potentially update the best solution~(lines 16).
-                  \item Add the respective component to the current candidate solution~(line 17).
-                  \item If the solution is feasible and its objective value is better than
-                        the best solution found so far, update the best solution by replacing
-                        it with the current one~(lines 18-21).
-                  \item Add the candidate solution to the~\texttt{beam} list~(line 22).
-                  \item Repeat while possible.
-                \end{enumerate}
-        \end{enumerate}
-  \item \textbf{Termination} Return the best~\texttt{Solution} found~(line 23).
+      \item \textbf{Initialization}: Start by initializing an empty~\texttt{Solution}. If
+            this initial solution is~\texttt{feasible}, store it as the best solution found so far.
+            Add a tuple representing this solution to the archive~(\texttt{beam}), including its
+            upper bound value.~(lines 2-5)
+      \item \textbf{Construction}: Construct the solution while there is still available time in the budget~(lines 6-22).
+            \begin{enumerate}
+                  \item Create an empty candidate list~(\texttt{cs})~(line 7).
+                  \item \textbf{Branch}: Expand the current solutions in the archive by adding
+                        components to create new partial solutions~(lines 8-10).
+                        \begin{enumerate}
+                              \item Select a solution from the archive~(line 8).
+                              \item Enumerate all possible components that can be added to that solution~(line 9).
+                              \item Add these new solutions to the candidate list~\texttt{cs} as tuples containing
+                                    the upper bound value, the partial solution, and the component leading to
+                                    this contribution~(line 10).
+                              \item Repeat while possible.
+                        \end{enumerate}
+                  \item If the candidate list~(\texttt{cs}) is not empty, filter the~\texttt{bw} best
+                        candidate solutions based on their upper bound values.~(lines 11-13)
+                  \item Empty the the~\texttt{beam} list~(line 14).
+                  \item \textbf{Update}: Build the beam for the next iteration and update best solution~(lines 15-22).
+                        \begin{enumerate}
+                              \item Select a candidate solution (make a~\texttt{copy}) to
+                                    potentially update the best solution~(lines 16).
+                              \item Add the respective component to the current candidate solution~(line 17).
+                              \item If the solution is feasible and its objective value is better than
+                                    the best solution found so far, update the best solution by replacing
+                                    it with the current one~(lines 18-21).
+                              \item Add the candidate solution to the~\texttt{beam} list~(line 22).
+                              \item Repeat while possible.
+                        \end{enumerate}
+            \end{enumerate}
+      \item \textbf{Termination} Return the best~\texttt{Solution} found~(line 23).
 \end{enumerate}
 
 It is important to note that, this algorithm requires the implementation of
@@ -153,28 +152,28 @@ In brief, this~\acrshort{iterated-local-search} solver implementation is
 described by the following steps:
 
 \begin{enumerate}
-  \item \textbf{Initialization}: Begin with the current best solution as the starting solution.~(lines 2-3)
-  \item \textbf{Local Search}: Conduct local search on the starting solution
-        while there is available time in the budget.~(lines 4-21)
-        \begin{enumerate}
-          \item \textbf{First Improvement}: Enhance the solution through the first local move that results in
-                a better objective value.~(lines 5-14)
-                \begin{enumerate}
-                  \item Randomly pick a local move from the neighborhood of the current solution.~(line 5)
-                  \item Calculate the incremental change in the objective value due to the local move.~(line 6)
-                  \item Check if applying the current local move results in a better solution.~(line 7)
-                  \item If improvement is achieved, apply the local move and proceed to the \textbf{Update} stage.~(lines 8-9)
-                  \item If the time budget is exhausted during the first improvement stage, halt the \textbf{Local Search}
-                        and return the best solution found so far.~(lines 10-14)
-                  \item Repeat this process until all possible local moves have been explored.
-                \end{enumerate}
-          \item \textbf{Update}: Update the current best solution if an improvement was achieved
-                in the first improvement stage.~(lines 15-20)
-          \item \textbf{Perturb}: Optionally, perturb the best solution with a
-                kick strength of \texttt{ks}, if an improvement was obtained in the
-                first improvement stage.~(line 21)
-        \end{enumerate}
-  \item \textbf{Termination} Return the best~\texttt{Solution} found.~(lines 22-15)
+      \item \textbf{Initialization}: Begin with the current best solution as the starting solution.~(lines 2-3)
+      \item \textbf{Local Search}: Conduct local search on the starting solution
+            while there is available time in the budget.~(lines 4-21)
+            \begin{enumerate}
+                  \item \textbf{First Improvement}: Enhance the solution through the first local move that results in
+                        a better objective value.~(lines 5-14)
+                        \begin{enumerate}
+                              \item Randomly pick a local move from the neighborhood of the current solution.~(line 5)
+                              \item Calculate the incremental change in the objective value due to the local move.~(line 6)
+                              \item Check if applying the current local move results in a better solution.~(line 7)
+                              \item If improvement is achieved, apply the local move and proceed to the \textbf{Update} stage.~(lines 8-9)
+                              \item If the time budget is exhausted during the first improvement stage, halt the \textbf{Local Search}
+                                    and return the best solution found so far.~(lines 10-14)
+                              \item Repeat this process until all possible local moves have been explored.
+                        \end{enumerate}
+                  \item \textbf{Update}: Update the current best solution if an improvement was achieved
+                        in the first improvement stage.~(lines 15-20)
+                  \item \textbf{Perturb}: Optionally, perturb the best solution with a
+                        kick strength of \texttt{ks}, if an improvement was obtained in the
+                        first improvement stage.~(line 21)
+            \end{enumerate}
+      \item \textbf{Termination} Return the best~\texttt{Solution} found.~(lines 22-15)
 \end{enumerate}
 
 \subsection{Outline}
@@ -190,13 +189,13 @@ meta-heuristics requires different methods from the model, which we summarize
 in~\Cref{tab:mh-api-methods}.
 
 \begin{table}[h]
-  \centering
-  \input{mainmatter/4-PrincipledModellingFramework/tables/mh-api.tex}
-  \caption{Required Methods from Model API for Multiple Meta-Heuristics}
-  \caption*{\small Note: Only the essential methods according to our
-    implementation are presented, although other implementations may utilize
-    different methods. Additionally, for the context of~\acrshort{aco}, our
-    implementation adopts the~\emph{Max-Min Ant System} variant~\cite{stutzle1999maxmin}. Nevertheless, the
-    method prerequisites should generalize to various other variants of this~\acrshort{meta-heuristic}.}
-  \label{tab:mh-api-methods}
+      \centering
+      \input{mainmatter/4-PrincipledModellingFramework/tables/mh-api.tex}
+      \caption{Required Methods from Model API for Multiple Meta-Heuristics}
+      \caption*{\small Note: Only the essential methods according to our
+            implementation are presented, although other implementations may utilize
+            different methods. Additionally, for the context of~\acrshort{aco}, our
+            implementation adopts the~\emph{Max-Min Ant System} variant~\cite{stutzle1999maxmin}. Nevertheless, the
+            method prerequisites should generalize to various other variants of this~\acrshort{meta-heuristic}.}
+      \label{tab:mh-api-methods}
 \end{table}
