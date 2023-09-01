@@ -15,16 +15,22 @@ nature and relative slowness compared to compiled languages can impact the
 efficiency of solver execution.~To mitigate this, we turned to an alternative
 \emph{Python} implementation known as~\emph{PyPy}.~This just-in-time (JIT) compiled
 version of Python has a substantial speed boost, claiming to be approximately
-4.8 times faster than the on found and average interpreter~(\emph{CPython}).
+4.8 times faster than the implementation found and average interpreter~(\emph{CPython}).
 
 % TODO: Add a plot here to prove it
+In fact, this became particularly evident when dealing with complex problem
+instances, where the performance difference was remarkable.  Albeit, while the
+current~\emph{Python} implementation served its purpose for prototyping and
+exploring ideas for problem-solving, a reimplemented version of this framework
+in a more performant programming language would be necessary for optimal
+performance. Nonetheless, rapidly testing new ideas from a modeling standpoint
+this framework remains a valuable choice.
 
-The decision to employ~\emph{PyPy} proved crucial, as it significantly improved the
-execution times of our solvers.~This was particularly evident when dealing with
-complex problem instances, where the performance difference was remarkable.
-Albeit, while the current~\emph{Python} implementation served its purpose for
-prototyping and exploring ideas for problem-solving, a reimplemented version of
-this framework in a more performant programming language would be necessary for
-optimal performance. Nonetheless, for brainstorming and rapidly testing new
-ideas from a modeling standpoint, from our perspective, this framework remains
-a valuable choice.
+Lastly, it's important to acknowledge that the specification of the framework
+might not be exhaustive. The range of~\acrshort{meta-heuristic} methods, as
+documented in the literature~\cite{osman1996metaheuristics}, is extensive, and
+new methods could potentially emerge in the future. While the range of
+meta-heuristics covered in the framework is substantial, it is possible that
+certain use-cases could necessitate the addition of new functionalities.
+Therefore, the framework's completeness and stability will certainly depend on
+insights from the community.
