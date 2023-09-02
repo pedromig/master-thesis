@@ -6,24 +6,23 @@ centers is a complex optimization challenge with multiple factors to consider.
 While the primary objective is to optimize the utilization of computing capacity
 offered to users, it is equally imperative to ensure the uninterrupted provision
 of computing power, even in scenarios where hardware failures are inevitable.
-Based on this motivation, Google invites participants to address these
-challenges in a (fictional) Google Data Center modelled after a real-world
-scenario, which we described next.
+Drawing inspiration from these engineering challenges, this problem presents a
+Google Data Center design scenario that closely mirrors real-world complexities,
+as we describe next.
 
-The data center, as outlined in the problem statement, is modelled as set of
-distinct~\textit{rows}, each comprising a certain number of available spaces
-known as~\textit{slots}, where servers can be positioned. It is worth
-highlighting that rows share resources, including electric power, Consequently,
-in the event of a hardware failure, an entire row of servers may become
-inaccessible, impacting the entirety of the servers located within that row.
-Moreover, the maximum number of slots is consistent across all rows within the
-data center. However, not all slots may be accessible due to specific
-installations or requirements that impose restrictions on the use of certain
-spaces.
+The data center, as outlined in the problem statement, is modelled as collection
+of distinct~\textit{rows}. Each row consists of a specific number of available
+spaces referred to as~\textquote{slots}, designated for the placement of
+servers.~Notably, this number of slots remains consistent across all rows within
+the data center.~Additionally, certain slots within the data center may be
+unusable due to other installations that impose restrictions on the utilization
+of those specific spaces. However, because rows share resources, such as
+electrical power, a hardware failure in one row can render the entire row of
+servers inaccessible.
 
-In ~\Cref{fig:data-center-layout}, an illustration depicts a layout
-featuring two rows, each consisting of a total of seven slots. Some of these
-slots are marked as unavailable as indicated by the cross symbol.
+In~\Cref{fig:data-center-layout}, an illustration depicts a layout featuring two
+rows, each consisting of a total of seven slots. Note that some of these slots
+are marked as unavailable, as indicated by the cross symbol.
 
 \begin{figure}[h]
   \centering
@@ -36,14 +35,14 @@ The servers are defined by a tuple that includes two attributes: the
 \textit{size} of the server, which is measured in terms of the number of
 consecutive slots occupied by the machine, and the computing~\textit{capacity}
 of the server, represented as an integer value that indicates the machine's CPU
-resources.~The~\Cref{table:dc-example-properties} presents potential values for
+resources.~The~\Cref{tab:dc-example-properties} presents potential values for
 these parameters, showcasing examples of four distinct servers.
 
 \begin{table}[ht]
   \centering
   \input{mainmatter/5-OptimizeADataCenter/tables/servers.tex}
   \caption{Server Properties}
-  \label{table:dc-example-properties}
+  \label{tab:dc-example-properties}
 \end{table}
 
 Moreover, when servers are positioned within the data center rows, they are
@@ -54,7 +53,7 @@ collective sum of the capacities of all the servers allocated to it.
 For clarification,~\Cref{fig:data-center-layout-with-servers} offers a potential
 assignment of servers based on the data center layout depicted in
 ~\Cref{fig:data-center-layout}, and the server attributes provided
-in~\Cref{table:dc-example-properties}. In this particular case, servers are
+in~\Cref{tab:dc-example-properties}. In this particular case, servers are
 allocated to two distinct resource pools.
 
 \begin{figure}[h]
@@ -72,81 +71,61 @@ located in the unaffected rows.~In the context of the problem, this represents
 the concept of a~\textit{guaranteed capacity} for a pool, which can be defined
 as follows:
 
-Given a resource pool ($p$), the guaranteed capacity of that ($gc_{p}$) is a
-measure of the remaining computing capacity available in the event that at most
-one arbitrary row~($r \in \mathcal{R}$) of the data center becomes unavailable.
+Let $\mathcal{P}$ be the number of resource pools, the guaranteed capacity
+($gc_{p}$) of a given pool ($p = 1, \ldots, \mathcal{P}$), is a measure of the
+remaining computing capacity available in the event that at most one arbitrary
+row~($r = 1, \ldots, \mathcal{R}$) of the data center becomes inoperable.
 Formally, this can be described as shown in~\Cref{eq:guaranteed-capacity}, where
-$\mathcal{M}$ denotes the set of servers (machines) available and $c_{m}$ the
-computing capacity of a given server ($m \in \mathcal{M}$).
+$\mathcal{M}$ denotes the number of servers available, $c_{m}$ the computing
+capacity of a given server ($m = 1, \ldots, \mathcal{M}$), and $x_{m,p,r}$ is a
+binary variable indicating whether the server $m$ is present (1) or absent
+(0) in pool $p$ for row $r$.
 
 \begin{equation}
   \label{eq:guaranteed-capacity}
-  {gc}_{p} = \min_{r \in \mathcal{R}} \left({\sum_{m \in \mathcal{M} \land m \in p} c_{m}} - {\sum_{ m \in \mathcal{M} \land m \in p \land m \in r} c_{m}}\right)
+  {gc}_{p} = \min_{r = 1}^{\mathcal{R}} \left({\sum_{m = 1}^{\mathcal{M}}{\sum_{i = 1}^{\mathcal{R}} c_{m} \cdot x_{m,p,i}}} - {\sum_{m = 1}^{\mathcal{M}} c_{m} \cdot x_{m,p,r}}\right)
 \end{equation}
 
-In essence, the objective of this problem can be succinctly defined as:
-Given a layout description of a data center, the objective is to determine the
-optimal arrangement of servers within the data center rows and assign these
+The objective of this problem can thus be succinctly defined as follows: given a
+layout description of a data center, the goal is to determine the optimal
+arrangement of servers within the data center rows and assignment of these
 servers to resource pools, such that, the minimum guaranteed capacity across all
-pools is maximized. Mathematically, this can be expressed as shown in Equation
-\ref{eq:objective}, where $s$ represents a candidate solution, $\mathcal{P}$
-the set of pools, and $gc_{p}$ denotes the guaranteed capacity for a specific
-pool ($p \in \mathcal{P}$).
+pools is maximized. Mathematically, this can be expressed as shown
+in~\Cref{eq:objective}.
 
 \begin{equation}
   \label{eq:objective}
-  \max f(s) = \min_{p \in \mathcal{P}} \left({gc}_{p}\right)
+  \max{f(s)} = \min_{p = 1}^{\mathcal{P}}{{gc}_{p}}
 \end{equation}
 
-Moreover, in a competition context, the value obtained from evaluating a
-solution represents the score a contestant would attain for solving a particular
-instance of this problem. For clarification of all the aforementioned concepts,
-the~\Cref{ex:problem-scoring} illustrates the scoring process of a candidate
-solution.
+To clarify all the concepts discussed the~\Cref{ex:problem-scoring} demonstrates
+how the objective is evaluated for the allocation of servers presented
+in~\Cref{fig:data-center-layout-with-servers}.
 
-\begin{example}[Scoring]
+\begin{example}[Objective Evaluation]
   \label{ex:problem-scoring}
-  Regarding the data center layout shown
-  in~\Cref{fig:data-center-layout-with-servers} and the server properties
-  provided in~\Cref{table:dc-example-properties}, we can summarize
-  the capacities assigned to each resource pool, by row, as shown in~\Cref{table:dc-gc-example}.
+  Consider the capacities assigned to each resource pool per row, as illustrated
+  in~\Cref{tab:dc-gc-example}.
 
   \begin{table}[ht]
     \centering
     \input{mainmatter/5-OptimizeADataCenter/tables/gc.tex}
     \caption{Guaranteed Capacity \& Score}
-    \label{table:dc-gc-example}
+    \label{tab:dc-gc-example}
   \end{table}
 
   The score obtained for this server placement, as determined by the evaluation
-  of the objective~\ref{eq:objective}, can thus be calculated as $\min(5, 2) = 2$.
+  of the objective~\ref{eq:objective}, is calculated as $\min(5, 2) = 2$.
 \end{example}
 
-Regarding the problem instances to be optimized, crucial details are provided
-concerning the layout of the data center, the available servers for allocation,
-and specifics about the unavailable slots.~These aspects are represented using
-the following parameters and their corresponding constraints:
+To conclude, several constraints are imposed on various parameters that
+describe the data center design for this problem. These constraints are as
+follows:
 
 \begin{description}
-  \item[\textbf{$\mathcal{R}$.}] ($ 1 \leq \mathcal{R} \leq 1000$) The number of rows in the data center.
-  \item[\textbf{$\mathcal{S}$.}] ($ 1 \leq \mathcal{S} \leq 1000$) The number of slots in each row of the data center.
-  \item[\textbf{$\mathcal{U}$.}] ($ 0 \leq \mathcal{U} \leq \mathcal{R} \times \mathcal{S}$) The number of unavailable slots.
-  \item[\textbf{$\mathcal{P}$.}] ($ 1 \leq \mathcal{P} \leq 1000$) The number of resource pools.
-  \item[\textbf{$\mathcal{M}$.}] ($ 1 \leq \mathcal{M} \leq \mathcal{R} \times \mathcal{S}$) The number of servers to be allocated.
+  \item[\textbf{$\mathcal{R}$.}] The number of rows in the data center~($ 1 \leq \mathcal{R} \leq 1000$)
+  \item[\textbf{$\mathcal{S}$.}] The number of slots in each row of the data center~($ 1 \leq \mathcal{S} \leq 1000$)
+  \item[\textbf{$\mathcal{U}$.}] The number of unavailable slots~($ 0 \leq \mathcal{U} \leq \mathcal{R} \times \mathcal{S}$)
+  \item[\textbf{$\mathcal{P}$.}] The number of resource pools~($ 1 \leq \mathcal{P} \leq 1000$)
+  \item[\textbf{$\mathcal{M}$.}] The number of servers to be allocated~($ 1 \leq \mathcal{M} \leq \mathcal{R} \times \mathcal{S}$)
 \end{description}
-
-Notably, in a compettion setting, participants were required to read and output
-both the problem description details presented, and the solution obtained, in a specific
-format as outlined in the problem statement. For a description of the these and
-other considerations regarding mostly implementation and evaluation details, the
-reader can refer to the official problem statement which can be found on the
-Google Coding Competitions Archive~\cite{googlellc2023codingcompetitionsarchive}.
-
-% This requirement can influence the practical representation
-% of solutions and may impact the way the model is defined. However, from a
-% conceptual standpoint, the representation itself is not of utmost importance, as
-% it should be feasible to translate between different representations without
-% losing any essential information. Therefore, while modeling the problem using
-% the adopted modelling framework's proposed aspects, we used the representation
-% that we found to be the most well-suited and efficient from an implementation
-% standpoint, as opposed to the most convenient to work with.

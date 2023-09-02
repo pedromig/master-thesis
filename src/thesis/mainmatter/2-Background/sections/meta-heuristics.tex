@@ -7,11 +7,11 @@ from natural phenomena like collective behavior, natural selection, and physical
 processes of materials.
 
 However, the majority of state-of-the-art meta-heuristic algorithms can be
-described by a couple of distinctive traits~\cite{blum2003metaheuristics} such as:
+described by a few distinctive traits~\cite{blum2003metaheuristics} such as:
 
 \begin{description}
-  \item[\textbf{Search Strategy.}] This refers to the method used to construct a
-    solution. It can be one of three main types: constructive, local, or a
+  \item[\textbf{Search Strategy.}] This refers to the method used to find a
+    solution.~It can be one of three main types: constructive, local, or a
     \emph{composite} approach that combines both strategies.
 
   \item[\textbf{Memoization.}] This concept involves maintaining a record or
@@ -22,7 +22,7 @@ described by a couple of distinctive traits~\cite{blum2003metaheuristics} such a
   \item[\textbf{State Size.}] This pertains to the number of solutions being
     evolved during the construction phase.~In~\emph{population methods}, multiple
     solutions are worked with at each iteration, while in~\emph{trajectory methods} (single-state),
-    only a single solution improved at a time.
+    only a single solution is improved at a time.
 \end{description}
 
 In this section, we will offer a brief overview of select state-of-the-art
@@ -45,12 +45,14 @@ starting points for the next iteration. It's important to acknowledge that the
 size of this archive, and consequently the number of solutions filtered at each
 step, is dictated by a parameter referred to as the~\emph{beam width}.
 
-The construction process of~\acrshort{beam-search} concludes either when there
+The construction process of~\acrshort{beam-search} terminates either when there
 are no more candidate solutions to expand or when other predetermined stopping
 criteria are satisfied. For illustration purposes, the pseudocode for
 \acrshort{beam-search} is presented in \Cref{algorithm:beam-search}.
+In this context, the notation $\argmax_{w}$ is employed to introduce the concept
+of selecting the top $w$ elements from a given set.
 
-\begin{algorithm}
+\begin{algorithm}[h]
   \input{mainmatter/2-Background/algorithms/bs.tex}
   \caption{\acrlong{beam-search}}
   \label{algorithm:beam-search}
@@ -58,15 +60,21 @@ criteria are satisfied. For illustration purposes, the pseudocode for
 
 The pseudocode assumes that the~\texttt{Branch} function generates the set of
 all potential (partial) solutions achieved by incorporating components from the
-ground set that are not currently part of the solution. It's worth noting that,
+ground set that are not currently part of the solution. It is worth noting that,
 since the solution is constructed incrementally, the solutions obtained through
 branching might not always be feasible.~As a result, an additional step for
-feasibility verification is required before updating the best solution~($s^{*}$)
-identified during the search process. Moreover, it's important to emphasize that
-the ~\emph{beam width} parameter directly influences the quality of the
-solutions discovered.~Smaller values might lead to premature convergence to a
-local optimum, while larger values, although capable of producing better-quality
-solutions, could lead to increased memory and computational requirements.
+feasibility verification is required before updating the best solution~($s$)
+identified during the search process.~Likewise, a similar check is carried
+out for the empty solution, as its feasibility can vary depending on the
+specific problem being addressed.
+
+It is important to emphasize that the~\emph{beam width} parameter directly
+influences the quality of the solutions discovered.~Smaller values might lead to
+premature convergence to a local optimum, while larger values, although capable
+of producing better-quality solutions, could lead to increased memory and
+computational requirements.~Futhermore, the effectiveness of
+this~\acrshort{meta-heuristic} is also closely linked to the quality of the
+upper bound function.
 
 \subsection{Greedy Randomized Adaptive Search Procedure}
 \label{subsec:grasp}
@@ -90,14 +98,14 @@ The provided pseudocode in~\Cref{algorithm:grasp} offers an overview of how the
 
 It's important to highlight that this meta-heuristic, GRASP, provides a means of
 controlling the balance between randomization and greediness in solution
-construction (\texttt{GreedyRandomizedConstruction} function). This control is
+construction (\texttt{GreedyRandomizedConstruction}). This control is
 achieved through the parameter $\alpha$, which serves as a threshold for the
 quality of solutions within the candidate list.~Specifically, when $\alpha = 1$,
 the construction process is entirely random, and all possible components are
 included in the candidate list, regardless of their quality. Conversely, with
 $\alpha = 0$, only the best component is considered at each step, rendering this
 \acrshort{meta-heuristic} purely greedy. It's worth noting that the inclusion of
-the optional local search step (\texttt{LocalSearch} function) can significantly
+the optional local search step (\texttt{LocalSearch}) can significantly
 enhance the quality of the randomized greedy process. However, the crux of
 fine-tuning lies in determining an appropriate value for $\alpha$.
 
@@ -178,11 +186,11 @@ of this~\acrshort{meta-heuristic}
 
 In summary, the~\acrshort{aco} meta-heuristic can be described as a process that
 comprises of a solution construction
-phase~(~\texttt{AntBasedSolutionConstruction} function), in which each solution
+phase~(\texttt{AntBasedSolutionConstruction}), in which each solution
 of the population is constructed using both the~\textit{pheromone model} and
 heuristic information, followed by an optional phase of exploiting these
-solutions through local search~(\texttt{LocalSearch} function), and culminating
-in a pheromone update phase~(\texttt{PheromoneUpdate} function). This process is
+solutions through local search~(\texttt{LocalSearch}), and culminating
+in a pheromone update phase~(\texttt{PheromoneUpdate}). This process is
 then repeated for multiple iterations, until certain stopping criteria is met.
 
 \subsection{Hill-Climbing}

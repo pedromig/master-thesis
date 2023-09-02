@@ -1,18 +1,18 @@
 % Iterated Greedy (algorithm2e pseudocode)
 
 \KwIn{Objective Function ($f$), Upper Bound Function($\Phi_{ub}$)}
-\KwOut{Solution ($s^{*})$}
+\KwOut{Solution ($s)$}
 
 \SetKwFunction{Destruct}{\texttt{Destruct}}
 \SetKwFunction{Construct}{\texttt{Construct}}
 \SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
 \SetKwFunction{Accept}{\texttt{Accept}}
 
-$s^{*}$ $\gets$ \Construct($\emptyset, \Phi_{ub}$)\;
+$s$ $\gets$ \Construct($\emptyset, \Phi_{ub}$)\;
 \While{\texttt{stopping criteria not met}}{
-  $s$ $\gets$ \Destruct{$s^{*}$}\;
-  $s$ $\gets$ \Construct{$s, \Phi_{ub}$}\;
-  \If{$s\ $ \texttt{is feasible} $\land$ $f(s) > f(s^{*})$}{
-    $s^{*}$ $\gets$ $s'$\;
+  $s'$ $\gets$ \Destruct{$s$}\;
+  $s'$ $\gets$ \Construct{$s', \Phi_{ub}$}\;
+  \If{$s'\ $ \texttt{is feasible} $\land$ $f(s') > f(s)$}{
+    $s$ $\gets$ $s'$\;
   }
 }

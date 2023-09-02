@@ -1,1 +1,73 @@
-\subsection{Representation}
+In this section, we will provide a formal perspective on the developed problem
+model, outlining the essential elements that define it. We will begin with the
+problem instance, where we describe the data that characterizes a problem
+instance. Next, we will delve into the concept of a solution within the context
+of this problem. Finally, we will detail the combinatorial and neighborhood
+structures which relate to~\acrshort{constructive-search} and~\acrshort{local-search} approaches.
+
+\subsection{Problem}
+
+As previously discussed in~\Cref{sec:odc-problem}, the problem revolves around
+the placement of servers within data center rows and their allocation to
+resource pools. This allocation is subject to space constraints imposed by the
+number of slots available in each row and the potential unavailability of
+certain slots. Therefore, to fully characterize a specific problem instance, the
+following data must be known:
+
+\begin{description}
+  \item[\textbf{Servers.}] A description of the servers to be allocated.
+    \begin{equation}
+      \text{servers} = \{(s_m, c_m) \mid m = 0, 1, 2, \ldots, \mathcal{M}\}
+    \end{equation}
+    Where, $s_{m}$ and $c_{m}$ denote the size (in slots) and computing capacity of server $m$, respectively.
+  \item[\textbf{Pools.}] A description of the available resource pools.
+    \begin{equation}
+      \text{pools} = \{c_{p} \mid p = 0, 1, 2, \ldots, \mathcal{P}\}
+    \end{equation}
+    Where, $c_{p}$ is the total capacity allocated to pool $p$.
+  \item[\textbf{Rows.}] A description of the rows of the data center.
+    \begin{equation}
+      \begin{aligned}
+        \text{rows} & = \{r_i \mid i = 1, 2, \ldots, \mathcal{R}\}                                  \\
+        r_i         & = \{r_{i,1}, r_{i,2}, \ldots, r_{i,j} \mid  j = 0, 1, 2 \ldots, \mathcal{S}\}
+      \end{aligned}
+    \end{equation}
+    Here, we introduce the binary variable $r_{i,j}$, which denotes whether, for
+    a given row $i$, the slot $j$ is available (1) or unavailable (0).
+  \item[\textbf{Unavailable Slots.}] A description of the unavailable slots for each row.
+    \begin{equation}
+      \text{unavailable} = \{ (i, j) \mid r_{i, j} = 0 \}
+    \end{equation}
+\end{description}
+
+\subsection{Component}
+
+% What is the ground set, what are components (pool, server, segment), Explain segments here
+% Empty Solution 
+% Partial Solution
+% Complete Solution
+
+% Data that characterizes a solution (pool, server, row)
+
+\subsection{Solution}
+
+A solution for this problem can then be described as an allocation of a server
+to a specific row and a specific pool so long as that row can accommodate the server.
+Formally, we can represent a solution as a set of allocations where each allocation is
+
+\subsection{Objective Function}
+
+% Talk about objective function
+% Talk about surrogate model aka. (proxy) objective function for this problem?
+
+\subsection{Combinatorial Structure}
+
+\subsubsection*{Construction Rules}
+% Talk about constructions (normal, sequence, heuristic)
+
+\subsubsection*{Upper Bound}
+% Explain all the bounds here 
+
+\subsection{Neighborhood Structure}
+
+% Explain Possible local moves

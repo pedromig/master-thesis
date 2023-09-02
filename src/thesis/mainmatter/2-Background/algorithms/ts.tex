@@ -1,20 +1,19 @@
 % Tabu Search (algorithm2e pseudocode)
 
-\KwIn{Solution ($s'$), Tabu Length ($l_{max}$), Objective Function ($f$)}
-\KwOut{Solution ($s^{*}$)}
+\KwIn{Solution ($s$), Tabu Length ($l_{max}$), Objective Function ($f$)}
+\KwOut{Solution ($s$)}
 
 \SetKwFunction{Oldest}{\texttt{Oldest}}
 
-$s^{*} \gets$ $s'$\;
 $\mathcal{T}$ $\gets$ $\{ \emptyset \}$\;
 \While{\texttt{stopping criteria not met}}{
-  $s$ $\gets$ $\underset{s\ \in\ \mathcal{N}(s) \backslash \mathcal{T}}{\argmax}\ f(s)$ \Comment*[f]{Select best neighbor $s \notin \mathcal{T}$}\;
-  \If{$f(s) > f(s^{*})$}{
-    $s^{*}$ $\gets$ $s$\;
-    $\mathcal{T} \gets \mathcal{T} \cup \{s\}$\;
+  $s'$ $\gets$ $\underset{s'\ \in\ \mathcal{N}(s) \backslash \mathcal{T}}{\argmax}\ f(s')$ \Comment*[f]{Select best neighbor $s' \notin \mathcal{T}$}\;
+  \If{$f(s') > f(s)$}{
+    $s$ $\gets$ $s'$\;
+    $\mathcal{T} \gets \mathcal{T} \cup \{s'\}$\;
   }
   \If{$\left\lvert \mathcal{T} \right\rvert$ $>$ $l_{\max}$} {
     $\mathcal{T}$ $\gets$ $\mathcal{T}\ \setminus $ \Oldest{$\mathcal{T}$}\;
   }
 }
-\Return{$s^{*}$}
+\Return{$s$}

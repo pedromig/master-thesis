@@ -4,10 +4,9 @@ problems~\cite{papadimitriou1998combinatorial,yu2010combinatorial,luke2013essent
 The approaches followed by these methods are diverse and typically defined by
 factors such as the time complexity, the quality and the strategy for finding
 solutions. Particularly, algorithms are often classified in the literature as
-exact, approximation, or heuristic based on the quality of solutions. Moreover,
-for each category exist procedures with varying complexities rely on different
-strategies to find solutions which, in essence, can be classified as
-constructive or local.
+exact, approximation, or heuristic based on the quality of solutions.~Moreover,
+(meta-)heuristic approaches are often described in terms of constructive and
+local search procedures.
 
 \subsection{Exact, Approximation and Heuristic Methods}
 \label{subsec:approaches}
@@ -28,11 +27,11 @@ techniques to enhance the exploration of the search space.
 In Branch and Bound approaches, the strategy revolves around utilizing bounds to
 restrict the search space. Specifically, the upper bound facilitates pruning the
 search tree, effectively eliminating the need to explore solutions that are
-undoubtedly worse with respect to best solution found by the algorithm at a
+undoubtedly worse with respect to the best solution found by the algorithm at a
 particular stage. Similarly, the lower bound guarantees that solutions of
 inferior quality are rejected during the search process. On the other hand,
 Dynamic Programming approaches leverage the optimal substructure
-property~\cite{festa2014brief}, thereby avoiding recomputing previous
+property~\cite{festa2014brief}, thereby avoiding recomputing repeated
 sub-problems.
 
 \emph{Approximation} methods are designed to find solutions that are provably
@@ -52,8 +51,7 @@ they are derived from intuition and their effectiveness is closely tied to the
 characteristics of the problem at hand. Nevertheless, they are reliable means of
 finding solutions in difficult~\acrshort{combinatorial-optimization} problems,
 typically yielding good solutions in a short time frame when compared to exact
-methods.~A well-known class of algorithms that further extends these methods are
-meta-heuristics as will be further discussed and detailed in~\Cref{sec:meta-heuristics}.
+methods.
 
 A~\acrshort{meta-heuristic} is as a high-level heuristic method,
 as alluded by the word \textquote{meta}, which describes a concept as an
@@ -74,7 +72,7 @@ in terms of constructive and local search approaches, which we describe next.
 
 \acrfull{constructive-search} is an approach for optimization where from an
 empty or partial solution for a given problem a feasible complete solution is
-constructed by iteratively adding components extracted from the ground set. The
+constructed by iteratively adding components selected from the ground set. The
 construction process is guided by a pre-established set of rules, which may be
 heuristic in nature or informed by other relevant information,~\eg{}, objective
 value and bounds.~These rules determine what components from the ground set can
@@ -89,7 +87,7 @@ procedure~\cite{marti2013multistart} is shown in~\Cref{algorithm:cs}.
   \label{algorithm:cs}
 \end{algorithm}
 
-It's important to observe that a constructive search approach hinges on a
+It is important to observe that a constructive search approach hinges on a
 strategy for selecting a component to add to a solution, represented
 in~\Cref{algorithm:cs} through the~\texttt{SelectComponent} function.~Moreover,
 various other problem-specific details come into play. These encompass
@@ -102,24 +100,26 @@ problem \textit{model}, a concept we will delve into further in this thesis.
 \subsection{Local Search}
 \label{subsec:local-search}
 
-\acrfull{local-search} approaches begin, with feasible solution to a given
-problem, and then make modifications by adding or removing components in order
-to improve it. These modifications, are typically localized and aim to exploit
-the solution's neighborhood, as defined by the neighborhood structure of the
-problem. The procedure concludes when no further alterations can enhance the
-solution's quality, ultimately leading to a local optimum. In the scope of this
-work, a transformation that can be applied to a solution within in the context
-of a \acrshort{local-search} procedure will be referred to as~\textit{local move}.
+\acrfull{local-search} approaches begin, with a feasible solution to a given
+problem, and then make modifications by adding, removing, and swapping
+components in order to improve it. The range of possible modifications defined
+by the user define the neighborhood structure for a problem,
+which~\acrshort{local-search} approaches attempt to
+exploit.~The~\acrshort{local-search} approach terminates when no neighboring
+solution is better (or equal),~\ie{}, when the current solution is a local
+optimum. In the scope of this work, a transformation that can be applied to a
+solution within in the context of a \acrshort{local-search} procedure will be
+referred to as~\textit{local move}.
 
 The primary objective of a~\acrshort{local-search} process is to improve a
 solution in the direction of the local optimum. However, it is common in
-a~\acrshort{local-search} approach to eventually worsen a solution in order
-to allow for further exploration of previously unseen regions of the search
-space. This action is commonly referred to as a~\textit{perturbation}~\cite{lourenco2010iterateda}.
+a~\acrshort{local-search} approach to allow worsening a solution in order to
+explore previously unseen regions of the search space. This action is commonly
+referred to as a~\textit{perturbation}~\cite{lourenco2010iterateda}.
 Furthermore,~\acrshort{local-search} is frequently applied in sequence to a
 constructive search phase, where a~\acrshort{constructive-search} algorithm is
-used to construct a good initial solution, which is then further improved through
-a~\acrshort{local-search} approach.
+used to construct a good initial solution, which is then further improved
+through a~\acrshort{local-search} approach.
 
 A generic pseudocode for a local search procedure is outlined
 in~\Cref{algorithm:ls}. It's crucial to clarify that within the pseudocode, the

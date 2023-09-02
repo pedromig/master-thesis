@@ -10,16 +10,18 @@ First, we start by understanding the problem and modeling its details. Then, we
 can apply, or develop, a solver to find one or more solutions taking into
 account the given model. This approach serves, for example, as the foundation of
 most linear optimization software packages which are widely used to solve
-real-world problems,~\eg{},~\textit{Gurobi},~\textit{CPLEX}, or~\textit{GLPK}.
-In particular, such packages expect a mathematical formulation (model)
-describing the problem as a linear objective function and a set of linear
-constraints, and then use one or more algorithms designed to solve such linear
-optimization problems. This clear separation of concerns leads to some
-advantages.~Notably, practitioners who want to solve a particular problem can
-focus on developing the model for that problem and easily use existing solvers
-to find solutions without needing to implement state-of-the-art algorithms
-themselves. Meanwhile, solver developers can take advantage of existing problems
-to test and enhance their solvers' performance.
+real-world problems,~\eg{},~\textit{Gurobi}~\footnote{https://www.gurobi.com/},
+~\textit{CPLEX}~\footnote{https://www.ibm.com/products/ilog-cplex-optimization-studio/cplex-optimizer},
+or~\textit{GLPK}~\footnote{https://www.gnu.org/software/glpk/}.~In particular,
+such packages expect a mathematical formulation (model) describing the problem
+as a linear objective function and a set of linear constraints, and then use one
+or more algorithms designed to solve such linear optimization problems. This
+clear separation of concerns leads to some advantages.~Notably, practitioners
+who want to solve a particular problem can focus on developing the model for
+that problem and easily use existing solvers to find solutions without needing
+to implement state-of-the-art algorithms themselves. Meanwhile, solver
+developers can take advantage of existing problems to test and enhance their
+solvers' performance.
 
 In this work, we are interested in tackling~\acrfull{combinatorial-optimization}
 problems using a similar separation of concerns.~Generally
@@ -31,8 +33,7 @@ many~\acrshort{combinatorial-optimization} problems are NP-Hard, meaning that,
 the time required to solve them via (problem-specific) exact approaches grows
 exponentially with the problem size, and consequently generic exact methods will
 also grow exponentially. In practice, this means that exact methods are often
-ineffective to
-solve~\textquote{real-world}~\acrshort{combinatorial-optimization} problems
+ineffective to solve~\textquote{real-world}~\acrshort{combinatorial-optimization} problems
 which have large problem sizes.
 
 As a result, there has been a growing interest in the development of methods
@@ -86,8 +87,7 @@ choice. These problems often drew inspiration from real-world challenges, such
 as vehicle routing, task scheduling, and router placement. There is often some
 relation to classical problems found in~\acrshort{combinatorial-optimization}
 literature, which may provide theoretical and practical insights on how to solve
-them but these seem to be harder to solve then their classical counterparts.
-Moreover, exact algorithms to solve these problems efficiently are not known,
+them. Still, exact algorithms to solve these problems efficiently are not known,
 and up to our knowledge there is also no known heuristic or approximation method
 that prevails over other approaches.
 

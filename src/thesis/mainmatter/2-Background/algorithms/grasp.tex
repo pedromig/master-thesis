@@ -1,17 +1,23 @@
 % Greedy Randomized Adaptive Search Procedure (algorithm2e pseudocode)
 
 \KwIn{Alpha ($\alpha$), Objective Function ($f$), Upper Bound Function ($\Phi_{ub}$)}
-\KwOut{Solution ($s^{*}$).}
+\KwOut{Solution ($s$).}
 
 \SetKwFunction{GreedyRandomizedConstruction}{\texttt{GreedyRandomizedConstruction}}
 \SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
 
-$s^{*}$ $\gets$ $\emptyset$\;
+$s$ $\gets$ $\emptyset$\;
+$bobj$ $\gets$ $-\infty$\;
+
+\If{ $s\ $ \texttt{is feasible}}{
+  $bobj$ $\gets$ $f(s)$\;
+}
 \While{\texttt{stopping criteria not met}}{
-  $s$ $\gets$ \GreedyRandomizedConstruction{$\Phi_{ub}, \alpha$}\;
-  $s$ $\gets$ \LocalSearch{$s$}\;
-  \If{ $s\ $ \texttt{is feasible} $\land$ $f(s) > f(s^{*})$}{
-    $s^{*}$ $\gets$ $s$\;
+  $s'$ $\gets$ \GreedyRandomizedConstruction{$\Phi_{ub}, \alpha$}\;
+  $s'$ $\gets$ \LocalSearch{$s'$}\;
+  \If{ $s'\ $ \texttt{is feasible} $\land$ $f(s') > bobj$}{
+    $s$ $\gets$ $s'$\;
+    $bobj$ $\gets$ $f(s')$\;
   }
 }
 \Return{$s^{*}$}

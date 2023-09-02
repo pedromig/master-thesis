@@ -2,7 +2,7 @@ Optimization, as defined by Papadimitriou and
 Steiglitz~\cite{papadimitriou1998combinatorial}, is the task concerning the
 search for an optimal configuration or set of parameters that maximizes or
 minimizes a given objective function. In other words, optimizing involves
-finding the best solution to a given problem among a set of feasible
+finding an optimal solution to a given problem among a set of feasible
 solutions. Formally, an optimization problem can be defined as follows:
 
 \begin{definition}[Optimization Problem~\cite{papadimitriou1998combinatorial}]
@@ -61,8 +61,8 @@ a~\acrshort{combinatorial-optimization} can be formally defined as follows:
 \end{definition}
 
 Typical examples of~\acrshort{combinatorial-optimization} problems include
-network flow, matching, scheduling, shortest path and decision problems.
-Notably, the~\acrfull{knapsack-problem}~\cite{cacchiani2022knapsack,
+network flow, matching, scheduling, shortest path and decision problems.~Notably,
+the~\acrfull{knapsack-problem}~\cite{cacchiani2022knapsack,
   yu2010combinatorial,festa2014brief} is a well-known example of
 a~\acrshort{combinatorial-optimization} problem where the goal is to find the
 subset of items with the highest total profit that can fit in a knapsack without
@@ -111,14 +111,14 @@ the~\acrshort{knapsack-problem} every partial solution is feasible. Finally, a
 complete solution is a feasible solution where no further items can be added due
 to capacity constraints.
 
-In essence, since \acrshort{combinatorial-optimization} problems involve
-choosing a combination of components any algorithm that is able to enumerate all
-possible combinations can be used can be used to solve these problems. However,
-finding an optimal solution can be difficult, and exhaustive search strategies
-may not be able to solve many of these problems, which are often
-NP-Hard~\cite{yu2010combinatorial,festa2014brief}. In these cases, heuristic
-and~\acrshort{meta-heuristic} methods present themselves as effective
-alternatives to be considered.
+In essence, since~\acrshort{combinatorial-optimization} problems involve
+choosing a combination of components, any algorithm that is able to enumerate
+all possible combinations can be used to solve these problems. However, finding
+an optimal solution can be difficult, and exhaustive search strategies may still
+not be able to efficiently solve~\acrshort{combinatorial-optimization} problems,
+which are often NP-Hard~\cite{yu2010combinatorial,festa2014brief}.~In
+these cases, heuristic and~\acrshort{meta-heuristic} methods present themselves
+as effective alternatives to be considered.
 
 \subsection{Bounds}
 \label{subsec:bounds}
@@ -136,12 +136,15 @@ function as a lower bound, which is known as the~\textit{infimum} or
 ~\textit{greatest lower bound} of a set.
 
 This concept holds significance in~\acrshort{combinatorial-optimization} and is
-frequently employed when aiming to optimize the objective value of (partial)
-solutions. In essence, the upper and lower bounds of a (partial) solution
-encompass the range of values for an objective function that are either
-greater/smaller than or equal to the optimal value achievable through the
-partial solution. The same logic applies to the concept of tight upper and lower
-bounds.
+frequently employed when aiming to estimate the best objective value that can be
+obtained by adding zero or more components to a partial solution.~In particular,
+the upper bound of a given solution is any value that is greater than or equal
+to the objective function values of feasible solutions that include the
+components of that specific solution, and similarly for the lower bound.~The
+same logic applies to the concept of tight upper and lower bounds. However, in
+the context of~\acrshort{combinatorial-optimization}, the term~\emph{tight} is
+commonly used to describe a bound that is closer to the optimal value but may
+not necessarily be strictly optimal.
 
 Formally speaking, the upper bound and lower
 bound~\cite{papadimitriou1998combinatorial,outeiro2021application} of a
@@ -149,47 +152,41 @@ bound~\cite{papadimitriou1998combinatorial,outeiro2021application} of a
 
 \begin{definition}[Upper Bound]
   \label{def:upper-bound}
-  An upper bound of a (partial) solution $s' \in 2^\mathcal{G}$ is a numeric
+  An upper bound of a (partial) solution $s \in 2^\mathcal{G}$ is any numeric
   value given by a function $\Phi_\text{ub}\colon 2^{\mathcal{G}} \rightarrow
     \mathbb{R} $ such that:
   \begin{equation}
-    \forall s \in \mathcal{S} \land s \supseteq s' \colon f(s) \le \Phi_\text{ub}(s')
+    \forall s' \in \mathcal{S} \land s' \supseteq s \colon f(s') \le \Phi_\text{ub}(s)
   \end{equation}
 \end{definition}
 
 \begin{definition}[Lower Bound]
   \label{def:lower-bound}
-  A lower bound of a (partial) solution $s' \in 2^\mathcal{G}$ is a numeric
+  A lower bound of a (partial) solution $s \in 2^\mathcal{G}$ is any numeric
   value given by a function $\Phi_\text{lb}\colon 2^{\mathcal{G}} \rightarrow
     \mathbb{R}$ such that:
   \begin{equation}
-    \forall s \in \mathcal{S} \land s \supseteq s'\colon \Phi_\text{lb}(s') \le f(s)
+    \forall s' \in \mathcal{S} \land s' \supseteq s\colon \Phi_\text{lb}(s) \le f(s')
   \end{equation}
 \end{definition}
 
-The usage of bounds is often common in~\acrshort{combinatorial-optimization}
-algorithms, especially in exact approaches, as will be later detailed.
-Nonetheless, concerning~\acrshort{meta-heuristic} methods, bounds can be helpful
-tools for guiding the solution construction process. The rationale is that, when
-faced with a choice between adding one of two components, considering the upper
-bound's value becomes valuable as opting for the component having a lesser
-negative impact on the bound's value preserves the solutions' future potential
-for improvement. Note that the tightness of a bound is a determining factor for
-keeping this potential.
+The usage of bounds is common in~\acrshort{combinatorial-optimization}
+algorithms, especially in exact approaches, as will be detailed
+in~\Cref{subsec:approaches}.  Nonetheless, concerning~\acrshort{meta-heuristic}
+methods, bounds can be helpful tools to guide the solution construction process.
+For example, consider the choice between adding one of two components to a
+partial solution. We can consider the two partial solutions that resulting from
+adding either component, compute their upper bound and use it as a way to
+determine which choice may be more promising. Note that a tight bound is often
+an important factor for keeping this potential.
 
 Moreover, while the objective function holds significance in directing the
 optimization process, there are situations where evaluating the quality of a
-partial solution might not be possible. Additionally, the objective function
-might pose a bottleneck, obstructing the optimizer's ability to measure the
-impact of changes on solution quality. Nevertheless, the value for an upper
-bound can consistently be defined, thus emphasizing the importance of
-bounds in this context.
+partial solution might not be possible due to the solution being infeasible.
 
 In essence, the upper bound value provides an optimistic look at the quality of
 a (partial) solution and its potential to improve. Conversely, the lower bound,
 provides a realistic perspective on the objective value of the solution.
-Moreover, for a complete solution, the upper bound value will always match the
-objective value.
 
 \subsection{Global and Local Optimization}
 \label{subsec:go-and-lo}
@@ -197,15 +194,14 @@ objective value.
 With regard to the search of solutions for optimization problems, there are two
 primary strategies: \acrfull{global-optimization} and \acrfull{local-optimization}.
 
-\acrshort{global-optimization} involves the process of discovering the ultimate
-global optimum~(\ref{def:global-optimum}) for a given problem, regardless of
-where it might lie within the solution space. This search for the best solution
-is often called~\textit{exploration}. In contrast,
-\acrshort{local-optimization} concentrates on finding the most optimal solution
-among proximate that are close in some way, which is commonly referred to as
-\textit{exploitation}. The concept of proximity is related to the definition
-of a neighborhood, which for a given solution is specified by a particular
-neighborhood structure defined as follows:
+\acrshort{global-optimization} involves the process of discovering a global
+optimum~(\Cref{def:global-optimum}) for a given problem, regardless of where it
+might lie within the solution space. This search for the best solution is often
+called~\textit{exploration}. In contrast,~\acrshort{local-optimization}
+concentrates on finding the most optimal solution among those that are in its
+proximity, which is commonly referred to as~\textit{exploitation}.~The concept
+of proximity is related to the definition of a neighborhood, which for a given
+solution is specified by a particular neighborhood structure defined as follows:
 
 \begin{definition}[Neighborhood Structure~\cite{papadimitriou1998combinatorial,blum2003metaheuristics}]
   \label{def:neighborhood-structure}
@@ -217,37 +213,39 @@ neighborhood structure defined as follows:
     \mathcal{N} \colon \mathcal{S} \longrightarrow 2^{\mathcal{S}}
   \end{equation}
 
-  Such that, a set of neighboring solutions $\mathcal{N}(\hat{s}) \subseteq
-    \mathcal{S}$ is assigned for each solution $\hat{s} \in \mathcal{S}$. This
-  referred to as the neighborhood of $\hat{s}$.
+  Such that, for every feasible solution $s \in \mathcal{S}$ there is a set of neighboring
+  solutions $\mathcal{N}(s) \subseteq \mathcal{S}$, namely its neighborhood.
+
 \end{definition}
 
 In general, the neighborhood structure refers to the set of rules that must be
 applied to a solution in order to generate all of its neighbors.  Additionally,
-we can define a local optimal solution or just local optimum as follows:
+we can define a~\emph{local optimal solution} or just~\emph{local optimum} as follows:
 
 \begin{definition}[Local Optimum~\cite{hiriart-urruty1995conditions,blum2003metaheuristics,nocedal2006numerical}]
   \label{def:local-optimum}
 
-  Assuming maximization without loss of generality, a solution $\hat{s}$ is
-  a local optimum with respect to a given neighborhood structure $\mathcal{N}(\hat{s})$ iff:
+  Assuming maximization without loss of generality, a solution $s$ is
+  a local optimum with respect to a given neighborhood structure $\mathcal{N}(s)$ iff:
 
   \begin{equation}
     \label{eq:local-optimum}
-    \forall s \in \mathcal{N}(\hat{s}) \colon f(\hat{s}) \geq f(s)
+    \forall s' \in \mathcal{N}(s) \colon f(s) \geq f(s')
   \end{equation}
 
   Furthermore, $\hat{s}$ is a considered a strict a local optimum iff:
 
   \begin{equation}
     \label{eq:strict-local-optimum}
-    \forall s \in \mathcal{N}(\hat{s}) \setminus \{\hat{s}\} \colon f(\hat{s}) > f(s)
+    \forall s' \in \mathcal{N}(s) \setminus \{s\} \colon f(s) > f(s')
   \end{equation}
 \end{definition}
 
-As an illustrative example, consider the objective function $f(s)$ shown in~\ref{fig:optima}.
-With respect to the~\Cref{def:global-optimum,def:local-optimum}, the solution
-$s^1$ is a global optimum and $s^2$, $s^3$ are (strict) local optima.
+As an illustrative example, consider the objective function $f(s)$ shown
+in~\Cref{fig:optima}.~With respect to
+the~\Cref{def:global-optimum,def:local-optimum}, the solution $s^1$ is a global
+optimum and $s^2$, $s^3$ are (strict) local optima.~It is worth noting that, in
+this example, the neighborhood is defined based on the adjacency to the $S$ axis.
 
 \begin{figure}[h]
   \centering
@@ -275,47 +273,42 @@ instances. Instead, a balance between global and local optimization
 (\textit{exploration} and \textit{exploitation}) is typically employed. To
 elaborate, the strategy typically involves~\textit{exploring} the search space
 via~\acrshort{global-optimization} methods to find~\textquote{good} starting
-solutions, that~\acrshort{local-optimization} methods can
+solutions, which~\acrshort{local-optimization} methods can
 further~\textit{exploit}.
 
 \subsection{Black-Box and Glass-Box Optimization}
 \label{subsec:bbo-and-gbo}
-
-%% NOTE: Stochastic-Search in Meta-Heuristics
-%% One may imagine then that the algorithm A repeatedly calls a “black-box”
-%% procedure returning fitness values to given solutions x, but A does not “know” how
-%% these fitness values are determined. In this case, A is called a black-box optimizer.
 
 In the field of optimization, two settings are commonly recognized:
 \acrfull{black-box-optimization} and \acrfull{glass-box-optimization}.
 
 In~\acrshort{black-box-optimization} optimization settings there is no
 information about the landscape of the function being optimized, constraints
-defining the set of feasible solutions~\cite{alarie2021two} or the objective
+defining the set of feasible solutions~\cite{alarie2021two}, or the objective
 function is too complex to be approached from an analytical perspective. As
-such, algorithms for achieving solutions for these problems do so only by
-interacting with the problem through the evaluation of potential candidate
-solutions~\cite{doerr2020complexity,gutjahr2010stochastic}. Meta-Heuristics, as
+such, algorithms to solve these problems do so only by interacting with the
+problem through the evaluation of potential candidate
+solutions~\cite{doerr2020complexity,gutjahr2010stochastic}.~Meta-Heuristics, as
 will be later detailed are examples of methods that follow this approach for
-finding/improving solutions. By contrast, in~\acrshort{glass-box-optimization}
+finding/improving solutions.~By contrast, in~\acrshort{glass-box-optimization}
 optimization, also known as~\textit{white box} optimization, there is a good
 understanding of the problem instance being optimized and the objective function
 properties~\cite{doerr2020complexity}. Hence, the algorithms used may take
 advantage of more analytical properties of the problem since they are
 transparent to the solver.
 
-For the purpose of clarification, with regard to the previously mentioned
-~\acrshort{knapsack-problem}, a~\acrshort{black-box-optimization} strategy would
-entail the utilization of a search heuristic such as simulated
-annealing~\cite{luke2013essentialsa} to obtain solutions. This is because the
-algorithm only necessitates knowledge of how to evaluate the quality of
-solutions through the objective function and not any specific information about
-the function being optimized. Alternatively, if the problem were to be
-formulated as an~\acrfull{ilp}~\cite{nocedal2006numerical,papadimitriou1998combinatorial}
-problem, it would become amenable to a~\acrshort{glass-box-optimization}
-approach, as the objective function would be accessible, and additional
-information about the problem could be inferred from it and provided to the
-algorithm.
+% For the purpose of clarification, with regard to the previously mentioned
+% ~\acrshort{knapsack-problem}, a~\acrshort{black-box-optimization} strategy would
+% entail the utilization of a search heuristic such as simulated
+% annealing~\cite{luke2013essentialsa} to obtain solutions. This is because the
+% algorithm only necessitates knowledge of how to evaluate the quality of
+% solutions through the objective function and not any specific information about
+% the function being optimized. Alternatively, if the problem were to be
+% formulated as an~\acrfull{ilp}~\cite{nocedal2006numerical,papadimitriou1998combinatorial}
+% problem, it would become amenable to a~\acrshort{glass-box-optimization}
+% approach, as the objective function would be accessible, and additional
+% information about the problem could be inferred from it and provided to the
+% algorithm.
 
 In the context of the Hash Code competition, contestants typically engage the
 problems from a~\acrshort{black-box-optimization} perspective, as the underlying
@@ -324,5 +317,5 @@ of formalization can be time-consuming and, as a result, the usage of
 ~\acrshort{glass-box-optimization} methods post-formalization would not be
 justified, as they could turn out to be computationally slower. However, it is
 in many cases, possible to use~\acrshort{glass-box-optimization}
-methods,~\eg{},~\acrshort{ilp} to tackle sub-problems that are more simple to
-formalize as more knowledgeable contestants have demonstrated in the past.
+methods,~\eg{},~\acrfull{ilp} to tackle sub-problems that are simpler to
+formalize.

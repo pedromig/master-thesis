@@ -1,6 +1,6 @@
 % Local Search Procedure (algorithm2e pseudocode)
 
-\KwIn{Solution ($s'$)}
+\KwIn{Solution ($s$)}
 \KwOut{Solution ($s$)}
 
 \SetKwFunction{LocalMoves}{\texttt{LocalMoves}}
@@ -8,7 +8,6 @@
 \SetKwFunction{Step}{\texttt{Step}}
 \SetKwFunction{Perturb}{\texttt{Perturb}}
 
-$s$ $\gets$ $s'$\;
 $\mathcal{M}$ $\gets$ \LocalMoves{$s$}\;
 \While{$\mathcal{M} \neq \emptyset$ }{
   $m$ $\gets$ \SelectLocalMove{$\mathcal{M}$}\;

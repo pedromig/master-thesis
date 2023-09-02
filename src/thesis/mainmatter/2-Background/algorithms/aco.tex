@@ -1,21 +1,28 @@
 % Ant Colony Optimization (algorithm2e pseudocode)
 
-\KwIn{Population ($\mathcal{S}$), Pheromone Update Rule ($\mathcal{R}$), Pheromone Values ($\vec{\tau}$), Evaporation Rate ($\alpha$)}
-\KwOut{Solution ($s^{*}$)}
+\KwIn{Pheromone Update Rule ($\mathcal{R}$), Pheromone Values ($\vec{\tau}$), Evaporation Rate ($\alpha$)}
+\KwOut{Solution ($s$)}
 
 \SetKwFunction{AntBasedSolutionConstruction}{\texttt{AntBasedSolutionConstruction}}
 \SetKwFunction{PheromoneUpdate}{\texttt{PheromoneUpdate}}
 \SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
 
-$s^{*} \gets$ $s'$\;
+$s \gets$ $s'$\;
+$bobj$ $\gets$ $-\infty$\;
 $\mathcal{S} \gets \{ \emptyset \}$\;
+
+\If{ $s\ $ \texttt{is feasible}}{
+  $bobj$ $\gets$ $f(s)$\;
+}
+
 \While{\texttt{not stopping criteria met}}{
-  $\mathcal{S}$ $\gets$ \AntBasedSolutionConstruction{$\mathcal{P}$, $\vec{\tau}$}\;
-  $\mathcal{S}$ $\gets$ \LocalSearch{$\mathcal{P}$} \Comment*[f]{Optional} \;
-  $s$ $\gets$ $\underset{s\ \in\ \mathcal{P}}{\argmax}\ f(s)$ \Comment*[f]{Select best solution}\;
-  \If{$f(s)$ > $f(s^{*})$}{
-    $s^{*} \gets s$;
+  $\mathcal{S}$ $\gets$ \AntBasedSolutionConstruction{$\mathcal{S}$, $\vec{\tau}$}\;
+  $\mathcal{S}$ $\gets$ \LocalSearch{$\mathcal{S}$} \Comment*[f]{Optional} \;
+  $s'$ $\gets$ $\underset{s'\ \in\ \mathcal{S}}{\argmax}\ f(s')$ \Comment*[f]{Select best solution}\;
+  \If{$f(s')$ > $bobj$}{
+    $s \gets s'$\;
+    $bobj$ $\gets$ $f(s')$\;
   }
-  $\mathcal{S} \gets$ \PheromoneUpdate{$\mathcal{P}$, $\mathcal{R}$, $\vec{\tau}$, $\alpha$}\;
+  $\mathcal{S} \gets$ \PheromoneUpdate{$\mathcal{S}$, $\mathcal{R}$, $\vec{\tau}$, $\alpha$}\;
 }
 \Return{$s^{*}$}

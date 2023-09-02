@@ -1,25 +1,32 @@
 % Beam Search (algorithm2e pseudocode)
 
 \KwIn{Beam Width ($w$), Objective Function ($f$), Upper Bound Function ($\Phi_{ub}$)}
-\KwOut{Solution ($s^{*})$}
+\KwOut{Solution ($s$)}
 
 \SetKwFunction{Perturb}{\texttt{Perturb}}
 \SetKwFunction{Branch}{\texttt{Branch}}
 
-$s^{*}$ $\gets$ $\emptyset$\;
+$s$ $\gets$ $\emptyset$\;
+$bobj$ $\gets$ $-\infty$\;
 $\mathcal{B}$ $\gets$ $\{ \emptyset \}$\;
+
+\If{ $s\ $ \texttt{is feasible}}{
+  $bobj$ $\gets$ $f(s)$\;
+}
+
 \While{ $\mathcal{B} \neq \emptyset\ $ $\land\ $ \texttt{stopping criteria not met}}{
   $\mathcal{B'}$ $\gets$ $\emptyset$\;
-  \ForEach{ $s \in \mathcal{B}$ }{
-    $\mathcal{B'}$ $\gets$ $\mathcal{B'}\ \cup\ $ \Branch{$s$}
+  \ForEach{ $s' \in \mathcal{B}$ }{
+    $\mathcal{B'}$ $\gets$ $\mathcal{B'}\ \cup\ $ \Branch{$s'$}
   }
   \If{ $\mathcal{B'} \neq \emptyset$ } {
-    $\mathcal{B}$ $\gets$ $\underset{\substack{s\ \in\ \mathcal{B'}}}{\argmax_{w}}\ \Phi_{ub}(s)$ \Comment*[f]{Select the \textquote{w} best solutions}\;
-    \ForEach{ $s \in \mathcal{B}$ }{
-      \If{ $s\ $ \texttt{is feasible} $\land$ $f(s) > f(s^{*})$}{
-        $s^{*}$ $\gets$ $s$\;
+    $\mathcal{B}$ $\gets$ $\underset{\substack{s'\ \in\ \mathcal{B'}}}{\argmax_{w}}\ \Phi_{ub}(s')$ \Comment*[f]{Select the \textquote{w} best solutions}\;
+    \ForEach{ $s' \in \mathcal{B}$ }{
+      \If{ $s'\ $ \texttt{is feasible} $\land$ $f(s') > bobj$}{
+        $s$ $\gets$ $s'$\;
+        $bobj$ $\gets$ $f(s')$\;
       }
     }
   }
 }
-\Return{ $s^{*}$ }
+\Return{ $s$ }
