@@ -213,7 +213,7 @@ algorithm is shown in~\Cref{algorithm:hill-climbing}.
 
 It's worth noting that the presented algorithm's effectiveness is rooted in the
 efficiency of a random process, which strives to improve solution quality
-through a sequence of random perturbation attempts (\texttt{Perturb} function).
+through a sequence of random local move attempts (\texttt{ApplyRandomLocalMove} function).
 Nevertheless, there exist two noteworthy variations that more thoroughly explore
 the solution's neighborhood and take steps in the direction of the most
 substantial improvement. These are commonly known as~\acrfull{first-improvement}
