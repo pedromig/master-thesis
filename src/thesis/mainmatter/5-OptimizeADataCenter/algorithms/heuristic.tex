@@ -1,0 +1,27 @@
+\KwIn{Number of Servers ($\mathcal{M}$), Number of Pools ($\mathcal{P}$), Number of Segments ($\mathcal{I}$),
+  Server Order ($\phi^\mathcal{M}$), Pool Order ($\phi^\mathcal{P}$), Row Order ($\phi^\mathcal{R}$)}
+\KwOut{Enumerated Components}
+
+\SetKw{Continue}{continue}
+\SetKw{Yield}{yield}
+
+\SetKwFunction{Fit}{\texttt{Fit}}
+\SetKwFunction{IsAssigned}{\texttt{IsAssigned}}
+
+\For{$m = 1$ \texttt{to} $\mathcal{M}$}{
+  \If{\IsAssigned{$\phi_{m}^\mathcal{M}$}}{
+    \Continue
+  }
+  \For{$p = 1$ \texttt{to} $\mathcal{P}$}{
+    $z \gets \phi_{p}^\mathcal{P}$\;
+    \For{$r = 1$ \texttt{to} $\mathcal{R}$}{
+      $k \gets \phi_{z, r}^\mathcal{R}$\;
+      \For{$i = 1$ \texttt{to} $\mathcal{I}^{k}$}{
+        \If{\ \Fit{$\phi_{m}^\mathcal{M}, i$}}{
+          \Yield $(\phi_{m}^\mathcal{M}, \phi_{p}^\mathcal{P}, i)$\;
+        }
+      }
+    }
+  }
+  \Yield $\phi_{m}^\mathcal{M}$\;
+}

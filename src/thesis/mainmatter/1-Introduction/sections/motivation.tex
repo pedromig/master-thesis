@@ -2,26 +2,26 @@ Optimization problems are ubiquitous in real-world scenarios. For example, when
 considering the task of planning a road trip, we are quickly faced with several
 optimization challenges arising from a seemingly simple task, such as, finding
 the shortest or cheapest route, and efficiently packing luggage. When solving
-these problems the goal is typically to find \textquote{good} solutions in a
+these problems, the goal is usually to find \textquote{good} solutions in a
 time-efficient manner.
 
-Tackling an optimization problem can typically be seen as a two-phase process.
+Tackling an optimization problem can usually be seen as a two-phase process.
 First, we start by understanding the problem and modeling its details. Then, we
 can apply, or develop, a solver to find one or more solutions taking into
 account the given model. This approach serves, for example, as the foundation of
-most linear optimization software packages which are widely used to solve
-real-world problems,~\eg{},~\textit{Gurobi}~\footnote{https://www.gurobi.com/},
-~\textit{CPLEX}~\footnote{https://www.ibm.com/products/ilog-cplex-optimization-studio/cplex-optimizer},
-or~\textit{GLPK}~\footnote{https://www.gnu.org/software/glpk/}.~In particular,
+most mixed-integer linear optimization software packages which are widely used to solve
+real-world problems,~\eg{},~\textit{Gurobi}~\footnote{\url{https://www.gurobi.com/}},
+~\textit{CPLEX}~\footnote{\url{https://www.ibm.com/products/ilog-cplex-optimization-studio/cplex-optimizer}},
+or~\textit{GLPK}~\footnote{\url{https://www.gnu.org/software/glpk/}}.~In particular,
 such packages expect a mathematical formulation (model) describing the problem
-as a linear objective function and a set of linear constraints, and then use one
-or more algorithms designed to solve such linear optimization problems. This
-clear separation of concerns leads to some advantages.~Notably, practitioners
-who want to solve a particular problem can focus on developing the model for
-that problem and easily use existing solvers to find solutions without needing
-to implement state-of-the-art algorithms themselves. Meanwhile, solver
-developers can take advantage of existing problems to test and enhance their
-solvers' performance.
+as a linear objective function and a set of linear constraints involving
+continuous or discrete variables, and then use one or more algorithms designed
+to solve such linear optimization problems. This clear separation of concerns
+has some advantages.~Notably, practitioners who want to solve a particular
+problem can focus on developing the model for that problem and easily use
+existing solvers to find solutions without needing to implement state-of-the-art
+algorithms themselves. Meanwhile, solver developers can take advantage of
+existing problems to test and enhance their solvers' performance.
 
 In this work, we are interested in tackling~\acrfull{combinatorial-optimization}
 problems using a similar separation of concerns.~Generally
@@ -29,11 +29,10 @@ speaking,~\acrshort{combinatorial-optimization} consists of finding an optimal
 solution, according to some objective function, from a discrete set of
 solutions. Several generic approaches have been developed to solve CO problems
 exactly,~\ie{}, to find an optimal solution. However,
-many~\acrshort{combinatorial-optimization} problems are NP-Hard, meaning that,
-the time required to solve them via (problem-specific) exact approaches grows
-exponentially with the problem size, and consequently generic exact methods will
-also grow exponentially. In practice, this means that exact methods are often
-ineffective to solve~\textquote{real-world}~\acrshort{combinatorial-optimization} problems
+many~\acrshort{combinatorial-optimization} problems are NP-Hard, meaning that
+the time required to solve them via any currently known exact approach grows
+faster than polynomially with the problem size. In practice, this means that
+exact methods are often ineffective to solve~\textquote{real-world}~\acrshort{combinatorial-optimization} problems
 which have large problem sizes.
 
 As a result, there has been a growing interest in the development of methods
@@ -53,16 +52,16 @@ applied to a broad range of problems.
 Given the nature of~\acrshort{meta-heuristic} methods and the inherent diversity
 of problems, crafting universal~\acrshort{meta-heuristic} solvers is a
 challenging task made harder due to the difficulty in separating the
-problem-specific details required by the high-level strategies from
+problem-specific details on which high-level strategies depend from
 the~\acrshort{meta-heuristic} problem-independent solving process. In fact, the
 abundance of~\acrshort{meta-heuristic} optimization software that provides
-specific frameworks for implementing evolutionary, local or constructive search
+specific frameworks for evolutionary, local or constructive search
 meta-heuristics for~\acrshort{combinatorial-optimization}
 problems~\cite{cahon2004paradiseoa,digaspero2003easylocal,durillo2011jmetal} and
 the lack of a unifying framework supporting all approaches can be regarded as a
 symptom of the difficulty of this endeavor. Still, it is worth remarking the
-works by~\citet{vieira2009uma} and~\citet{outeiro2021application},
-which partially looked at the formalization of this objective.
+works by~\citet{vieira2009uma} and~\citet{outeiro2021application}, among others,
+who partially looked at the formalization of this objective.
 
 The development of a unifying framework would standardize problem-solving
 approaches, facilitate the reuse of~\acrshort{meta-heuristic} methods, and
@@ -74,7 +73,7 @@ across a range of diverse problems.
 Simultaneously, alongside the development and application
 of~\acrshort{meta-heuristic} strategies to
 address~\acrshort{combinatorial-optimization} problems, there exists a community
-interest in constructing a collection of benchmark optimization problems that
+interested in constructing a collection of benchmark optimization problems that
 hold both theoretical and practical
 significance~\cite{bartz-beielstein2020benchmarking}. The Google Hash Code
 competition problems, arguably, present themselves as suitable candidates.
@@ -88,12 +87,12 @@ as vehicle routing, task scheduling, and router placement. There is often some
 relation to classical problems found in~\acrshort{combinatorial-optimization}
 literature, which may provide theoretical and practical insights on how to solve
 them. Still, exact algorithms to solve these problems efficiently are not known,
-and up to our knowledge there is also no known heuristic or approximation method
-that prevails over other approaches.
+and to the best of our knowledge there is also no known heuristic or
+approximation method that prevails over other approaches.
 
 Given the pertinence of these problems, and the wide range of challenges they
-present from both a theoretical and practical standpoint, they serve as
+present from both a theoretical and practical standpoint, they should serve as
 interesting benchmarks for the evaluation of meta-heuristics offering ample
-research potential. Furthermore, they offer a suitable approach to assess the
-feasibility of the aforementioned unifying framework on more realistic and
+research potential. Furthermore, they should allow the feasibility of the
+aforementioned unifying framework bo be assessed on more realistic and
 challenging problems beyond the ones commonly found in the literature.

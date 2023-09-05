@@ -14,10 +14,10 @@ $bobj$ $\gets$ $-\infty$\;
 }
 \While{\texttt{stopping criteria not met}}{
   $s'$ $\gets$ \GreedyRandomizedConstruction{$\Phi_{ub}, \alpha$}\;
-  $s'$ $\gets$ \LocalSearch{$s'$}\;
+  $s'$ $\gets$ \LocalSearch{$s'$} \Comment*[f]{Optional}\;
   \If{ $s'\ $ \texttt{is feasible} $\land$ $f(s') > bobj$}{
     $s$ $\gets$ $s'$\;
     $bobj$ $\gets$ $f(s')$\;
   }
 }
-\Return{$s^{*}$}
+\Return{$s$}

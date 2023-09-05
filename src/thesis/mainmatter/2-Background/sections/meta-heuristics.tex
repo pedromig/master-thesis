@@ -81,8 +81,8 @@ upper bound function.
 
 \acrfull{grasp}~\cite{resende2010greedya,outeiro2021application,blum2003metaheuristics}
 is a stochastic,~\acrshort{constructive-search}
-and~\acrshort{local-search},~\acrshort{meta-heuristic} that iteratively build
-solutions by sequencing a construction phase with a local search phase.~The
+and~\acrshort{local-search},~\acrshort{meta-heuristic} that iteratively builds
+solutions by sequencing a construction phase with an optional local search phase.~The
 construction phase begins with an empty solution and iteratively adds a new
 component at each step. This component is chosen at random from a
 \emph{restricted candidate list} of components. This list consists of the best
@@ -91,23 +91,22 @@ either a heuristic value or an upper bound.~Additionally, there's an option to
 apply a local search phase to the partial solution obtained during the
 construction phase. The goal of this local search is to further exploit the
 solution, with algorithm concluding when some predefined stopping criteria are
-met.
+met.~The provided pseudocode in~\Cref{algorithm:grasp} offers an overview of how the
+\acrshort{grasp} algorithm works.
 
-The provided pseudocode in~\Cref{algorithm:grasp} offers an overview of how the
-\acrshort{grasp} algorithm functions.
-
-It's important to highlight that this meta-heuristic, GRASP, provides a means of
+It's important to highlight that this meta-heuristic, provides a means of
 controlling the balance between randomization and greediness in solution
 construction (\texttt{GreedyRandomizedConstruction}). This control is
 achieved through the parameter $\alpha$, which serves as a threshold for the
 quality of solutions within the candidate list.~Specifically, when $\alpha = 1$,
 the construction process is entirely random, and all possible components are
-included in the candidate list, regardless of their quality. Conversely, with
-$\alpha = 0$, only the best component is considered at each step, rendering this
-\acrshort{meta-heuristic} purely greedy. It's worth noting that the inclusion of
-the optional local search step (\texttt{LocalSearch}) can significantly
-enhance the quality of the randomized greedy process. However, the crux of
-fine-tuning lies in determining an appropriate value for $\alpha$.
+included in the candidate list, regardless of their quality.~Conversely, with
+$\alpha = 0$, only the components with the optimal heuristic or bound value,
+will be selected at random, rendering this~\acrshort{meta-heuristic} more
+greedy. It's worth noting that the inclusion of the optional local search step
+(\texttt{LocalSearch}) can significantly enhance the quality of the randomized
+greedy process. However, the crux of fine-tuning lies in determining an
+appropriate value for $\alpha$.
 
 \begin{algorithm}
   \input{mainmatter/2-Background/algorithms/grasp.tex}
@@ -174,9 +173,7 @@ algorithm requires the tuning of several parameters such as the pheromone
 evaporation rate, the choice of the pheromone update rule, and the
 initialization of the pheromone model. Notably, there are different models
 which gave origin to many variations of this~\acrshort{meta-heuristic}.
-
-The pseudocode provided in~\ref{algorithm:aco} illustrates the basic functioning
-of this~\acrshort{meta-heuristic}
+The pseudocode provided in~\Cref{algorithm:aco} illustrates this~\acrshort{meta-heuristic}.
 
 \begin{algorithm}
   \input{mainmatter/2-Background/algorithms/aco.tex}

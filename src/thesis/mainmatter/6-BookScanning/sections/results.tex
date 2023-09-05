@@ -1,0 +1,80 @@
+This chapter, described our model and analysis of the google hash code problem
+entitled~\textquote{\nameref{subsubsec:hashcode-2020-qualification}}.
+This problem presented instances, each with different challenges and
+relatively large sizes.
+
+We began by approaching the problem from a constructive search perspective, and
+in doing so, we made several choices related to the enumeration of components
+and the calculation of the upper bound. Initially, we attempted to use the~\emph{standard}
+enumeration method for components, but it quickly became apparent that this
+approach was impractical due to the size of the instances. Consequently, we
+switched to the~\emph{sequential} enumeration method, which was better suited
+for handling the large instances and ultimately became our default choice.
+Concerning the upper bound, the first one presented in the problem model proved
+to be too computationally demanding and was not used in practice. However, the
+second bound, which further relaxed the constraints of the problem, proved to be
+more performant and is the one we utilized in practice.
+
+These choices enabled us to employ a greedy
+constructive~\acrshort{meta-heuristic} that selected the solution with the best
+upper bound value at each step with a 15 minute timeout, leading to the results
+presented in~\Cref{tab:bs-cs-results}.~Other experiments were conducted with
+various constructive meta-heuristics we developed in the context of the modeling
+framework. However, these approaches proved to be slower in optimizing the
+solution within the aforementioned time frame.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{@{\extracolsep{4pt}}lc@{\extracolsep{4pt}}}
+    \toprule
+    Instance                           & Score         \\ \midrule
+    \textquote{Read On}                & \num{5822900} \\
+    \textquote{Incunabula}             & \num{185017 } \\
+    \textquote{Tough Choices}          & \num{2665}    \\
+    \textquote{So many books}          & \num{140189}  \\
+    \textquote{Libraries of the world} & \num{275446}  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Book Scanning Simple Constructive Search Results}
+  \label{tab:bs-cs-results}
+\end{table}
+
+From a local search perspective, we encountered challenges in achieving improved
+results using the implemented meta-heuristics. Despite having promising local
+moves in theory, none of them led to improvements in the solution obtained after
+constructive search. Consequently, we considered an alternative approach that
+focused on optimizing the ordering of libraries and then solved the book
+assignment problem exactly.
+
+For this purpose, we employed the two-phase approach which yielded the best
+results we were able to achieve. Remarkably, the usage of an exact solver for
+the~\emph{max-flow min-cost} problem provided in the \emph{Python}
+package~\emph{networkx}\footnote{\url{https://networkx.org/}} achieved
+surprisingly good performance, taking at most 2 minutes to fully construct a
+solution after an ordering for the libraries was established, even in the
+largest instance.~Furthermore, the local search following this construction,
+using a~\acrshort{hill-climbing} technique, was able to further improve the
+scores for some of the instances within the 30-minute time limit we set for this
+procedure.
+
+This approach indeed yielded the best results we were able to achieve, which are
+presented in detail in~\Cref{tab:bs-results}alongside the best results obtained
+by other contestants during the competition.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{@{\extracolsep{4pt}}lcc@{\extracolsep{4pt}}}
+    \toprule
+    Instance                           & Score         & Best Known Score \\ \midrule
+    \textquote{Read On}                & \num{5822900} & \num{5822900}    \\
+    \textquote{Incunabula}             & \num{5689822} & \num{5690888}    \\
+    \textquote{Tough Choices}          & \num{5028530} & \num{5107113}    \\
+    \textquote{So many books}          & \num{5208455} & \num{5237345}    \\
+    \textquote{Libraries of the world} & \num{5328034} & \num{5348248}    \\
+    \bottomrule
+  \end{tabular}
+  \caption{Book Scanning Best Results}
+  \label{tab:bs-results}
+\end{table}
+
+Remarkably, this placed us in~\textbf{33rd} place on the competition leaderboard.

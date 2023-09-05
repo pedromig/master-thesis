@@ -1,0 +1,49 @@
+After formally describing the problem model, the information was translated into
+a practical implementation developed within the modeling framework mentioned in
+Chapter \ref{ch:principled-modelling-framework}. This implementation enabled the
+use of various meta-heuristic methods for experimentation. Multiple iterations
+of the model were tested, each involving different types of component
+enumerations, bounds, heuristics, and various solvers.
+
+The machine used to run the solvers on the single available instance for this
+problem had the following s specifications:
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{@{\extracolsep{4pt}}ccc@{\extracolsep{4pt}}}
+    \toprule
+    OS                 & CPU                                     & RAM   \\ \midrule
+    Ubuntu 22.04.2 LTS & Intel i7-12700H (20 cores) --- 4.600GHz & 64 GB \\
+    \bottomrule
+  \end{tabular}
+  \caption{Benchmark Machine Specifications}
+\end{table}
+
+The best results were achieved through a simple heuristic strategy in a
+constructive search phase. This strategy involved enumerating ten best
+components at each iteration using the heuristic strategy described
+in~\Cref{algorithm:odc-enum-heuristic}. The selected component to add to the
+solution was the one that contributed the most increment to the upper bound
+value. Notably, the upper bound function used was the one described in Equation
+\ref{eq:odc-upper-bound-2}, which effectively discriminated the results,
+allowing for a construction that yielded a final score of 386 points in only 1
+second.
+
+Other~\acrshort{constructive-search} algorithms, such
+as~\acrshort{grasp},~\acrshort{iterated-greedy} and~\acrshort{beam-search}
+proved to be slower in constructing solutions of similar quality compared to the
+simple heuristic strategy.~Multiple~\emph{add-hoc} parametrizations were tested
+for each of these algorithms, but they consistently produced initial results
+ranging from 280 to 320 points, taking additional time to further improve them
+as to match the described heuristic.
+
+For~\acrshort{local-search} strategy, the best meta-heuristic
+was~\acrshort{iterated-local-search}. When run with a total timeout time of 15
+seconds and using a perturbation with a kick strength of
+2,~\acrshort{iterated-local-search} consistently improved the solution returned
+by the heuristic construction strategy (regardless of the seed), yielding a
+score of 410 points.~This result was satisfying and led to us move on to the
+next problem.
+
+Notably, the score of~\textbf{410} is better than the best score in the
+competition leaderboard~(\textbf{407}).

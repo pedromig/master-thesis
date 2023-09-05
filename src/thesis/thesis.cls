@@ -64,6 +64,7 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{adjustbox}
+\usepackage{siunitx}
 
 % Headers, Titles, Paragraphs, etc...
 \usepackage{parskip}
@@ -75,6 +76,10 @@
 \usepackage{setspace}
 \usepackage{csquotes}
 \usepackage{enumitem}
+
+% Footnote
+\usepackage{scrextend}
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\,}
 
 % URL Formatting
 \usepackage[hyphens]{url}

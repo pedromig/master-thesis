@@ -1,0 +1,24 @@
+% Standard Enumeration (algorithm2e pseudocode)
+
+\KwIn{Number of Servers ($\mathcal{M}$), Number of Pools ($\mathcal{P}$), Number of Segments ($\mathcal{I}$)}
+\KwOut{Enumerated Components}
+
+\SetKw{Continue}{continue}
+\SetKw{Yield}{yield}
+
+\SetKwFunction{Fit}{\texttt{Fit}}
+\SetKwFunction{IsAssigned}{\texttt{IsAssigned}}
+
+\For{$m = 1$ \texttt{to} $\mathcal{M}$}{
+  \If{\IsAssigned{$m$}}{
+    \Continue
+  }
+  \For{$p = 1$ \texttt{to} $\mathcal{P}$}{
+    \For{$i = 1$ \texttt{to} $\mathcal{I}$}{
+      \If{\ \Fit{$m, i$}}{
+        \Yield $(m, p, i)$ \Comment*[f]{Assign server $m$ to pool $p$ and segment $i$}\;
+      }
+    }
+  }
+  \Yield $m$ \Comment*[f]{Forbid server $m$}\;
+}

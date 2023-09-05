@@ -1,73 +1,251 @@
-In this section, we will provide a formal perspective on the developed problem
-model, outlining the essential elements that define it. We will begin with the
-problem instance, where we describe the data that characterizes a problem
-instance. Next, we will delve into the concept of a solution within the context
-of this problem. Finally, we will detail the combinatorial and neighborhood
-structures which relate to~\acrshort{constructive-search} and~\acrshort{local-search} approaches.
+In the following, we delve into the modeling developed for this problem, and
+highlight important aspects related to its implementation within the framework
+proposed in~\Cref{ch:principled-modelling-framework}.
 
-\subsection{Problem}
+\subsubsection*{Problem}
 
-As previously discussed in~\Cref{sec:odc-problem}, the problem revolves around
-the placement of servers within data center rows and their allocation to
-resource pools. This allocation is subject to space constraints imposed by the
-number of slots available in each row and the potential unavailability of
-certain slots. Therefore, to fully characterize a specific problem instance, the
-following data must be known:
+A problem instance is uniquely defined by the set of available servers eligible
+for allocation, along with their respective sizes and capacities, the number of
+resource pools to be created, and the set of segments, each of which is
+characterized by its size.
 
-\begin{description}
-  \item[\textbf{Servers.}] A description of the servers to be allocated.
-    \begin{equation}
-      \text{servers} = \{(s_m, c_m) \mid m = 0, 1, 2, \ldots, \mathcal{M}\}
-    \end{equation}
-    Where, $s_{m}$ and $c_{m}$ denote the size (in slots) and computing capacity of server $m$, respectively.
-  \item[\textbf{Pools.}] A description of the available resource pools.
-    \begin{equation}
-      \text{pools} = \{c_{p} \mid p = 0, 1, 2, \ldots, \mathcal{P}\}
-    \end{equation}
-    Where, $c_{p}$ is the total capacity allocated to pool $p$.
-  \item[\textbf{Rows.}] A description of the rows of the data center.
-    \begin{equation}
-      \begin{aligned}
-        \text{rows} & = \{r_i \mid i = 1, 2, \ldots, \mathcal{R}\}                                  \\
-        r_i         & = \{r_{i,1}, r_{i,2}, \ldots, r_{i,j} \mid  j = 0, 1, 2 \ldots, \mathcal{S}\}
-      \end{aligned}
-    \end{equation}
-    Here, we introduce the binary variable $r_{i,j}$, which denotes whether, for
-    a given row $i$, the slot $j$ is available (1) or unavailable (0).
-  \item[\textbf{Unavailable Slots.}] A description of the unavailable slots for each row.
-    \begin{equation}
-      \text{unavailable} = \{ (i, j) \mid r_{i, j} = 0 \}
-    \end{equation}
-\end{description}
+This corresponds to the information stored within the~\texttt{Problem} class.
+From an implementation standpoint, certain pre-processing operations were necessary to
+obtain this information. In particular, the construction of set of available
+segments using information related to available rows and the list of unavailable
+slots.~Furthermore, given that this class serves as a repository for immutable
+problem-related information and is instantiated only once, a server ordering
+relevant for the construction rules was also included.~This enabled us to
+iterate through and access the server order without the need to recompute it.
 
-\subsection{Component}
+\subsubsection*{Solution}
 
-% What is the ground set, what are components (pool, server, segment), Explain segments here
-% Empty Solution 
-% Partial Solution
-% Complete Solution
+A solution is characterized by a collection of server assignments to pools and
+segments.~Notably, in the context of this problem, any partial solution is
+feasible.
 
-% Data that characterizes a solution (pool, server, row)
+This data is contained within the~\texttt{Solution} class, along with other
+pertinent information that is helpful in describing the state of the
+solution.~This includes details such as the set of unassigned servers, the
+guaranteed capacities for each of the pools, the total capacities for each pool,
+and the same capacities data broken down by row. Furthermore, it also
+encompasses the details of evaluation metrics like the current objective
+function and upper bound values, in addition to other relevant data that
+facilitates their incremental calculations.
 
-\subsection{Solution}
+\subsubsection*{Component}
 
-A solution for this problem can then be described as an allocation of a server
-to a specific row and a specific pool so long as that row can accommodate the server.
-Formally, we can represent a solution as a set of allocations where each allocation is
+A component can be represented as a tuple that contains a server, a pool, a
+segment, effectively representing an assignment.~However, it is important to
+note that a valid decision is to refrain from placing a server in any of the
+available segments.~As such, another valid component can be characterized solely
+by the server, indicating the action of~\emph{forbidding} it from being placed.
+Notably, this information is encoded in the~\texttt{Component} class.
 
-\subsection{Objective Function}
+\begin{equation}
+  \label{eq:odc-components-1}
+  \mathcal{C} = \{(m, p, i) \mid \forall m = 1, \ldots, \mathcal{M},\ \forall p = 1, \ldots, \mathcal{P},\ \forall i = 1, \ldots, \mathcal{I}\}
+\end{equation}
+\begin{equation}
+  \label{eq:odc-components-2}
+  \mathcal{F} = \{m \mid \forall m = 1, \ldots, \mathcal{M}\}
+\end{equation}
 
-% Talk about objective function
-% Talk about surrogate model aka. (proxy) objective function for this problem?
-
-\subsection{Combinatorial Structure}
+Given the component definitions
+in~\Cref{eq:odc-components-1,eq:odc-components-2}, the ground set can be defined
+as $\mathcal{G} = \mathcal{C} \cup \mathcal{F}$.
 
 \subsubsection*{Construction Rules}
-% Talk about constructions (normal, sequence, heuristic)
+
+Since not all subsets of components represent feasible solutions, the
+construction rules specify which components can be enumerated and the order by
+which the enumeration is done. As such, the following sections describe the
+approaches that were considered.
+
+\paragraph*{Standard}
+
+This approach involves enumerating all possible combinations of segments and
+pools where any of the unassigned servers can be assigned. It also considers the
+option of~\emph{forbidding} a server from being
+used.~\Cref{algorithm:odc-enum-standard} illustrates the pseudocode for this
+enumeration.~Note that, the function~\texttt{IsUsed} denotes whether a given
+server is available for assignment. Moreover, the function~\texttt{Fit}
+indicates if a server $m$ can be assigned to segment $i$.
+
+\begin{algorithm}[h]
+  \input{mainmatter/5-OptimizeADataCenter/algorithms/standard.tex}
+  \caption{Standard Component Enumeration}
+  \label{algorithm:odc-enum-standard}
+\end{algorithm}
+
+
+\paragraph*{Sequential}
+
+In this approach, a predetermined order for the servers is followed. The process
+involves selecting the next server in a sequence and, similar to the standard
+approach, enumerate all possible combinations of segments and pools where a
+given server can be assigned. Again, the option for forbidding a server from
+being used is considered. The pseudocode for this enumeration is demonstrated in
+\Cref{algorithm:odc-enum-sequential}.
+
+\begin{algorithm}[h]
+  \input{mainmatter/5-OptimizeADataCenter/algorithms/sequential.tex}
+  \caption{Sequential Component Enumeration}
+  \label{algorithm:odc-enum-sequential}
+\end{algorithm}
+
+Notably, the order considered for server enumeration $\phi^\mathcal{M}$, where
+$\phi_m^\mathcal{M}$ denotes the $m$-th server within this order, is inspired by
+heuristics for the~\acrshort{knapsack-problem}, and prioritizes servers based on
+a non-decreasing order of the ratio between size and capacity, $\ell_{m}/c_{m}$.
+
+\paragraph*{Heuristic}
+
+This approach entails establishing a specific order for servers, pools, and
+rows, and then enumerating the potential combinations following that predefined
+order.~In terms of pools, the order prioritizes pools with the lowest capacity.
+Concerning rows, the order gives preference to rows that have the least capacity
+with respect to the pool undergoing enumeration.~Finally, segments are
+enumerated based on whether the chosen server can fit into the available space.
+It is worth noting that the option of forbidding server placement is also taken
+into account in this approach.
+
+
+In~\Cref{algorithm:odc-enum-heuristic}, the symbol $\phi^{\mathcal{M}}$
+represents the previously mentioned order for server enumeration. The symbol
+$\phi^\mathcal{P}$ signifies the order for pool enumeration, with
+$\phi_{p}^\mathcal{P}$ indicating the $p$-th pool in this order. Finally, the
+symbol $\phi^\mathcal{R}$ signifies the order for row enumeration, where
+$\phi_{p, r}^\mathcal{R}$ specifies the $r$-th row affected by the choice of the
+$p$-th pool in this order.
+
+
+\begin{algorithm}[h]
+  \input{mainmatter/5-OptimizeADataCenter/algorithms/heuristic.tex}
+  \caption{Heuristic Component Enumeration}
+  \label{algorithm:odc-enum-heuristic}
+\end{algorithm}
+
+\subsubsection*{Objective Function}
+
+The objective function for this problem remains the same as defined in the
+problem description, which involves maximizing the minimum guaranteed capacity
+across all pools. However, this function is a bottleneck. Therefore, for the
+purpose of optimization, we used an alternative objective function, $g(x)$,
+that, for a given assignment, $x$, uses as the objective value the tuple
+containing all guaranteed capacities for all the pools sorted in non-decreasing
+order, as illustrated in~\Cref{eq:objective-2}.
+
+\begin{equation}
+  \label{eq:objective-2}
+  \begin{aligned}
+    g(x)         =\  & (gc_{\pi_1},\ gc_{\pi_2},\ \ldots,\ gc_{\pi_\mathcal{P}})     \\
+    \text{s.t. }     & gc_{\pi_1} \le gc_{\pi_2} \le \ldots \le gc_{\pi_\mathcal{P}}
+  \end{aligned}
+\end{equation}
+
+In this equation, $\pi$ is a permutation of the set $\{1, 2, \ldots, \mathcal{P}\}$.
 
 \subsubsection*{Upper Bound}
-% Explain all the bounds here 
 
-\subsection{Neighborhood Structure}
+The upper bound developed for this problem is grounded in a relaxation of the
+second constraint presented in~\Cref{eq:objective}. Rather than directly
+assigning servers to individual segments, we opt to consider the number of slots
+available for server placement in each row. This number is determined by summing
+the count of available slots across all segments within that row.  Following
+this relaxation and for the purpose of computing the upper bound, we refer to
+the set containing the number of available slots for placement in all rows
+except row $r$ as $\mathcal{W}_{r}$.~The calculation of the initial values for
+all elements of this set is displayed in~\Cref{eq:odc-relax}:
 
-% Explain Possible local moves
+\begin{equation}
+  \label{eq:odc-relax}
+  \mathcal{W}_{r} = \sum_{i \in \mathcal{I}^r} \mathcal{L}_{i} \quad r \in \{1, \ldots, \mathcal{R}\} \setminus \{ r \}
+\end{equation}
+
+The upper bound calculation process is then divided into two steps, with the
+first step involving the estimation of an optimistic guaranteed capacity,
+followed by a second step for correction to ensure a tight upper bound.
+
+In the first step, we consider the total size resulting from every combination
+of rows, excluding one row denoted as $\mathcal{W}_r$. We systematically assign
+available servers to these rows until the cumulative size is fully utilized. The
+sum of server capacities for each row, except one, is then divided by the total
+number of pools to derive a quantity referred to as the~\textquote{row-wise upper bound}.
+
+Additionally, the assignment of servers adheres to the previously mentioned
+heuristic order ($\phi^\mathcal{M}$), inspired by the knapsack problem. However,
+in the context of the upper bound calculation, this order prioritizes servers
+that are already assigned, followed by the unassigned servers, and excludes
+those marked as forbidden.
+
+Formally, the row-wise upper bound calculation process is outlined
+in~\Cref{eq:odc-rowise-bound}:
+
+\begin{equation}
+  \label{eq:odc-rowise-bound}
+  \begin{aligned}
+    \Phi_{ub}^{r} =\  & \frac{\sum_{m = 1}^{\mathcal{M}} c_{\phi_{m}^\mathcal{M}}}{\mathcal{P}}     \\
+    \text{s.t. }      & \sum_{m = 1}^{\mathcal{M}} \ell_{\phi_{m}^\mathcal{M}} \leq \mathcal{W}_{r} \\
+  \end{aligned}
+\end{equation}
+
+In the second step of this calculation, we can further refine each row-wise
+upper bound by removing pools and servers that already possess a guaranteed
+capacity exceeding the value of the row-wise upper bound when dropping that row.
+After removing these elements, we recalculate the bound for the reduced server
+set and the number of remaining pools. This process is repeated until no further
+corrections can be applied, meaning that no considered pool has a guaranteed
+capacity greater than the bound.
+
+The upper bound is determined by selecting the minimum value among all the
+row-wise upper bounds after applying the correction, which is calculated, as
+illustrated in~\Cref{eq:odc-upper-bound}:
+
+\begin{equation}
+  \label{eq:odc-upper-bound}
+  \Phi_{ub} = \min_{r = 1}^{\mathcal{R}} \Phi_{ub}^{r}
+\end{equation}
+
+While this bound is valuable, it can be enhanced for greater informativeness.
+During the computation of each row-wise upper bound, we maintain the smallest
+value for each pool in a vector denoted as $\Lambda$. It is important to note
+that at the end of this process, the values within $\Lambda$ correspond to an
+upper bound on the guaranteed capacity of each pool.~Subsequently, this vector
+is utilized to define an upper bound for the problem, as depicted
+in~\Cref{eq:odc-upper-bound-2}, where $\pi$ represents a permutation of the set
+${1, 2, \ldots, \mathcal{P}}$. Notably, this upper bound aligns with the choice
+for the alternative objective function, $g(x)$, mentioned earlier.
+
+\begin{equation}
+  \label{eq:odc-upper-bound-2}
+  \begin{aligned}
+    \Phi_{ub}    =\  & (\Lambda^{\pi_1},\ \Lambda^{\pi_2},\ \ldots,\ \Lambda^{\pi_\mathcal{P}})     \\
+    \text{s.t. }     & \Lambda^{\pi_1} \le \Lambda^{\pi_2} \le \ldots \le \Lambda^{\pi_\mathcal{P}} \\
+  \end{aligned}
+\end{equation}
+
+\subsubsection*{Local Moves}
+
+The local moves considered for this problem are as follows:
+
+\begin{enumerate}
+  \item Assigning a server to a pool and segment if there is an available one.
+  \item Removing a server from a segment.
+  \item Changing the segment to which a particular server is allocated, if other
+        segments that can accommodate its size are available.
+  \item Changing the pool to which a server is allocated, moving it to a different pool.
+  \item Swapping the pools of two assigned servers, thereby transferring the
+        capacity of the servers between pools.
+  \item Swapping the segment in which servers are assigned. This is applicable
+        when there is available space on both sides of the transfer to accommodate the
+        change.
+\end{enumerate}
+
+Notably, these operations in the context of the modelling framework
+implementation are encoded in the~\texttt{LocalMove} class.
+
+\subsubsection*{Perturbation}
+
+Regarding the perturbation of the solution, for this problem, we did not employ
+any specific operation apart from randomly applying the described local moves.
