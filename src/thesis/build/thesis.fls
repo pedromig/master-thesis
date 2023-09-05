@@ -902,6 +902,11 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT ./frontmatter/uc.tex
 INPUT ./frontmatter/uc.tex
+INPUT ./latex-thesis-cover/assets/images/LOGO-Uc-VERTICAL.eps
+INPUT ./latex-thesis-cover/assets/images/LOGO-Uc-VERTICAL-eps-converted-to.pdf
+INPUT ./latex-thesis-cover/assets/images/LOGO-Uc-VERTICAL-eps-converted-to.pdf
+OUTPUT build/thesis.ist
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./frontmatter/cover.tex
 INPUT ./frontmatter/cover.tex
 INPUT ../assets/cover/fctuc-logo.eps
@@ -909,8 +914,6 @@ INPUT ../assets/cover/fctuc-logo-eps-converted-to.pdf
 INPUT ../assets/cover/fctuc-logo-eps-converted-to.pdf
 INPUT ./frontmatter/funding.tex
 INPUT ./frontmatter/funding.tex
-OUTPUT build/thesis.ist
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./frontmatter/abstract.tex
 INPUT ./frontmatter/abstract.tex
 INPUT ./frontmatter/acknowledgements.tex
