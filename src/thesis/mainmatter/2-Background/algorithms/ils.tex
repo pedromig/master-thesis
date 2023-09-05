@@ -6,11 +6,12 @@
 \SetKwFunction{Perturb}{\texttt{Perturb}}
 \SetKwFunction{LocalSearch}{\texttt{LocalSearch}}
 
+$s'$ $\gets$ $s$\;
 \While{\texttt{stopping criteria not met}}{
   $s'$ $\gets$ \LocalSearch{$s$}\;
-  $s'$ $\gets$ \Perturb{$s', k$}\;
   \If{$f(s') > f(s$)}{
     $s$ $\gets$ $s'$\;
   }
+  $s'$ $\gets$ \Perturb{$s', k$}\;
 }
 \Return{$s$}

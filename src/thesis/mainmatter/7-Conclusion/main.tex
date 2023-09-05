@@ -3,5 +3,58 @@
 
 \chquote{\textquote{We can only see a short distance ahead, but we can see plenty there that needs to be done.}}{Alan Turing}{}
 
+In this thesis, our main objective was to address two complex combinatorial
+optimization problems from the Google Hash Code competition using~\acrshort{meta-heuristic}
+approaches.~Our approach was centered on developing conceptual models for these
+problems and implementing them within a framework we designed. This enabled the
+utilization of generic~\acrshort{meta-heuristic} solvers that were also developed to
+conform to the framework's specification. Essentially, the framework acted as a
+practical tool to bridge the gap between conceptual problem modeling and actual
+problem-solving, while offering a platform for creating generic~\acrshort{meta-heuristic}
+solvers that can tackle any problem in a black-box fashion.
+
+Our efforts resulted in successful problem modeling and promising outcomes for
+both of the problems we attempted to solve. Notably, all the problem models we
+devised could be implemented through the framework, highlighting the
+adaptability and effectiveness of our approach in tackling intricate problems.
+Moreover, our framework allowed the development of all the~\acrshort{meta-heuristic}
+strategies discussed in~\Cref{ch:background}, demonstrating that is indeed
+possible to this. However, it's important to acknowledge that the framework we
+constructed will benefit from further refinement, especially in terms of
+accommodating different modeling aspects, such as describing models for other
+types of meta-heuristics like evolutionary algorithms, which were not within the
+scope of this work.
+
+Overall, the experience of working with this framework has positive, primarily
+due to its transparency in addressing essential modeling questions and its clear
+separation of solvers and models, making a wide range of utilities readily
+available. However, becoming proficient in the framework requires
+training and conceptual familiarity, which will only come with practice.
+
 \section{Future Work}
-\label{sec:future-work}
+
+Possible research directions in future work are presented as follows:
+
+\begin{description}
+  \item[Problem Models] Expanding the repertoire of problem models, both for
+    the existing Google Hash Code problems and for other challenges within the
+    competition, holds significant importance. This broader range of models will
+    enable a comprehensive assessment of how the framework performs when applied
+    to problems with diverse characteristics. The models we've constructed so far
+    represent just a small subset, and a more extensive selection will facilitate
+    a more in-depth analysis of~\acrshort{meta-heuristic} behavior. This expansion is
+    crucial, as having a variety of performant models will support extensive
+    testing and refinement of solvers.
+
+  \item[Meta-Heuristic Implementation] Further implementations of other
+    meta-heuristic techniques, such as evolutionary algorithms, can be
+    explored. The introduction of new meta-heuristics may necessitate updates
+    and additional functionalities for the framework to accommodate these approaches effectively.
+
+  \item[Experimental Evaluation of Meta-Heuristics] The results obtained from the
+    developed models have not yet delved into the parametrization of meta-heuristic
+    methods. This analysis is crucial for optimizing and fine-tuning these
+    techniques to achieve the best possible performance in solving complex problems.
+    Furthermore, future work should include a thorough examination and comparison
+    of different  meta-heuristics.
+\end{description}

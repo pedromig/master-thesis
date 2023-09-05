@@ -33,7 +33,7 @@ and will be utilized and implemented in the context of this work.
 \label{subsec:beam-search}
 
 \acrfull{beam-search}~\cite{ow1988filtered,outeiro2021application} is a
-\acrshort{constructive-search} trajectory~\acrfull{meta-heuristic} inspired by
+\acrshort{constructive-search} population~\acrfull{meta-heuristic} inspired by
 the~\emph{breadth-first search} algorithm~\cite{papadimitriou1998combinatorial}.
 However, it deviates from the conventional practice of expanding all solutions
 in the search tree during each iteration. Instead, this technique maintains a
@@ -198,7 +198,7 @@ stochastic,~\acrshort{local-search} trajectory~\acrshort{meta-heuristic} that
 works by iteratively attempting to improve a starting solution through a
 sequence of incremental changes,~\ie{}, by selecting the solution in the
 neighborhood that yields the best increment with respect to the objective value.
-This process terminates when the best solution possible is found or another
+This process terminates when the local optimal solution is found or another
 stopping criteria is met. Despite the simplicity of this method it is worth
 noting that, due to the inherent greedy choice of the best at each step this
 approach is susceptible to getting trapped in local optima. For illustration
@@ -250,7 +250,7 @@ helps prevent repeated exploration of the same regions within the search space.
 
 The core framework of the \acrshort{iterated-local-search} algorithm is
 illustrated in Algorithm~\ref{algorithm:iterated-local-search}. The parameter
-$ks$ in the \texttt{Perturb} function represents the \textit{kick strength},
+$k$ in the \texttt{Perturb} function represents the \textit{kick strength},
 determining the intensity of the perturbation movement, and can be
 adjusted accordingly.
 

@@ -1,4 +1,4 @@
-Modelling refers to the process of creating a simplified representation or
+Modeling refers to the process of creating a simplified representation or
 approximation of a real-world system, process, or phenomenon in order to improve
 understanding and facilitate analysis.~It is commonly used in the fields of
 physics and mathematics, where mathematical equations are used to depict reality
@@ -17,8 +17,8 @@ or~\textit{GLPK}, to address any problem in a principled manner.
 As an example of this~\acrshort{glass-box-optimization} modelling approach
 consider the~\acrshort{knapsack-problem} for which an~\acrshort{ilp}
 model~\cite{yu2010combinatorial} is represented by the
-formulation~\ref{eq:knapsack-ilp}.~Herein, the parameter $n$ signifies the count
-of items, while $W$ designates the knapsack's maximum capacity.  Additionally,
+~\Cref{eq:knapsack-ilp}.~Herein, the parameter $n$ signifies the number
+of items, while $W$ designates the knapsack maximum capacity. Additionally,
 the variables $w_{i}$ and $p_{i}$ correspond to the weight and profit,
 respectively, associated with each individual item $i$. Furthermore, the binary
 variable $x_{i}$ is employed to denote whether a particular item is included
@@ -34,8 +34,8 @@ for a given solution.
       \end{aligned}
 \end{equation}
 
-It's crucial to recognize that this formulation highlights several significant
-aspects of the problem.~These include the decision space, which defines the
+It is crucial to recognize that this formulation highlights several significant
+aspects of the problem.~These include the solution space, which defines the
 range of values each variable can take; the objective function, which expresses
 the optimization goal; the construction rules (constraints) that guide the
 creation of a valid solution; and the problem instance parameters necessary for

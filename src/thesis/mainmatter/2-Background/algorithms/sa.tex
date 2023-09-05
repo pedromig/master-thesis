@@ -4,13 +4,13 @@
 \KwOut{Solution ($s$)}
 
 \SetKwFunction{Random}{\texttt{Random}}
-\SetKwFunction{Perturb}{\texttt{Perturb}}
+\SetKwFunction{Perturb}{\texttt{ApplyRandomLocalMove}}
 
 $t \gets t_{0}$\;
 \While{\texttt{stopping criteria not met}}{
   $s' \gets$ \Perturb{$s$}\;
   $\delta$ $\gets$ $f(s)$ - $f(s')$\;
-  \If{$\delta < 0$ $\lor$ \Random{$0, 1$} $ < $ $e^{-\frac{\delta}{t}}$}{
+  \If{$\delta \le 0$ $\lor$ \Random{$0, 1$} $ < $ $e^{-\frac{\delta}{t}}$}{
     $s$ $\gets$ $s'$\;
   }
   $t$ $\gets$ $t \cdot \alpha$\;
