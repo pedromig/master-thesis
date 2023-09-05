@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  5 SEP 2023 04:05
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2023.6.1)  5 SEP 2023 04:37
  system commands enabled.
 **thesis.tex
 (./thesis.tex
@@ -3490,7 +3490,7 @@ Chapter 5.
 ]
 warning  (file ../assets/dc/dc-rows-no-labels.pdf) (pdf inclusion): PDF inclusio
 n: found PDF version '1.7', but at most version '1.5' allowed
-<../assets/dc/dc-rows-no-labels.pdf, id=1788, 203.80139pt x 89.3739pt>
+<../assets/dc/dc-rows-no-labels.pdf, id=1789, 203.80139pt x 89.3739pt>
 File: ../assets/dc/dc-rows-no-labels.pdf Graphic file (type pdf)
 <use ../assets/dc/dc-rows-no-labels.pdf>
 Package luatex.def Info: ../assets/dc/dc-rows-no-labels.pdf  used on input line
@@ -3500,7 +3500,7 @@ Package luatex.def Info: ../assets/dc/dc-rows-no-labels.pdf  used on input line
 -no-labels.pdf>]
 warning  (file ../assets/dc/dc-example.pdf) (pdf inclusion): PDF inclusion: foun
 d PDF version '1.7', but at most version '1.5' allowed
-<../assets/dc/dc-example.pdf, id=1800, 323.2878pt x 89.3739pt>
+<../assets/dc/dc-example.pdf, id=1801, 323.2878pt x 89.3739pt>
 File: ../assets/dc/dc-example.pdf Graphic file (type pdf)
 <use ../assets/dc/dc-example.pdf>
 Package luatex.def Info: ../assets/dc/dc-example.pdf  used on input line 67.
@@ -3529,7 +3529,7 @@ Chapter 6.
 ]
 warning  (file ../assets/bs/bs-example.pdf) (pdf inclusion): PDF inclusion: foun
 d PDF version '1.7', but at most version '1.5' allowed
-<../assets/bs/bs-example.pdf, id=1976, 299.19778pt x 139.4811pt>
+<../assets/bs/bs-example.pdf, id=1977, 299.19778pt x 139.4811pt>
 File: ../assets/bs/bs-example.pdf Graphic file (type pdf)
 <use ../assets/bs/bs-example.pdf>
 Package luatex.def Info: ../assets/bs/bs-example.pdf  used on input line 52.
@@ -3542,7 +3542,7 @@ ple.pdf>] (./mainmatter/6-BookScanning/tables/books.tex))
 (./mainmatter/6-BookScanning/sections/model.tex [82] [83] [84]
 warning  (file ../assets/bs/bs-graph.pdf) (pdf inclusion): PDF inclusion: found 
 PDF version '1.7', but at most version '1.5' allowed
-<../assets/bs/bs-graph.pdf, id=2038, 463.7325pt x 226.9278pt>
+<../assets/bs/bs-graph.pdf, id=2039, 463.7325pt x 226.9278pt>
 File: ../assets/bs/bs-graph.pdf Graphic file (type pdf)
 <use ../assets/bs/bs-graph.pdf>
 Package luatex.def Info: ../assets/bs/bs-graph.pdf  used on input line 135.
@@ -3589,8 +3589,8 @@ Here is how much of LuaTeX's memory you used:
    11 hlist, 3 vlist, 2 rule, 1 disc, 2 local_par, 15 glue, 5 kern, 3 penalty, 2
  margin_kern, 15 glyph, 167 attribute, 153 glue_spec, 89 attribute_list, 2 write
 , 24 pdf_action, 2 pdf_colorstack nodes
-   avail lists: 1:15,2:11601,3:447,4:7933,5:6493,6:215,7:14624,8:265,9:16138,10:
-32,11:1042,12:1
+   avail lists: 1:15,2:11601,3:455,4:7934,5:6491,6:215,7:14598,8:287,9:16138,10:
+32,11:1040,12:1
  98545 multiletter control sequences out of 65536+600000
  333 fonts using 40860719 bytes
  123i,24n,136p,2012b,2671s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3611,7 +3611,7 @@ ts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txs
 ya.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (106 pages, 734034 bytes).
+Output written on thesis.pdf (106 pages, 734074 bytes).
 
 PDF statistics: 2420 PDF objects out of 2487 (max. 8388607)
  2228 compressed objects within 23 object streams

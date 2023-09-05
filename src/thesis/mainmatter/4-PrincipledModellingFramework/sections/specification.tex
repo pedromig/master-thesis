@@ -1,7 +1,7 @@
 This section, establishes a collection of operations that a model must
 support, all while motivating their necessity and applicability in the
 context of meta-heuristic solver development. To achieve this, our description
-will draw from the Python-based implementation that we've devised. However, it is
+will draw from the Python-based implementation that we have devised. However, it is
 crucial to underline that our implementation serves as a demonstration of a
 plausible way to materialize an~\acrshort{api} that facilitates modeling
 operations. As such, considerations such as naming conventions and programming
@@ -30,8 +30,9 @@ following four classes.
 
   \item \inlinecode{class Solution: ...}\\
         Holds data that defines an empty or partially
-        complete solution. It serves as the mutable state that a solver can
-        modify during the optimization process.
+        complete solution. It serves as the mutable state that a solver
+        can modify using a set of pre-defined functions during the optimization
+        process.
 
   \item \inlinecode{class Component: ...}\\
         Characterizes any component within the ground set of a given problem.
@@ -53,7 +54,7 @@ following method, which returns an empty solution.
 
 It is important to acknowledge that the definition of an empty solution is tied
 to the specific problem under consideration. Nevertheless, this method when
-invoked returns an encapsulated solution object that abstracts the problem's details.
+invoked returns an encapsulated solution object that abstracts the details of the problem.
 
 As previously mentioned, the~\texttt{Component} class serves as a representation
 of a component from the ground set, encapsulating its relevant data.
@@ -90,9 +91,9 @@ other essential functionality.
 \subsection{Inspection Methods}
 
 The methods outlined in this section provide access to metrics that characterize
-the state a solution. In terms of implementation, these function
-as~\emph{getters} for the model's properties and should not be utilized for
-executing resource-intensive computations, given the high frequency at which
+the state of a solution. In terms of implementation, these
+act as~\emph{getters} for the properties of the model and should avoid executing
+resource-intensive computations when possible, given the high frequency at which
 they are meant to be invoked by solvers.
 
 \subsubsection*{Objective Value}
@@ -145,7 +146,7 @@ objective and upper bound values.
 \subsubsection*{Component Enumeration}
 
 From a~\acrshort{constructive-search} perspective, a central operation involves
-recognizing the components that constitute the problem's ground set -- those
+recognizing the components that constitute the ground set of the problem -- those
 that can be added, or removed from a specific solution.~Therefore, it is
 imperative for a model to offer a means through which a solver can access this
 essential information. This is accomplished in our implementation via the
@@ -157,7 +158,7 @@ following set of methods.
   \inlinecode{def remove_moves(self: Solution) -> Iterable[Component]: ...}
 \end{center}
 
-Notably, all these methods yield a list of components specific to their
+Notably, all these methods yield a sequence of components specific to their
 corresponding operations, denoted as~\texttt{Iterable[Component]} in the return
 type signature. However, in our implementation, these methods are implemented
 as~\emph{iterators}, signifying that upon invocation, they provide the first
@@ -171,12 +172,12 @@ Furthermore, the intention behind these methods is for them to yield all
 conceivable components that can be either added or removed from a specific
 solution.~However, in practice, this might become unfeasible if the ground set
 is excessively large. In such cases, an alternative strategy for component
-enumeration may need to be contemplated.~It's important to note that this
+enumeration may need to be contemplated.~It is important to note that this
 consideration is relevant to the implementation of the method itself by the user
 who models the problem, but it doesn't alter the method signature in any way.
 
 
-Finally, within the context of~\acrshort{aco}, there's a need to enumerate all
+Finally, within the context of~\acrshort{aco}, there is a need to enumerate all
 components that are already included in a solution. This requirement is due to
 the necessity to update the~\textit{pheromone model}. As a result, this
 justifies the introduction of the following method.
@@ -189,7 +190,7 @@ justifies the introduction of the following method.
 
 In the context of component enumeration, it can be advantageous to follow a
 problem-specific heuristic order.~With this in mind, we introduced the
-~\texttt{heuristic\_add\_moves} method, designed to offer an iterator for
+~\texttt{heuristic\_add\_moves} method, designed to offer a sequence of
 components enumerated in accordance with the heuristic. Additionally, we
 introduced the~\texttt{heuristic\_add\_move} method to provide a means for
 exclusively returning a single heuristic move, if available.~The type signatures
@@ -329,7 +330,7 @@ move~(\texttt{random\_local\_move} method).
   \inlinecode{def random_local_move(self: Solution) -> Optional[LocalMove]: ...}
 \end{center}
 
-When it comes to random enumeration of a candidate solution's neighborhood
+When it comes to random enumeration of the neighboring moves of a candidate solution
 without replacement, as performed by the ~\texttt{random\_local\_moves\_wor} method,
 important insights can be obtained regarding its efficient implementation.
 
@@ -388,10 +389,10 @@ possible moves.
 
 \subsubsection*{Local Move Application}
 
-This method is designed to implement a problem-specific perturbation to a given
-solution during~\acrshort{local-search}. The integer parameter in the method
-signature provided below is employed to determine the~\textquote{kick strength},
-which signifies the magnitude of the perturbation to be applied.
+As it is crucial for~\acrshort{constructive-search} methods to be able to apply
+components, the same holds true for~\acrshort{local-search} methods, albeit in
+the context of local moves. Therefore, this method is specifically designed to
+facilitate the application of a~\texttt{LocalMove} to a given candidate solution.
 
 \begin{center}
   \inlinecode{def step(self: Solution, m: LocalMove) -> None: ...}
