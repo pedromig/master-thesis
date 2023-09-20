@@ -1,0 +1,43 @@
+\begin{frame}{Attendance}
+  \begin{figure}[ht]
+    \input{../assets/histogram/histogram.tex}
+    \caption{Google Hash Code Competition Attendance 2014-2022}
+    \label{fig:hashcode-attendance}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Problems}
+  To better understand the~\alert{Google Hash Code} problems a comprehensive
+  analysis was conducted to understand the key properties and similarities with
+  well-known literature problems.
+
+  \begin{table}[ht]
+    \resizebox{0.9\textwidth}{!}{% 
+      \begin{tabular}{@{}cccccccc@{}}
+        \toprule
+        \multirow{2}{*}{\textbf{Problem}} & \multicolumn{7}{c}{\textbf{Categories}}                                                                                    \\
+        \cmidrule{2-8}
+        {}                                & Assignment                              & Knapsack   & Coverage   & Vehicle Routing & Simulation & Scheduling & Packing    \\ \midrule
+        Street View Routing               &                                         &            & \checkmark & \checkmark      &            &            &            \\
+        Optimize a Data Center            & \checkmark                              & \checkmark &            &                 &            &            &            \\
+        Loon                              &                                         &            & \checkmark & \checkmark      & \checkmark &            &            \\
+        Delivery                          &                                         &            &            & \checkmark      &            &            &            \\
+        Satellites                        & \checkmark                              &            & \checkmark &                 & \checkmark &            &            \\
+        Streaming Videos                  & \checkmark                              & \checkmark &            &                 &            &            &            \\
+        Router Placement                  &                                         &            & \checkmark &                 &            &            &            \\
+        Self-Driving Rides                & \checkmark                              &            &            & \checkmark      & \checkmark &            &            \\
+        City Plan                         &                                         &            &            &                 &            &            & \checkmark \\
+        Photo Slideshow                   &                                         &            &            &                 &            & \checkmark &            \\
+        Compiling Google                  &                                         &            &            &                 &            & \checkmark &            \\
+        Book Scanning                     & \checkmark                              & \checkmark & \checkmark &                 &            & \checkmark &            \\
+        Assembling Smartphones            & \checkmark                              &            &            &                 &            & \checkmark &            \\
+        Traffic Signaling                 &                                         &            &            &                 & \checkmark &            &            \\
+        Software Engineering at Scale     &                                         &            &            &                 &            & \checkmark &            \\
+        Mentorship and Teamwork           &                                         &            &            &                 &            & \checkmark &            \\
+        Santa Tracker                     &                                         &            &            & \checkmark      &            &            &            \\ \bottomrule
+      \end{tabular}
+    }
+    \caption{Categorization of Google Hash Code Problems}
+    \label{tab:hashcode-summary}
+  \end{table}
+\end{frame}

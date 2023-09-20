@@ -116,10 +116,10 @@ expressed as shown in~\Cref{eq:objective}.
 \begin{equation}
   \label{eq:objective}
   \begin{aligned}
-    \max\ f(x)   & = \min_{p=1}^\mathcal{P}{gc_{p}(x)}                                                                                              \\
-    \text{s.t. } & \sum_{p=1}^{\mathcal{P}} \sum_{r=1}^{\mathcal{R}} \sum_{i \in I^{r}} x_{m,p,i} \le 1         & \forall\ m=1,\ldots,\mathcal{M}   \\
-                 & \sum_{m=1}^{\mathcal{M}} \sum_{p=1}^{\mathcal{P}} \ell_m \cdot x_{m,p,i} \le \mathcal{L}_{i} & \forall\  i=1,\ldots, \mathcal{I} \\
-                 & x \in {\{0,1\}}^{\mathcal{M} \times \mathcal{P} \times \mathcal{R}}                                                              \\
+    \max\ f(x)   & = \min_{p=1}^\mathcal{P}{gc_{p}(x)}                                                                                                \\
+    \text{s.t. } & \sum_{p=1}^{\mathcal{P}} \sum_{r=1}^{\mathcal{R}} \sum_{i \in \mathcal{I}^{r}} x_{m,p,i} \le 1 & \forall\ m=1,\ldots,\mathcal{M}   \\
+                 & \sum_{m=1}^{\mathcal{M}} \sum_{p=1}^{\mathcal{P}} \ell_m \cdot x_{m,p,i} \le \mathcal{L}_{i}   & \forall\  i=1,\ldots, \mathcal{I} \\
+                 & x \in {\{0,1\}}^{\mathcal{M} \times \mathcal{P} \times \mathcal{R}}                                                                \\
   \end{aligned}
 \end{equation}
 

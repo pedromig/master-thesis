@@ -1,81 +1,140 @@
-\documentclass[10pt,handout,usenames,dvipsnames,pdf]{beamer}
-% \documentclass[10pt,usenames,dvipsnames,pdf]{beamer}
+% \documentclass[10pt,handout,usenames,dvipsnames,pdf]{beamer}
+\documentclass[10pt,usenames,dvipsnames,pdf]{beamer}
 
 \usepackage[portuguese,english]{babel}
 \usepackage[backend=biber,style=authoryear-icomp,natbib=true,url=false,doi=true]{biblatex}
 
-% \usepackage[notesposition=right,duration=20,lastminutes=5]{pdfpc}
-\usepackage{appendixnumberbeamer}
+\usepackage[notesposition=right,duration=20,lastminutes=5]{pdfpc}
 
 \usepackage[scale=2]{ccicons}
 
 \usepackage{hyperref}
-\usepackage{booktabs}
-\usepackage{multirow}
 \usepackage{bookmark}
 
-\usepackage[ruled,lined]{algorithm2e}
+\usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{float}
 
+\usepackage{tikz}
 \usepackage{pgfplots}
-\usepackage{pgfgantt}
+\usepackage{pgfplotstable}
+
+\usepackage[ruled,lined]{algorithm2e}
+
+\usepackage{listings}
+\usepackage{siunitx}
+
+% Color Definitions (Colourblind friendly)
+\definecolor{cb_blue}{RGB}{0, 92, 169}
+\definecolor{cb_orange}{RGB}{213, 94, 0}
+\definecolor{cb_green}{RGB}{0, 158, 115}
+\definecolor{cb_purple}{RGB}{102, 51, 153}
+\definecolor{cb_pink}{RGB}{204, 121, 167}
+\definecolor{cb_gray}{RGB}{153, 153, 153}
+\definecolor{cb_dark_yellow}{RGB}{230, 159, 0}
+\definecolor{cb_light_blue}{RGB}{86, 180, 233}
+\definecolor{cb_light_yellow}{RGB}{240, 228, 66}
+\definecolor{cb_dark_blue}{RGB}{0, 114, 178}
+
+% Code Listings Style
+\lstset{ %
+  showstringspaces=false,
+  language=Python,
+  basicstyle=\footnotesize\ttfamily,
+  columns=fullflexible,
+  keepspaces=true,
+  literate={->}{$\rightarrow$}2,
+  keywordstyle=\color{cb_blue}\bfseries,
+  stringstyle=\color{cb_pink},
+  morekeywords={sort, assert, append},
+  keywords=[2]{Problem, Solution, Component, LocalMove, 
+               Iterable, Hashable, None, int, T, bool, Optional, Timer,
+               True, False},
+  keywordstyle=[2]\color{cb_green}\bfseries,
+  emph={empty_solution, random_solution, id, objective, upper_bound,
+        feasible, add_moves, remove_moves, components,
+        heuristic_add_move, heuristic_add_moves, random_add_move,
+        random_remove_move, add, remove, upper_bound_increment_add,
+        upper_bound_increment_remove,objective_increment_add,
+        objective_increment_remove, local_moves,random_local_moves_wor,
+        random_local_move, step, objective_increment_local, perturb, copy,
+        heuristic_value},
+  emphstyle=\color{cb_orange},
+  xleftmargin=10mm,
+}
 
 % Bibliography
 \addbibresource{../references.bib}
 
 % PDF Presenter Console (pdfpc) Notes
-% \setbeamertemplate{note page}{\pagecolor{black!2}\normalsize\insertnote}
+\setbeamertemplate{note page}{\pagecolor{black!2}\normalsize\insertnote}
 
 % \setbeameroption{hide notes}
-% \setbeameroption{show notes on second screen=right}
+\setbeameroption{show notes on second screen=right}
 
 \newcommand<>{\talknote}[1]{\only#2{\note[item]{\textbf{#1}}\relax}}
 
 % PDF Metadata
 \hypersetup{
- pdftitle = {Principled Modelling Of The Google Hash Code Problems For Metaheuristics},
+ pdftitle = {Principled Modeling of the Google Hash Code Problems for Meta-Heuristics},
  pdfauthor = {Pedro Miguel Duque Rodrigues},
- pdfsubject = {Master Thesis - Intermediate Defense Presentation},
- pdfkeywords = {Intelligent Systems, Modelling, Meta-Heuristics},
+ pdfsubject = {Master Thesis - Presentation},
+ pdfkeywords = {Intelligent Systems, Modeling, Meta-Heuristics},
  pdfproducer = {Latex Beamer with hyperref},
  pdfcreator = {lualatex},
 }
 
 % Beamer Theme
-\usetheme[progressbar=frametitle, background=light]{metropolis}
+\usetheme[progressbar=frametitle,background=light]{metropolis}
 \metroset{block=fill}
 
+% Algorithm Style
+\SetKwInOut{KwIn}{Input}
+\SetKwInOut{KwOut}{Output}
+\SetKwComment{Comment}{$\vartriangleright$\ }{}
+\DontPrintSemicolon
+
+% Custom Operators
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
 % Title Page Settings
-\title{Principled Modelling Of The Google Hash Code Problems For Meta-Heuristics}
-\subtitle{Intermediate Defense}
-\author{Pedro Rodrigues \vspace{0.1cm} \\ \tiny Alexandre B. Jesus \\ \and Carlos M. Fonseca \\} 
-\date{\footnotesize January 2023}
+\title{Principled Modeling of the Google Hash Code Problems for Meta-Heuristics}
+\author{Pedro Rodrigues \vspace{0.1cm} \\ \scriptsize Alexandre D. Jesus \\ \and Carlos M. Fonseca \\} 
+\date{\footnotesize September 2023}
 \institute{University of Coimbra \\ Department of Informatics Engineering}
 
 \begin{document}
 
-\begin{frame}[noframenumbering, plain]
-  \titlepage
-  \talknote{Welcome the audience}
-\end{frame}
+\input{sections/titlepage.tex}
 
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
+\section{Introduction}
+\input{sections/introduction.tex}
 
-\begin{frame}[standout]
-  \talknote{Thank the audience for being awake.}
-  Questions?
-\end{frame}
+\section{Background}
+\input{sections/background.tex}
+
+\section{Principled Modeling Framework}
+\input{sections/framework.tex}
+
+\section{Google Hash Code Competition}
+\input{sections/hashcode.tex}
+
+\section{Optimize a Data Center Problem}
+\input{sections/odc.tex}
+
+\section{Book Scanning Problem}
+\input{sections/bs.tex}
+
+\section{Conclusion \& Future Work}
+\input{sections/conclusion.tex}
+
+\input{sections/backpage.tex}
 
 \appendix
 
-\section{References}
-
-\begin{frame}[allowframebreaks]{References}
-  \printbibliography[heading=none]
-\end{frame}
+\include{backup/bibliography.tex}
 
 \end{document}

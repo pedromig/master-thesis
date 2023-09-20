@@ -1,0 +1,118 @@
+\begin{frame}{Optimization}
+
+  \begin{block}{Optimization Problem}
+    An optimization problem is a tuple $(\mathcal{S}, f)$, where
+    $\mathcal{S}$ is a set containing all feasible solutions, and $f$ is an
+    objective (cost) function, with a mapping such that:
+    \begin{equation*}
+      f \colon \mathcal{S} \longrightarrow \mathbb{R}
+    \end{equation*}
+  \end{block}
+
+  \begin{block}{Combinatorial Optimization Problem}
+    A combinatorial optimization problem is an optimization problem where the
+    set $\mathcal{S}$ of feasible solutions is finite.
+  \end{block}
+
+  In this work we assume without loss of generality a maximizing objective function.
+\end{frame}
+
+\begin{frame}{Ground Set}
+
+  \begin{block}{Ground Set}
+    The ground set of a CO problem is a finite set of
+    components $\mathcal{G} = \{c_1, c_2, \ldots, c_k\}$, such that every solution to the
+    problem, feasible or not, can be defined as a subset of $\mathcal{G}$.
+  \end{block}
+
+  \begin{block}{Empty Solution}
+    A solution $s \in 2^\mathcal{G}$, where $2^\mathcal{G}$ denotes the powerset of $\mathcal{G}$,
+    is said to be an empty solution if $s = \emptyset$.
+  \end{block}
+
+  \begin{block}{Partial Solution}
+    A solution $s \in 2^\mathcal{G}$ is said to be a
+    partial solution if there is a feasible solution $s' \in \mathcal{S}$ such
+    that $s' \supseteq s$.
+  \end{block}
+
+  \begin{block}{Complete Solution}
+    A feasible solution $s \in \mathcal{S}$ is said
+    to be a complete solution if there is no feasible solution $s' \in
+      \mathcal{S}$ such that $s' \supset s$.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Bounds}
+  The usage of~\alert{bounds}, particularly the~\emph{upper bound} in a maximization setting,
+  is beneficial as it aids in:
+
+  \begin{itemize}
+    \item The evaluation of infeasible solutions.
+    \item The measurement of a candidate solution's potential.
+  \end{itemize}
+
+  \begin{block}{Upper Bound}
+    An upper bound of a (partial) solution $s \in 2^\mathcal{G}$ is any numeric
+    value given by a function $\Phi_\text{ub}\colon 2^{\mathcal{G}} \rightarrow
+      \mathbb{R} $ such that:
+    \begin{equation*}
+      \forall s' \in \mathcal{S} \land s' \supseteq s \colon f(s') \le \Phi_\text{ub}(s)
+    \end{equation*}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Constructive Search}
+  \alert{Constructive Search} is a procedure for optimization that operates as follows:
+
+  \begin{itemize}
+    \item Initiate the process with an empty or partial solution
+    \item Add a component from the ground set to the solution.
+    \item Repeat the process until no more (feasible) components are available.
+  \end{itemize}
+
+  \begin{center}
+    \scalebox{0.75}{%  
+      \begin{algorithm}[H]
+        \input{../thesis/mainmatter/2-Background/algorithms/cs.tex}
+        \caption{Constructive Search Procedure}
+      \end{algorithm}
+    }
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{Local Search}
+  \alert{Local Search} is a procedure for optimization that operates as follows:
+
+  \begin{itemize}
+    \item Start with a feasible solution to the problem.
+    \item Apply local moves and perturbations to the solution, thus exploring candidate solutions in the neighborhood.
+    \item Repeat the process until the solution cannot be further improved.
+  \end{itemize}
+
+  \begin{center}
+    \scalebox{0.75}{%  
+      \begin{algorithm}[H]
+        \input{../thesis/mainmatter/2-Background/algorithms/ls.tex}
+        \caption{Local Search Procedure}
+      \end{algorithm}
+    }
+  \end{center}
+\end{frame}
+
+\begin{frame}{Meta-Heuristics}
+  The following~\alert{meta-heuristics}, were analyzed and implemented in the context
+  of this work.
+  \begin{itemize}
+    \item \emph{Beam Search}
+    \item \emph{Iterated Greedy}
+    \item \emph{Greedy Randomized Adaptive Search Procedure}
+    \item \emph{Ant Colony Optimization}
+    \item \emph{Hill-Climbing}
+    \item \emph{Iterated Local Search}
+    \item \emph{Simulated Annealing}
+    \item \emph{Tabu Search}
+  \end{itemize}
+
+\end{frame}

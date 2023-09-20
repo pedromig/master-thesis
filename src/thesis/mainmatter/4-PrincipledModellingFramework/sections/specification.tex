@@ -105,7 +105,7 @@ they are meant to be invoked by solvers.
 This method returns the objective value of a solution. In the type signature for
 this method, the return type~\texttt{T} signifies a generic type.~While this
 type is usually numeric, it can be any other~\emph{comparable} type.~This
-requisite is fundamental from the solver's standpoint, as it's through comparing
+requisite is fundamental from the solver's standpoint, as it is through comparing
 this value that a solver evaluates whether a particular solution outperforms
 others.
 
@@ -269,7 +269,7 @@ the same functionality is essential for upper bounds. This leads to the
 introduction of the following methods, which serve the purpose of quantifying
 the increment in the upper bound resulting from the addition or
 removal of a component from a solution. Once more, the preference should lean
-towards incremental evaluation for determining this value, as it's often even
+towards incremental evaluation for determining this value, as it is often even
 more resource-intensive than calculating a contribution to the objective value.
 
 \begin{center}

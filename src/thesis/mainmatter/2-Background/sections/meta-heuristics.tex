@@ -41,7 +41,7 @@ fixed-size archive of previous solutions, which are expanded at each
 step~(\textit{beam}). Subsequently, the expanded solutions undergo filtering,
 and only the best solutions, determined based on heuristic information or bound
 values, are retained within the archive. These selected solutions act as the
-starting points for the next iteration. It's important to acknowledge that the
+starting points for the next iteration. It is important to acknowledge that the
 size of this archive, and consequently the number of solutions filtered at each
 step, is dictated by a parameter referred to as the~\emph{beam width}.
 
@@ -94,7 +94,7 @@ solution, with algorithm concluding when some predefined stopping criteria are
 met.~The provided pseudocode in~\Cref{algorithm:grasp} offers an overview of how the
 \acrshort{grasp} algorithm works.
 
-It's important to highlight that this meta-heuristic, provides a means of
+It is important to highlight that this meta-heuristic, provides a means of
 controlling the balance between randomization and greediness in solution
 construction (\texttt{GreedyRandomizedConstruction}). This control is
 achieved through the parameter $\alpha$, which serves as a threshold for the
@@ -103,7 +103,7 @@ the construction process is entirely random, and all possible components are
 included in the candidate list, regardless of their quality.~Conversely, with
 $\alpha = 0$, only the components with the optimal heuristic or bound value,
 will be selected at random, rendering this~\acrshort{meta-heuristic} more
-greedy. It's worth noting that the inclusion of the optional local search step
+greedy. It is worth noting that the inclusion of the optional local search step
 (\texttt{LocalSearch}) can significantly enhance the quality of the randomized
 greedy process. However, the crux of fine-tuning lies in determining an
 appropriate value for $\alpha$.
@@ -211,7 +211,7 @@ algorithm is shown in~\Cref{algorithm:hill-climbing}.
   \label{algorithm:hill-climbing}
 \end{algorithm}
 
-It's worth noting that the presented algorithm's effectiveness is rooted in the
+It is worth noting that the presented algorithm's effectiveness is rooted in the
 efficiency of a random process, which strives to improve solution quality
 through a sequence of random local move attempts (\texttt{ApplyRandomLocalMove} function).
 Nevertheless, there exist two noteworthy variations that more thoroughly explore

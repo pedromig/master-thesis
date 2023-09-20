@@ -1,0 +1,78 @@
+\begin{frame}{ Frameworks}
+  The following frameworks served as~\textbf{references} for our implementation.
+
+  \begin{description}
+    \item[POF] Python Optimization Framework~(\cite{vieira2009uma})
+    \item[nasf4nio] Not Another Software Framework for Nature-Inspired Optimization~(\cite{fonseca2021nasf4nio})
+    \item[nasf4nio-cs] Not Another Software Framework for Nature-Inspired Optimization --- Constructive Search~(\cite{outeiro2021application})
+  \end{description}
+\end{frame}
+
+\begin{frame}{Modeling}
+  In the context of~\alert{modeling} for~\emph{meta-heuristics}, the following aspects are
+  considered relevant:
+  \begin{itemize}
+    \item \emph{Problem Instance}
+    \item \emph{Solution}
+    \item \emph{Construction Rules}
+    \item \emph{Objective Function \& Bounds}
+    \item \emph{Combinatorial Structure (Components)}
+    \item \emph{Neighborhood Structure (Local Moves)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Data Structures}
+  The following~\textbf{data structures} constitute the foundation of the framework:
+
+  \begin{description}
+    \item[Problem] Holds immutable data that fully characterizes the problem instance.
+
+    \item[Solution] Characterizes a solution for the problem and serves as the mutable state that
+      the solver can modify during the optimization process.
+
+    \item[Component] Characterizes any component within the ground set of a given problem.
+
+    \item[LocalMove] Characterizes any local move that can be applied to a solution
+  \end{description}
+
+  Notably, these are implemented as~\alert{Python classes}.
+\end{frame}
+
+\begin{frame}{Specification}
+  The following~\textbf{operations} are provided in an interface between the model and the solvers.
+
+  \begin{itemize}
+    \item Problem
+          \begin{itemize}
+            \item Create Empty Solution~(\texttt{empty\_solution})
+          \end{itemize}
+    \item Solution
+          \begin{itemize}
+            \item Enumerate Components~(\texttt{add\_moves},~\texttt{heuristic\_add\_move},~...)
+            \item Enumerate Local Moves~(\texttt{local\_moves},~...)
+            \item Apply Component~(\texttt{add},~\texttt{remove})
+            \item Apply Local Move~(\texttt{step})
+            \item Perturb Solution~(\texttt{perturb})
+            \item Inspect Solution~(\texttt{objective},~\texttt{upper\_bound})
+          \end{itemize}
+    \item Component
+          \begin{itemize}
+            \item Get Identifier~(\texttt{id})
+          \end{itemize}
+  \end{itemize}
+
+  These operations encompass a variety of~\alert{methods} present in each of the aforementioned classes.
+\end{frame}
+
+\begin{frame}[fragile]{Solver Development}
+  Solvers call upon the operations defined in the specification in order to find solutions.
+
+  \begin{block}{Heuristic Construction Solver Implementation}
+    \begin{center}
+      \scalebox{0.95}{
+        \lstinputlisting{../assets/code/hc.py}
+      }
+    \end{center}
+  \end{block}
+
+\end{frame}

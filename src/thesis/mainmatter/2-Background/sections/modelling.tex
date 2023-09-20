@@ -14,7 +14,7 @@ can be attributed to the fact that the model encapsulates all the information
 required by a generic solver,~\eg{},\textit{Gurobi},~\textit{CPLEX},
 or~\textit{GLPK}, to address any problem in a principled manner.
 
-As an example of this~\acrshort{glass-box-optimization} modelling approach
+As an example of this~\acrshort{glass-box-optimization} modeling approach
 consider the~\acrshort{knapsack-problem} for which an~\acrshort{ilp}
 model~\cite{yu2010combinatorial} is represented by the
 ~\Cref{eq:knapsack-ilp}.~Herein, the parameter $n$ signifies the number
@@ -26,12 +26,12 @@ variable $x_{i}$ is employed to denote whether a particular item is included
 for a given solution.
 
 \begin{equation}
-      \label{eq:knapsack-ilp}
-      \begin{aligned}
-            \max f(x) = & \sum_{i=1}^{n} p_i \cdot x_i                           \\
-            \text{s.t } & \sum_{i=1}^{n} w_i \cdot x_i \leq W                    \\
-                        & x_i \in \{0, 1\} \quad \text{for } i = 1, 2, \ldots, n
-      \end{aligned}
+  \label{eq:knapsack-ilp}
+  \begin{aligned}
+    \max f(x) = & \sum_{i=1}^{n} p_i \cdot x_i                           \\
+    \text{s.t } & \sum_{i=1}^{n} w_i \cdot x_i \leq W                    \\
+                & x_i \in \{0, 1\} \quad \text{for } i = 1, 2, \ldots, n
+  \end{aligned}
 \end{equation}
 
 It is crucial to recognize that this formulation highlights several significant
@@ -52,11 +52,11 @@ solutions~(\Cref{sec:meta-heuristics}), certain recurring aspects emerge as
 essential questions that a model must address:
 
 \begin{description}
-      \item[\textbf{Problem Instance.}] What information is required to characterize a particular problem (instance)?
-      \item[\textbf{Solution.}] How do we characterize an empty, partial or complete solution for the problem, and its feasibility?
-      \item[\textbf{Objective Function \& Bounds.}] Can we evaluate a partial or complete solution, and how? How do we calculate the bounds for a (partial) solution?
-      \item[\textbf{Combinatorial Strutcture (\acrshort{constructive-search}).}] How do we construct solutions? What is the ground set, components and how are they added/removed to/from the solution.
-      \item[\textbf{Neighborhood Strutucture (\acrshort{local-search}).}] How do we characterize neighborhood of a solution and the possible local moves?
+  \item[\textbf{Problem Instance.}] What information is required to characterize a particular problem (instance)?
+  \item[\textbf{Solution.}] How do we characterize an empty, partial or complete solution for the problem, and its feasibility?
+  \item[\textbf{Objective Function \& Bounds.}] Can we evaluate a partial or complete solution, and how? How do we calculate the bounds for a (partial) solution?
+  \item[\textbf{Combinatorial Strutcture (\acrshort{constructive-search}).}] How do we construct solutions? What is the ground set, components and how are they added/removed to/from the solution.
+  \item[\textbf{Neighborhood Strutucture (\acrshort{local-search}).}] How do we characterize neighborhood of a solution and the possible local moves?
 \end{description}
 
 Incorporating a standardized approach to address these fundamental questions can
@@ -70,10 +70,10 @@ equips solvers with essential information across diverse meta-heuristics, while
 abstracting the intricacies of inherent to each specific problem.
 
 \begin{figure}[h]
-      \centering
-      \includegraphics[width=\textwidth,keepaspectratio]{../assets/modelling/modelling.pdf}
-      \caption{Principled Modelling Framework}
-      \label{fig:pmf}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{../assets/modelling/modelling.pdf}
+  \caption{Principled Modeling Framework}
+  \label{fig:pmf}
 \end{figure}
 
 The overall concept for a principled meta-heuristics modeling framework is to
@@ -90,10 +90,10 @@ avoids the need for distinct functions for each problem, which would defeat the
 purpose of creating a standardized approach.
 
 Notably, this framework for tackling problems in the context of meta-heuristics,
-which we refer to as the principled modelling approach, has been seldomly
+which we refer to as the principled modeling approach, has been seldomly
 researched and constitutes an ongoing research effort. In fact, we identify two
 noteworthy studies in the literature and three attempts in practically
-developing an~\acrfull{api} for this modelling
+developing an~\acrfull{api} for this modeling
 framework~\cite{vieira2009uma,outeiro2021application,fonseca2021nasf4nio}.
 
 \subsection{Software}
@@ -130,24 +130,24 @@ interested in the implementation details of the algorithms.
 Generally, the~\acrshort{pof} is implemented by the means of three main classes:
 
 \begin{description}
-      \item[\textbf{\texttt{Problem}.}] This class is where the modeling-related
-            aspects are implemented. Specifically, the solution generation and
-            evaluation are described by a series of classes and methods that, when
-            implemented, comprise the model. These classes and methods allow the user
-            to specify how solutions are generated, how they can be modified to improve
-            them, and how they are evaluated, thus constituting the~\textquote{internal} interface.
-      \item[\textbf{\texttt{Solver}.}] This class is where meta-heuristics can be implemented in
-            a problem-independent manner. By calling upon the methods defined int the \texttt{Problem}
-            class the development of these algorithms is standardized and constitutes the ``external''
-            interface of this framework.
-      \item[\textbf{\texttt{Simulator}.}] This class serves as a
-            general-purpose utility that allows the step-by-step execution of a solver
-            with respect to a given problem, thus being responsible for the execution
-            of the algorithms and gathering solutions.
+  \item[\textbf{\texttt{Problem}.}] This class is where the modeling-related
+    aspects are implemented. Specifically, the solution generation and
+    evaluation are described by a series of classes and methods that, when
+    implemented, comprise the model. These classes and methods allow the user
+    to specify how solutions are generated, how they can be modified to improve
+    them, and how they are evaluated, thus constituting the~\textquote{internal} interface.
+  \item[\textbf{\texttt{Solver}.}] This class is where meta-heuristics can be implemented in
+    a problem-independent manner. By calling upon the methods defined int the \texttt{Problem}
+    class the development of these algorithms is standardized and constitutes the ``external''
+    interface of this framework.
+  \item[\textbf{\texttt{Simulator}.}] This class serves as a
+    general-purpose utility that allows the step-by-step execution of a solver
+    with respect to a given problem, thus being responsible for the execution
+    of the algorithms and gathering solutions.
 \end{description}
 
-Focusing on modelling perspective, the~\texttt{Problem} class is the one that
-exposes several modelling related functions that when implemented for a problem
+Focusing on modeling perspective, the~\texttt{Problem} class is the one that
+exposes several modeling related functions that when implemented for a problem
 can be used by a \texttt{Solver} to obtain solutions. Albeit, from a simple
 analysis of the the function set we concluded that it is too complex and
 intricate possibly being one of the reasons that motivated the simpler design
@@ -175,16 +175,16 @@ the implementation of generic meta-heuristics.
 In terms of the core data structures, the API defines the following:
 
 \begin{description}
-      \item[\textbf{\texttt{Problem}.}] This data structure is responsible for recording
-            all the problem instance specific features and other relevant information
-            that may be acquired and that pertains to the problem at hand and thus not
-            being changed by the solver in any way
-      \item[\textbf{\texttt{Solution}.}] This data structure is responsible for storing the
-            data pertaining to a complete/partial solution for a particular problem
-            instance.
-      \item[\textbf{\texttt{Component}.}] This data structure stores the data
-            relative to a component from the ground set that may added, removed,
-            permitted or forbidden with respect to a given solution.
+  \item[\textbf{\texttt{Problem}.}] This data structure is responsible for recording
+    all the problem instance specific features and other relevant information
+    that may be acquired and that pertains to the problem at hand and thus not
+    being changed by the solver in any way
+  \item[\textbf{\texttt{Solution}.}] This data structure is responsible for storing the
+    data pertaining to a complete/partial solution for a particular problem
+    instance.
+  \item[\textbf{\texttt{Component}.}] This data structure stores the data
+    relative to a component from the ground set that may added, removed,
+    permitted or forbidden with respect to a given solution.
 \end{description}
 
 In the context of~\acrshort{nasf4nio}, the majority of the data structures are
@@ -198,22 +198,22 @@ implementation intricacies, such as, inspection, assignment, and memory manageme
 we can classify them into three main categories:
 
 \begin{description}
-      \item[\textbf{Generation.}] In this category we find operations such
-            as:~\textit{emptySolution} and~\textit{heuristicSolution}~which are used to
-            generate solutions for a given problem.
-      \item[\textbf{Construction.}] Under this category fall operation that
-            allow a partial solution to be further improved constructively.
-            These include the functions \textit{applyMove}, \textit{enumMove},
-            \textit{heuristicMove}, \textit{heuristicMoveWOR},
-            \textit{randomMove} and \textit{randomMoveWOR}, which allow for the
-            application, enumeration and selection of moves.  In this context, a
-            move refers to the modification of a given solution by performing an
-            action on its components,~\ie{},from
-            a~\acrshort{constructive-search} perspective.
-      \item[\textbf{Evaluation.}] In this category appear functions such as
-            \textit{getObjectiveVector} and \textit{getObjectiveLB} which allow for
-            evaluation of the quality of the solution with respect to the objective
-            value and bounds.
+  \item[\textbf{Generation.}] In this category we find operations such
+    as:~\textit{emptySolution} and~\textit{heuristicSolution}~which are used to
+    generate solutions for a given problem.
+  \item[\textbf{Construction.}] Under this category fall operation that
+    allow a partial solution to be further improved constructively.
+    These include the functions \textit{applyMove}, \textit{enumMove},
+    \textit{heuristicMove}, \textit{heuristicMoveWOR},
+    \textit{randomMove} and \textit{randomMoveWOR}, which allow for the
+    application, enumeration and selection of moves.  In this context, a
+    move refers to the modification of a given solution by performing an
+    action on its components,~\ie{},from
+    a~\acrshort{constructive-search} perspective.
+  \item[\textbf{Evaluation.}] In this category appear functions such as
+    \textit{getObjectiveVector} and \textit{getObjectiveLB} which allow for
+    evaluation of the quality of the solution with respect to the objective
+    value and bounds.
 \end{description}
 
 Similarly, the same principles apply to~\acrshort{nasf4nio}. However, the

@@ -39,7 +39,7 @@ using the identity:
 
 \begin{equation}
   \label{eq:max2min}
-  \min{f(s)} = \max{-f(s)}
+  \min{f(s)} = - \max{f(s)}
 \end{equation}
 
 \subsection{Combinatorial Optimization}
@@ -57,7 +57,7 @@ a~\acrshort{combinatorial-optimization} can be formally defined as follows:
   \label{def:combinatorial-optimization-problem}
   A combinatorial optimization problem is an optimization
   problem~(\ref{def:optimization-problem}) where the set $\mathcal{S}$ of
-  feasible solutions is finite or countably infinite.
+  feasible solutions is finite.
 \end{definition}
 
 Typical examples of~\acrshort{combinatorial-optimization} problems include
@@ -74,7 +74,8 @@ problems, solutions are often defined in terms of a~\emph{ground set}.
 \begin{definition}[Ground Set~\cite{outeiro2021application,festa2014brief,marti2013multistart}]
   The ground set of a CO problem is a finite set of
   components $\mathcal{G} = \{c_1, c_2, \ldots, c_k\}$, such that every solution to the
-  problem, feasible or not, can be defined as a subset of $\mathcal{G}$.  \end{definition}
+  problem, feasible or not, can be defined as a subset of $\mathcal{G}$.
+\end{definition}
 
 For this work, it is also relevant to define the notion of empty, partial and
 complete solutions.
